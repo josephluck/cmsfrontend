@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 
 // App/Login
 import App from './App';
+import Register from 'containers/Register';
 import Login from 'containers/Login';
 import RequireLogin from 'containers/RequireLogin';
 
@@ -40,6 +41,7 @@ import DeleteItem from 'containers/DeleteItem';
 render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
+      <IndexRoute component={Register} />
     	<Route path="login" component={Login}></Route>
     	<Route component={RequireLogin}>
         <Route path="users">

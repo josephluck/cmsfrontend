@@ -118,6 +118,9 @@ function removeToken() {
 
 function getApiUrl(options) {
   switch (options.name) {
+    case 'register':
+      return API_ROOT + 'companies';
+      break;
     case 'login':
       if (options.token) {
         return API_ROOT + `sessions/${options.token}`;
