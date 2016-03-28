@@ -1,7 +1,7 @@
 import superagent from 'superagent';
 import PersistentStorage from 'utils/PersistentStorage';
 
-const API_ROOT = 'http://api.cms-api.dev/'
+const API_ROOT = 'http://cms-api.dev/'
 
 // Handle errors (unauthorized, forbidden etc)
 
