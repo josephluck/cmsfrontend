@@ -13,19 +13,23 @@ function UsersList({
 			<ul className="list">
 				{users.map((user, i) => {
 					return (
-						<li key={i}
-							className="list-item flex">
-							<span className="flex-1 ellipsis">{user.email}</span>
-							<span className="flex-0 list-buttons">
-								{currentUser.id !== user.id ?
-									<Link to={`users/view/${user.id}/delete`}>{"Delete"}</Link>
-									:
-									<span>
-										<Link to={`users/${user.id}/edit`}>{"Change password"}</Link>
+						<div key={i}>
+							{user.api_consumer !== true ?
+								<li className="list-item flex">
+									<span className="flex-1 ellipsis">{user.email}</span>
+									<span className="flex-0 list-buttons">
+										{currentUser.id !== user.id ?
+											<Link to={`users/view/${user.id}/delete`}>{"Delete"}</Link>
+											:
+											<span>
+												<Link to={`users/${user.id}/edit`}>{"Change password"}</Link>
+											</span>
+										}
 									</span>
-								}
-							</span>
-						</li>
+								</li>
+								: null
+							}
+						</div>
 					)
 				})}
 			</ul>

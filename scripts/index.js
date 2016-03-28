@@ -44,6 +44,9 @@ render((
       <IndexRoute component={Register} />
     	<Route path="login" component={Login}></Route>
     	<Route component={RequireLogin}>
+        <Route path="settings">
+          <Route path="view" />
+        </Route>
         <Route path="users">
           <Route path="view" component={Users}>
             <Route path=":id" component={User}>
