@@ -1,1 +1,1 @@
-web: pushd /dist; python -m SimpleHTTPServer $PORT; popd
+web: npm start
