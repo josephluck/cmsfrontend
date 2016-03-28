@@ -2,6 +2,7 @@ import React from 'react';
 import FormHelper from 'utils/FormHelper';
 
 import FormInput from 'components/FormInput';
+import {Link} from 'react-router';
 
 function RegisterForm({
 	onSubmit,
@@ -38,11 +39,21 @@ function RegisterForm({
           type="password" />
       </FormInput>
 
-      <div className="text-align-right">
-  		  <button type="submit">
-          {state.loading ? "Registering" : "Register"}
-        </button>
-      </div>
+        <div className="container flex vertical-align">
+          <div className="flex-1">
+            <span>
+              {"Already have an account? "}
+            </span>
+            <Link to="login">
+              {"Login"}
+            </Link>
+          </div>
+          <div class="flex-0">
+            <button type="submit">
+              {state.loading ? "Registering" : "Register"}
+            </button>
+          </div>
+        </div>
   	</form>
   );
 }

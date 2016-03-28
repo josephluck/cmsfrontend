@@ -5,6 +5,7 @@ import Api from 'utils/Api';
 import PersistentStorage from 'utils/PersistentStorage';
 
 import LoginForm from 'components/LoginForm';
+import {Link} from 'react-router';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -15,11 +16,13 @@ class Login extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div className="container">
-	  		<LoginForm
-	  			onSubmit={submitLogin}
-	  			state={this.props.form}></LoginForm>
-	  	</div>
+	  	<div>
+		  	<div className="container">
+		  		<LoginForm
+		  			onSubmit={submitLogin}
+		  			state={this.props.form}></LoginForm>
+		  	</div>
+		  </div>
 	  );
 	}
 }
