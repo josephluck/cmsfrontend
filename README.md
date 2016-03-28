@@ -1,28 +1,34 @@
-# React ES6 Webpack Boilerplate
+## Prerequisites
 
-Boilerplate for kick starting a project with the following technologies:
-* [React](https://github.com/facebook/react)
-* [Babel 6](http://babeljs.io)
-* [Webpack](http://webpack.github.io) for bundling
-* [Webpack Dev Server](http://webpack.github.io/docs/webpack-dev-server.html)
-* [React Transform](https://github.com/gaearon/react-transform-hmr) for hot reloading React components in real time.
+Ensure that the latest versions of node and npm are installed on your machine.
 
-The various webpack options used have been explained in detailed as comments in the config file. Should help with understanding the nitty-gritty :)
+## Dependencies
 
+Install all dependencies:
 
-### Usage
-
-```
-npm install
-npm start
-Open http://localhost:5000
+```bash
+$ npm install
 ```
 
-### Linting
+## Development server
 
-ESLint with React linting options have been enabled.
+To run the development server:
 
+```bash
+$ npm start
 ```
-npm run lint
+
+This runs a development mode server with live reload etc. The server defaults to port 5000
+
+Open `http://localhost:5000` in your browser.
+
+## Production
+
+```bash
+$ npm run build
+$ npm start
 ```
 
+## Deployement
+
+Deployment is done through Heroku
