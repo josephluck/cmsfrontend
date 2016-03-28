@@ -1,0 +1,52 @@
+import React from 'react';
+import { warmUp } from 'react-freezer-js';
+import Store from 'store/Store';
+import Api from 'utils/Api';
+
+class Section extends React.Component {
+	constructor(props) {
+		super(props);
+		Store.get().set({
+			section: {
+				items: []
+			},
+			section_loading: true
+		});
+	}
+
+	componentWillMount() {
+		Api.get({
+			url: {
+				name: 'section',
+				id: this.props.params.id,
+				section_id: this.props.params.section_id
+			}
+		}).then((body) => {
+			Store.get().section.reset(body);
+			Store.get().set({section_loading: false})
+		}, (err) => {
+			Store.get().section.reset({});
+			Store.get().set({section_loading: false})
+		})
+	}
+
+	render() {
+	  return (
+	  	<div>
+		  	{this.props.children}
+			</div>
+	  );
+	}
+}
+
+Section.defaultProps = {
+	section: {
+		items: []
+	},
+	loading: true
+}
+
+export default warmUp(Section, [
+	['section', 'section'],
+	['loading', 'section_loading']
+]);

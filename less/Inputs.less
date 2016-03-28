@@ -1,0 +1,40 @@
+.input {
+	margin-bottom: @padding;
+	label {
+		width: 100%;
+		display: block;
+		padding: 0 @padding @padding/2;
+	}
+	input, select, textarea {
+		background: @pureWhite;
+		padding: @padding/2 @padding;
+		border: @borderWidth solid @darkGray;
+		width: 100%;
+		font-size: 1em;
+		resize: vertical;
+	}
+}
+
+button, .button {
+	background: @pureWhite;
+	border: @borderWidth solid @darkGray;
+	padding: @padding/2 @padding;
+	outline: none;
+	box-shadow: none;
+	font-size: 1em;
+	display: inline-block;
+	font-family: inherit;
+	cursor: pointer;
+	color: @black;
+	&:hover {
+		color: @black;
+	}
+	&.add-another {
+		background: transparent;
+		border: @borderWidth dashed @darkGray;
+		color: @blue;
+		&:hover {
+			color: @blueHover;
+		}
+	}
+}

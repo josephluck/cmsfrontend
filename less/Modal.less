@@ -1,0 +1,23 @@
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	height: 300px;
+	margin-left: -300px;
+	width: 600px;
+	background: @white;
+	box-shadow: 0px 0px 0px 1000px rgba(140, 140, 140, 0.8);
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	.modal-content {
+		flex: 1;
+		overflow: auto;
+	}
+	.modal-footer {
+		a, button {
+			margin-left: @padding;
+		}
+	}
+}

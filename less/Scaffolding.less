@@ -1,0 +1,50 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	background: @lightGray;
+	color: @black;
+}
+
+h1, h2, h3, h4, h5, p {
+	margin: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: @blue;
+	&:visited {
+		color: @blue;
+	}
+	&:hover {
+		color: @blueHover;
+	}
+}
+
+hr {
+	outline: 0px;
+	border: 0px;
+	box-shadow: none;
+	margin: 0px;
+	border-top: solid @borderWidth @darkGray;
+}
+
+.container {
+	margin: @padding @padding*2;
+	.container {
+		margin: @padding 0px;
+	}
+}
+
+.modal {
+	.container {
+		margin: @padding @padding*2;
+	}
+}
+
+.box {
+	background: @pureWhite;
+	padding: @padding @padding;
+	border: solid @borderWidth @darkGray;
+}
