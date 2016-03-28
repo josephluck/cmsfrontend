@@ -1,10 +1,10 @@
 import superagent from 'superagent';
 import PersistentStorage from 'utils/PersistentStorage';
 
-let API_ROOT = 'http://cms-api.dev/'
-
 if (window.location.hostname !== 'localhost') {
-  let API_ROOT = 'young-earth-94007.herokuapp.com'
+  const API_ROOT = 'young-earth-94007.herokuapp.com';
+} else {
+  const API_ROOT = 'http://cms-api.dev/';
 }
 
 // Handle errors (unauthorized, forbidden etc)
