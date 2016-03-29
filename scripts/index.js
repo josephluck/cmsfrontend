@@ -55,6 +55,7 @@ render((
           </Route>
         </Route>
         <Route path="users">
+          <Route path="new" component={NewUser} />
           <Route path="view" component={Users}>
             <Route path=":id" component={User}>
               <Route path="delete" component={DeleteUser} />
@@ -63,7 +64,6 @@ render((
           <Route path=":id" component={User}>
             <Route path="edit" component={EditUser} />
           </Route>
-          <Route path="new" component={NewUser} />
         </Route>
     		<Route path="pages">
     			<Route path="view" component={Pages} />

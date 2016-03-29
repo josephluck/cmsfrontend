@@ -20,7 +20,7 @@ class EditUser extends React.Component {
 		  	<div className="subnav container flex vertical-align">
 	  			<div className="flex-1">
 		  			<h3>
-		  				<Link to="team_members/view">{"Users"}</Link>
+		  				<Link to="users/view">{"Users"}</Link>
 		  				{this.props.team_member.email ?
 		  					<span>
 				  				{" / Change password"}

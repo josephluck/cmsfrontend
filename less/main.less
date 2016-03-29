@@ -11,3 +11,33 @@
 @import "Subnav.less";
 @import "ErrorBar.less";
 @import "Field.less";
+
+.example-enter {
+  opacity: 0.01;
+  transform: translateX(5em);
+  transition: all 2s ease-in;
+  position: absolute;
+  width: 100%;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  position: absolute;
+  width: 100%;
+}
+
+.example-leave {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 2s ease-in;
+  position: absolute;
+  width: 100%;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0;
+  transform: translateX(-5em);
+  position: absolute;
+  width: 100%;
+}
