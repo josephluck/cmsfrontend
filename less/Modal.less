@@ -3,7 +3,7 @@
 	top: 50%;
 	left: 50%;
 	margin-top: -150px;
-	height: 300px;
+	height: 400px;
 	margin-left: -300px;
 	width: 600px;
 	background: @white;
@@ -14,8 +14,18 @@
 	.modal-content {
 		flex: 1;
 		overflow: auto;
+		margin: 0px;
+		padding: @padding @padding*2;
+		border-top: solid @borderWidth @darkGray;
+		.container {
+			padding: @padding 0px;
+			margin: 0px;
+		}
 	}
 	.modal-footer {
+		border-top: solid @borderWidth @darkGray;
+		margin: 0px;
+		padding: @padding @padding*2;
 		a, button {
 			margin-left: @padding;
 		}

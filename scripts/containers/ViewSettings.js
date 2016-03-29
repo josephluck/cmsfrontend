@@ -11,14 +11,13 @@ class ViewSettings extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.company)
 	  return (
   		<div className="container">
   			<Block loading={this.props.company_loading}>
 		  		<div className="container flex vertical-align">
 		  			<h3 className="flex-1">{"Company details"}</h3>
 		  			<Link className="button"
-		  				to="settings">
+		  				to="settings/view/delete">
 		  				{"Delete account"}
 		  			</Link>
 		  			<Link className="button left-margin"
@@ -57,6 +56,7 @@ class ViewSettings extends React.Component {
 			  		</div>
 			  	</div>
 		  	</Block>
+		  	{this.props.children}
 		  </div>
 	  );
 	}

@@ -11,6 +11,7 @@ import RequireLogin from 'containers/RequireLogin';
 // Settings
 import Settings from 'containers/Settings';
 import ViewSettings from 'containers/ViewSettings';
+import DeleteCompany from 'containers/DeleteCompany';
 
 // Users
 import Users from 'containers/Users';
@@ -49,7 +50,9 @@ render((
     	<Route path="login" component={Login}></Route>
     	<Route component={RequireLogin}>
         <Route path="settings" component={Settings}>
-          <Route path="view" component={ViewSettings} />
+          <Route path="view" component={ViewSettings}>
+            <Route path="delete" component={DeleteCompany} />
+          </Route>
         </Route>
         <Route path="users">
           <Route path="view" component={Users}>
