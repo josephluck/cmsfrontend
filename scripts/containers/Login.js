@@ -10,9 +10,9 @@ import {Link} from 'react-router';
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().forms.set({login: {
-			errors: {}
-		}})
+		Store.get().forms.set({
+			login: {}
+		})
 	}
 	render() {
 	  return (
@@ -46,7 +46,8 @@ function submitLogin (form) {
 	}, (err) => {
 		Store.get().forms.login.set({
 			"loading": false,
-			"error": true
+			"error": true,
+			"errors": err.errors
 		});
 
 		Api.removeToken();
@@ -55,9 +56,7 @@ function submitLogin (form) {
 }
 
 Login.defaultProps = {
-	form: {
-		errors: {}
-	}
+	form: {}
 }
 
 export default warmUp(Login, [
