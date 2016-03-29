@@ -2,7 +2,7 @@ import superagent from 'superagent';
 import PersistentStorage from 'utils/PersistentStorage';
 
 if (window.location.hostname !== 'localhost') {
-  var API_ROOT = 'http://young-earth-94007.herokuapp.com/';
+  var API_ROOT = 'https://young-earth-94007.herokuapp.com/';
 } else {
   var API_ROOT = 'http://cms-api.dev/';
 }
