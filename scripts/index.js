@@ -8,6 +8,9 @@ import Register from 'containers/Register';
 import Login from 'containers/Login';
 import RequireLogin from 'containers/RequireLogin';
 
+// Settings
+import Settings from 'containers/Settings';
+
 // Users
 import Users from 'containers/Users';
 import NewUser from 'containers/NewUser';
@@ -44,7 +47,7 @@ render((
       <IndexRoute component={Register} />
     	<Route path="login" component={Login}></Route>
     	<Route component={RequireLogin}>
-        <Route path="settings">
+        <Route path="settings" component={Settings}>
           <Route path="view" />
         </Route>
         <Route path="users">

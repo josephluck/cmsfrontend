@@ -132,6 +132,9 @@ function getApiUrl(options) {
       return API_ROOT + 'sessions';
 
       break;
+    case 'company':
+      return API_ROOT + `companies/${options.id}`;
+      break;
     case 'users':
       return API_ROOT + 'users';
       break;
