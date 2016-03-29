@@ -19,6 +19,10 @@ class ViewSettings extends React.Component {
 		  			<h3 className="flex-1">{"Company details"}</h3>
 		  			<Link className="button"
 		  				to="settings">
+		  				{"Delete account"}
+		  			</Link>
+		  			<Link className="button left-margin"
+		  				to="settings">
 		  				{"Edit"}
 		  			</Link>
 		  		</div>
@@ -52,7 +56,7 @@ class ViewSettings extends React.Component {
 			  			</span>
 			  		</div>
 			  	</div>
-			  </Block>
+		  	</Block>
 		  </div>
 	  );
 	}

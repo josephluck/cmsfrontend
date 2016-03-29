@@ -1,10 +1,17 @@
+@fieldLabelWidth: 120px;
+
 .field-label {
 	font-weight: bold;
-	width: 150px;
+	width: @fieldLabelWidth;
+	min-width: @fieldLabelWidth;
 	margin-right: @padding;
 }
+.field {
+	word-break: break-all;
+}
 .field-help {
-	margin-left: 150px + @padding;
+	margin-left: @fieldLabelWidth + @padding;
+	width: 100%;
 	color: darken(@darkGray, 25%);
 	font-size: 0.8em;
 	font-style: italic;
