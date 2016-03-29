@@ -38,12 +38,8 @@ class Settings extends React.Component {
 	  		<hr />
 
 		  	<div className="container">
-			  	<Block loading={this.props.loading}>
-			  		<h1>{"Settings"}</h1>
-			  	</Block>
+			  	{this.props.children}
 			  </div>
-
-			  {this.props.children}
 			</div>
 	  );
 	}
@@ -55,6 +51,5 @@ Settings.defaultProps = {
 
 export default warmUp(Settings, [
 	['company_id', 'user', 'company_id'],
-	['company', 'company'],
-	['loading', 'company_loading']
+	['company', 'company']
 ]);
