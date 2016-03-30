@@ -68,6 +68,8 @@ function submitDelete(e) {
 				id: Store.get().company.id
 			}
 		}).then((res) => {
+			Api.removeToken();
+			Store.get().user.reset({});
 			window.location.hash = "/";
 		});
 	} else {

@@ -20,6 +20,9 @@ import User from 'containers/User';
 import EditUser from 'containers/EditUser';
 import DeleteUser from 'containers/DeleteUser';
 
+// Sites
+import Sites from 'containers/Sites';
+
 // Pages
 import Pages from 'containers/Pages';
 
@@ -65,6 +68,14 @@ render((
             <Route path="edit" component={EditUser} />
           </Route>
         </Route>
+
+        <Route path="sites">
+          <Route path="view" component={Sites} />
+          <Route path=":id">
+            <Route path="view" />
+          </Route>
+        </Route>
+
     		<Route path="pages">
     			<Route path="view" component={Pages} />
     			<Route path="new" component={NewPage} />

@@ -29,10 +29,10 @@ function Profile({
   			  		onClick={closeDropdown}>
   			  		{"Settings"}
   			  	</Link>
-  			  	<Link to="pages/view"
+  			  	<Link to="sites/view"
   			  		className="menu-item"
   			  		onClick={closeDropdown}>
-  			  		{"Pages"}
+  			  		{"Sites"}
   			  	</Link>
   			  	<Link to="users/view"
   			  		className="menu-item"

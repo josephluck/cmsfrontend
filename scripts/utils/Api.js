@@ -141,6 +141,9 @@ function getApiUrl(options) {
     case 'user':
       return API_ROOT + `users/${options.id}`;
       break;
+    case 'sites':
+      return API_ROOT + 'sites';
+      break;
     case 'pages':
       return API_ROOT + 'pages';
       break;
