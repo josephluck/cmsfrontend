@@ -24,7 +24,9 @@ class Page extends React.Component {
 			Store.get().page.reset(body);
 			Store.get().set({page_loading: false})
 		}, (err) => {
-			Store.get().page.reset({});
+			Store.get().page.reset({
+				sections: []
+			});
 			Store.get().set({page_loading: false})
 		})
 	}

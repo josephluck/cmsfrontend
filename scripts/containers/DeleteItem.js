@@ -13,13 +13,13 @@ class DeleteItem extends React.Component {
 	  return (
 	  	<div className="modal">
 	  		<div className="container">
-	  			<h3>Delete item</h3>
+	  			<h3>{"Delete item"}</h3>
 	  		</div>
 	  		<div className="container modal-content">
 	  			<p>{`To confirm you want to delete item ${this.props.item.title} press the delete button below.`}</p>
 	  		</div>
   			<div className="modal-footer container text-align-right">
-  				<Link to={`pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>
+  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>
   					{"Cancel"}
   				</Link>
   				<button onClick={this.props.submitDelete}>
@@ -50,7 +50,7 @@ function submitDelete() {
 
 		Store.get().section.items.splice(item_index, 1);
 
-		window.location.hash = `#pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
+		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
 	}, (err) => {
 		debugger
 	})

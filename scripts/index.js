@@ -22,8 +22,11 @@ import DeleteUser from 'containers/DeleteUser';
 
 // Sites
 import Sites from 'containers/Sites';
+import NewSite from 'containers/NewSite';
 import Site from 'containers/Site';
 import ViewSite from 'containers/ViewSite';
+import EditSite from 'containers/EditSite';
+import DeleteSite from 'containers/DeleteSite';
 
 // Page
 import NewPage from 'containers/NewPage';
@@ -72,8 +75,12 @@ render((
 
         <Route path="sites">
           <Route path="view" component={Sites} />
+          <Route path="new" component={NewSite} />
           <Route path=":site_id" component={Site}>
-            <Route path="view" component={ViewSite} />
+            <Route path="view" component={ViewSite}>
+              <Route path="delete" component={DeleteSite} />
+            </Route>
+            <Route path="edit" component={EditSite} />
             <Route path="pages">
               <Route path="new" component={NewPage} />
               <Route path=":page_id" component={Page}>

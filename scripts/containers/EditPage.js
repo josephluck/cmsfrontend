@@ -20,12 +20,19 @@ class EditPage extends React.Component {
 		  	<div className="subnav container flex vertical-align">
 	  			<div className="flex-1">
 		  			<h3>
-		  				<Link to="pages/view">{"Pages"}</Link>
-		  				{this.props.page.title ?
+		  				<Link to="sites/view">{"Sites"}</Link>
+		  				{this.props.site.title ?
 		  					<span>
 				  				{" / "}
-				  				<Link to={`pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
-				  				{" / Edit"}
+				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
+				  				{this.props.page.title ?
+				  					<span>
+						  				{" / "}
+						  				<Link to={`pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
+						  				{" / Edit"}
+						  			</span>
+					  				: null
+					  			}
 				  			</span>
 			  				: null
 			  			}
@@ -61,12 +68,12 @@ function submitPage (form) {
 	Api.put({
 		url: {
 			name: 'page',
-			id: Store.get().page.id
+			page_id: Store.get().page.id
 		},
 		payload: form
 	}).then((res) => {
 		Store.get().page.reset(res);
-		window.location.hash = `#pages/${Store.get().page.id}/view`;
+		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`;
 	}, (err) => {
 		Store.get().forms.page.set({
 			"loading": false,
@@ -83,6 +90,7 @@ EditPage.defaultProps = {
 }
 
 export default warmUp(EditPage, [
+	['site', 'site'],
 	['page', 'page'],
 	['form', 'forms', 'page'],
 	['submitPage', submitPage]

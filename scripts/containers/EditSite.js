@@ -4,12 +4,13 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
-import PageForm from 'components/PageForm';
+import Block from 'components/Block';
+import SiteForm from 'components/SiteForm';
 
-class Page extends React.Component {
+class EditSite extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().forms.set({page: {
+		Store.get().forms.set({site: {
 			errors: {}
 		}})
 	}
@@ -17,14 +18,14 @@ class Page extends React.Component {
 	  return (
 	  	<div>
 		  	<div className="subnav container flex vertical-align">
-		  		<div className="flex-1">
+	  			<div className="flex-1">
 		  			<h3>
 		  				<Link to="sites/view">{"Sites"}</Link>
 		  				{this.props.site.title ?
 		  					<span>
 				  				{" / "}
 				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{" / New page"}
+				  				{" / Edit"}
 				  			</span>
 			  				: null
 			  			}
@@ -36,33 +37,36 @@ class Page extends React.Component {
 		  	<hr />
 
 		  	<div className="container">
-		  		<PageForm
-		  			onSubmit={submitPage}
-		  			state={this.props.form}></PageForm>
+		  		<Block loading={!this.props.site.title}>
+			  		<SiteForm
+			  			onSubmit={submitSite}
+			  			state={this.props.form}
+			  			data={this.props.site}>
+			  		</SiteForm>
+			  	</Block>
 		  	</div>
 		  </div>
 	  );
 	}
 }
 
-function submitPage (form) {
-	Store.get().forms.page.set({
+function submitSite (form) {
+	Store.get().forms.site.set({
 		"loading": true,
 		"error": false
 	});
 
-	form['site_id'] = Store.get().site.id;
-
-	Api.post({
+	Api.put({
 		url: {
-			name: 'pages'
+			name: 'site',
+			site_id: Store.get().site.id
 		},
 		payload: form
 	}).then((res) => {
-		Store.get().site.pages.unshift(res);
+		Store.get().site.reset(res);
 		window.location.hash = `#sites/${Store.get().site.id}/view`;
 	}, (err) => {
-		Store.get().forms.page.set({
+		Store.get().forms.site.set({
 			"loading": false,
 			"error": true,
 			"errors": err.errors
@@ -70,14 +74,14 @@ function submitPage (form) {
 	})
 }
 
-Page.defaultProps = {
+EditSite.defaultProps = {
 	form: {
 		errors: {}
 	}
 }
 
-export default warmUp(Page, [
+export default warmUp(EditSite, [
 	['site', 'site'],
-	['form', 'forms', 'page'],
-	['submitPage', submitPage]
+	['form', 'forms', 'site'],
+	['submitSite', submitSite]
 ]);

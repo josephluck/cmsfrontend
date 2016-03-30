@@ -5,7 +5,7 @@ import Api from 'utils/Api';
 
 import { Link } from 'react-router';
 
-class DeleteSection extends React.Component {
+class DeleteSite extends React.Component {
 	constructor(props, context) {
 		super(props);
 	}
@@ -13,17 +13,17 @@ class DeleteSection extends React.Component {
 	  return (
 	  	<div className="modal">
 	  		<div className="container">
-	  			<h3>{"Delete section"}</h3>
+	  			<h3>{"Delete site"}</h3>
 	  		</div>
 	  		<div className="container modal-content">
-	  			<p>{`To confirm you want to delete section ${this.props.section.title} press the delete button below.`}</p>
+	  			<p>{`To confirm you want to delete site ${this.props.site.title} press the delete button below.`}</p>
 	  		</div>
   			<div className="modal-footer container text-align-right">
-  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>
+  				<Link to={`sites/view`}>
   					{"Cancel"}
   				</Link>
   				<button onClick={this.props.submitDelete}>
-  					{this.props.section.loading ?
+  					{this.props.site.loading ?
   						"Deleting"
   						: "Delete"
   					}
@@ -35,30 +35,22 @@ class DeleteSection extends React.Component {
 }
 
 function submitDelete() {
-	Store.get().section.set({
+	Store.get().site.set({
 		"loading": true
 	});
 	Api.destroy({
 		url: {
-			name: 'section',
-			section_id: Store.get().section.id
+			name: 'site',
+			site_id: Store.get().site.id
 		}
 	}).then((res) => {
-		let section_index = Store.get().page.sections.map((section) => {
-			return section.id
-		}).indexOf(Store.get().section.id);
-
-		Store.get().page.sections.splice(section_index, 1);
-
-		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`;
+		window.location.hash = `#sites/view`;
 	}, (err) => {
 		debugger
 	})
 }
 
-export default warmUp(DeleteSection, [
+export default warmUp(DeleteSite, [
 	['site', 'site'],
-	['page', 'page'],
-	['section', 'section'],
 	['submitDelete', submitDelete]
 ]);

@@ -13,13 +13,13 @@ class DeletePage extends React.Component {
 	  return (
 	  	<div className="modal">
 	  		<div className="container">
-	  			<h3>Delete page</h3>
+	  			<h3>{"Delete page"}</h3>
 	  		</div>
 	  		<div className="container modal-content">
 	  			<p>{`To confirm you want to delete page ${this.props.page.title} press the delete button below.`}</p>
 	  		</div>
   			<div className="modal-footer container text-align-right">
-  				<Link to={`pages/${this.props.page.id}/view`}>
+  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>
   					{"Cancel"}
   				</Link>
   				<button onClick={this.props.submitDelete}>
@@ -41,16 +41,17 @@ function submitDelete() {
 	Api.destroy({
 		url: {
 			name: 'page',
-			id: Store.get().page.id
+			page_id: Store.get().page.id
 		}
 	}).then((res) => {
-		window.location.hash = "#pages/view";
+		window.location.hash = `#sites/${Store.get().site.id}/view`;
 	}, (err) => {
 		debugger
 	})
 }
 
 export default warmUp(DeletePage, [
+	['site', 'site'],
 	['page', 'page'],
 	['submitDelete', submitDelete]
 ]);
