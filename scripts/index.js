@@ -22,9 +22,8 @@ import DeleteUser from 'containers/DeleteUser';
 
 // Sites
 import Sites from 'containers/Sites';
-
-// Pages
-import Pages from 'containers/Pages';
+import Site from 'containers/Site';
+import ViewSite from 'containers/ViewSite';
 
 // Page
 import NewPage from 'containers/NewPage';
@@ -52,11 +51,13 @@ render((
       <IndexRoute component={Register} />
     	<Route path="login" component={Login}></Route>
     	<Route component={RequireLogin}>
+
         <Route path="settings" component={Settings}>
           <Route path="view" component={ViewSettings}>
             <Route path="delete" component={DeleteCompany} />
           </Route>
         </Route>
+
         <Route path="users">
           <Route path="new" component={NewUser} />
           <Route path="view" component={Users}>
@@ -71,40 +72,41 @@ render((
 
         <Route path="sites">
           <Route path="view" component={Sites} />
-          <Route path=":id">
-            <Route path="view" />
-          </Route>
-        </Route>
-
-    		<Route path="pages">
-    			<Route path="view" component={Pages} />
-    			<Route path="new" component={NewPage} />
-          <Route path=":id" component={Page}>
-            <Route path="view" component={ViewPage}>
-              <Route path="delete" component={DeletePage} />
-            </Route>
-            <Route path="edit" component={EditPage} />
-            <Route path="new_section" component={NewSection} />
-            <Route path="sections">
-              <Route path=":section_id" component={Section}>
-                <Route path="view" component={ViewSection}>
-                  <Route path="delete" component={DeleteSection} />
-                  <Route path="items">
-                    <Route path=":item_id" component={Item}>
-                      <Route path="delete" component={DeleteItem} />
-                    </Route>
-                  </Route>
+          <Route path=":site_id" component={Site}>
+            <Route path="view" component={ViewSite} />
+            <Route path="pages">
+              <Route path="new" component={NewPage} />
+              <Route path=":page_id" component={Page}>
+                <Route path="view" component={ViewPage}>
+                  <Route path="delete" component={DeletePage} />
                 </Route>
-                <Route path="edit" component={EditSection} />
-                <Route path="new_item" component={NewItem} />
-                <Route path="items">
-                  <Route path=":item_id" component={Item}>
-                    <Route path="edit" component={EditItem} />
+                <Route path="edit" component={EditPage} />
+                <Route path="new_section" component={NewSection} />
+                <Route path="sections">
+                  <Route path=":section_id" component={Section}>
+                    <Route path="view" component={ViewSection}>
+                      <Route path="delete" component={DeleteSection} />
+                      <Route path="items">
+                        <Route path=":item_id" component={Item}>
+                          <Route path="delete" component={DeleteItem} />
+                        </Route>
+                      </Route>
+                    </Route>
+                    <Route path="edit" component={EditSection} />
+                    <Route path="new_item" component={NewItem} />
+                    <Route path="items">
+                      <Route path=":item_id" component={Item}>
+                        <Route path="edit" component={EditItem} />
+                      </Route>
+                    </Route>
                   </Route>
                 </Route>
               </Route>
             </Route>
           </Route>
+        </Route>
+
+    		<Route path="pages">
     		</Route>
     	</Route>
     </Route>

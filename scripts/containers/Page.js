@@ -18,7 +18,7 @@ class Page extends React.Component {
 		Api.get({
 			url: {
 				name: 'page',
-				id: this.props.params.id
+				page_id: this.props.params.page_id
 			}
 		}).then((body) => {
 			Store.get().page.reset(body);

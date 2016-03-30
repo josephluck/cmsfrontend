@@ -20,19 +20,26 @@ class EditSection extends React.Component {
 		  	<div className="subnav container flex vertical-align">
 	  			<div className="flex-1">
 		  			<h3>
-		  				<Link to="pages/view">{"Pages"}</Link>
-		  				{this.props.page.title ?
+		  				<Link to="sites/view">{"Sites"}</Link>
+		  				{this.props.site.title ?
 		  					<span>
 				  				{" / "}
-				  				<Link to={`pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
-				  				{this.props.section.title ?
+				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
+				  				{this.props.page.title ?
 				  					<span>
-				  						{" / "}
-				  						<Link to={`pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>{this.props.section.title}</Link>
-				  						{" / Edit"}
-				  					</span>
-				  					: null
-				  				}
+						  				{" / "}
+						  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
+						  				{this.props.section.title ?
+						  					<span>
+						  						{" / "}
+						  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>{this.props.section.title}</Link>
+						  						{" / Edit"}
+						  					</span>
+						  					: null
+						  				}
+						  			</span>
+					  				: null
+					  			}
 				  			</span>
 			  				: null
 			  			}
@@ -73,7 +80,7 @@ function submitPage (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().section.reset(res);
-		window.location.hash = `#pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
+		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
 	}, (err) => {
 		Store.get().forms.section.set({
 			"loading": false,
@@ -90,6 +97,7 @@ EditSection.defaultProps = {
 }
 
 export default warmUp(EditSection, [
+	['site', 'site'],
 	['page', 'page'],
 	['section', 'section'],
 	['form', 'forms', 'section'],

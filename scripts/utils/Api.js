@@ -144,11 +144,14 @@ function getApiUrl(options) {
     case 'sites':
       return API_ROOT + 'sites';
       break;
+    case 'site':
+      return API_ROOT + `sites/${options.site_id}`;
+      break;
     case 'pages':
       return API_ROOT + 'pages';
       break;
     case 'page':
-      return API_ROOT + `pages/${options.id}`;
+      return API_ROOT + `pages/${options.page_id}`;
       break;
     case 'sections':
       return API_ROOT + 'sections';

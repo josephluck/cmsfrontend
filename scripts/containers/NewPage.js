@@ -19,8 +19,15 @@ class Page extends React.Component {
 		  	<div className="subnav container flex vertical-align">
 		  		<div className="flex-1">
 		  			<h3>
-		  				<Link to="pages/view">{"Pages"}</Link>
-		  				{" / New"}
+		  				<Link to="sites/view">{"Sites"}</Link>
+		  				{this.props.site.title ?
+		  					<span>
+				  				{" / "}
+				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
+				  				{" / New page"}
+				  			</span>
+			  				: null
+			  			}
 		  			</h3>
 		  		</div>
 		  		<button className="transparent">{"Hidden"}</button>
@@ -44,7 +51,7 @@ function submitPage (form) {
 		"error": false
 	});
 
-	form['site_id'] = 1;
+	form['site_id'] = Store.get().site.id;
 
 	Api.post({
 		url: {
@@ -52,7 +59,7 @@ function submitPage (form) {
 		},
 		payload: form
 	}).then((res) => {
-		window.location.hash = "#pages/view";
+		window.location.hash = `#sites/${Store.get().site.id}/pages/view`;
 	}, (err) => {
 		Store.get().forms.page.set({
 			"loading": false,
@@ -69,6 +76,7 @@ Page.defaultProps = {
 }
 
 export default warmUp(Page, [
+	['site', 'site'],
 	['form', 'forms', 'page'],
 	['submitPage', submitPage]
 ]);

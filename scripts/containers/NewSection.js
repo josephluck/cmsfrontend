@@ -19,12 +19,19 @@ class NewSection extends React.Component {
 		  	<div className="subnav container flex vertical-align">
 	  			<div className="flex-1">
 		  			<h3>
-		  				<Link to="pages/view">{"Pages"}</Link>
-		  				{this.props.page.title ?
+		  				<Link to="sites/view">{"Sites"}</Link>
+		  				{this.props.site.title ?
 		  					<span>
 				  				{" / "}
-				  				<Link to={`pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
-				  				{" / New section"}
+				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
+				  				{this.props.page.title ?
+				  					<span>
+				  						{" / "}
+				  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
+				  						{" / New section"}
+				  					</span>
+				  					: null
+				  				}
 				  			</span>
 			  				: null
 			  			}
@@ -61,7 +68,7 @@ function submitSection(form) {
 		payload: form
 	}).then((res) => {
 		Store.get().page.sections.unshift(res);
-		window.location.hash = `#pages/${Store.get().page.id}/view`;
+		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`;
 	}, (err) => {
 		Store.get().forms.new_section.set({
 			"loading": false,
@@ -78,6 +85,7 @@ NewSection.defaultProps = {
 }
 
 export default warmUp(NewSection, [
+	['site', 'site'],
 	['page', 'page'],
 	['form', 'forms', 'new_section'],
 	['submitSection', submitSection]

@@ -8,7 +8,7 @@ import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import ApiHelper from 'components/ApiHelper';
 
-class ViewPage extends React.Component {
+class ViewSite extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -22,28 +22,21 @@ class ViewPage extends React.Component {
 		  				<Link to="sites/view">{"Sites"}</Link>
 		  				{this.props.site.title ?
 		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{this.props.page.title ?
-				  					<span>
-				  						{" / "}
-				  						{this.props.page.title}
-				  					</span>
-				  					: null
-				  				}
-				  			</span>
-			  				: null
-			  			}
+		  						{" / "}
+		  						{this.props.site.title}
+		  					</span>
+		  					: null
+		  				}
 		  			</h3>
 		  		</div>
 	  			<div>
-	  				<ApiHelper route="page" params={this.props.params}></ApiHelper>
+	  				<ApiHelper route="site" params={this.props.params}></ApiHelper>
 		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view/delete`}>
+		  				to={`sites/${this.props.site.id}/view/delete`}>
 		  				{"Delete"}
 		  			</Link>
 		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/edit`}>
+		  				to={`sites/${this.props.site.id}/edit`}>
 		  				{"Edit"}
 		  			</Link>
 		  		</div>
@@ -54,25 +47,25 @@ class ViewPage extends React.Component {
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
 	  	  		<div className="container flex vertical-align">
-	  	  			<h3 className="flex-1">Sections</h3>
+	  	  			<h3 className="flex-1">Pages</h3>
 	  	  			<Link className="button"
-	  	  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/new_section`}>
-	  	  				{"New section"}
+	  	  				to={`sites/${this.props.site.id}/pages/new`}>
+	  	  				{"New page"}
 	  	  			</Link>
 	  	  		</div>
 	  		  	<div className="container">
-	  		  		<NoResults noResults={!this.props.page.sections.length}
-	  		  			name="sections">
+	  		  		<NoResults noResults={!this.props.site.pages.length}
+	  		  			name="pages">
 	  		  			<ul className="list">
-		  		  			{this.props.page.sections.map((section, i) => {
+		  		  			{this.props.site.pages.map((page, i) => {
 		  		  				return (
 			  		  				<li key={i}
 			  		  					className="list-item flex">
-			  		  					<span className="flex-1 ellipsis">{section.title}</span>
+			  		  					<span className="flex-1 ellipsis">{page.title}</span>
 			  		  					<span className="flex-0 list-buttons">
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${section.id}/view`}>{"View"}</Link>
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${section.id}/edit`}>{"Edit"}</Link>
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${section.id}/view/delete`}>{"Delete"}</Link>
+			  		  						<Link to={`sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
+			  		  						<Link to={`sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
+			  		  						<Link to={`sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
 			  		  					</span>
 			  		  				</li>
 			  		  			)
@@ -95,15 +88,14 @@ function showHelp() {
 	})
 }
 
-ViewPage.defaultProps = {
-	page: {
-		sections: []
+ViewSite.defaultProps = {
+	site: {
+		pages: []
 	}
 }
 
-export default warmUp(ViewPage, [
+export default warmUp(ViewSite, [
 	['site', 'site'],
-	['page', 'page'],
-	['loading', 'page_loading'],
+	['loading', 'site_loading'],
 	['help_showing', 'help_showing']
 ]);
