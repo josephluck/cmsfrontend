@@ -16,6 +16,14 @@ class NewItem extends React.Component {
 			}
 		}})
 	}
+	componentWillUnmount() {
+		Store.get().forms.new_item.reset({
+			errors: {},
+			data: {
+				fields: [{}]
+			}
+		})
+	}
 	render() {
 	  return (
 	  	<div>

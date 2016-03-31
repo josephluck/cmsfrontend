@@ -30,7 +30,6 @@ class ViewSite extends React.Component {
 		  			</h3>
 		  		</div>
 	  			<div>
-	  				<ApiHelper route="site" params={this.props.params}></ApiHelper>
 		  			<Link className="button left-margin"
 		  				to={`sites/${this.props.site.id}/view/delete`}>
 		  				{"Delete"}

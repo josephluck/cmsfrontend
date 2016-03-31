@@ -39,7 +39,7 @@ class ApiHelper extends React.Component {
         'headers': {
           'authorization': '${this.props.auth_token}',
           'content-type': 'application/json',
-          'cache-control': 'no-cache',
+          'cache-control': 'no-cache'
         },
         'processData': false
       }

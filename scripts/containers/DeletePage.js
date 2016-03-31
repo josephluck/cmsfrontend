@@ -44,6 +44,12 @@ function submitDelete() {
 			page_id: Store.get().page.id
 		}
 	}).then((res) => {
+		let section_index = Store.get().site.pages.map((page) => {
+			return page.id
+		}).indexOf(Store.get().page.id);
+
+		Store.get().site.pages.splice(section_index, 1);
+
 		window.location.hash = `#sites/${Store.get().site.id}/view`;
 	}, (err) => {
 		debugger
