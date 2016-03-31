@@ -82,7 +82,7 @@ function submitItem(form) {
 		payload: form
 	}).then((res) => {
 		Store.get().section.items.push(res);
-		window.location.hash = `#pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
+		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
 	}, (err) => {
 		Store.get().forms.new_item.set({
 			"loading": false,
