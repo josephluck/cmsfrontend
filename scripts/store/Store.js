@@ -1,8 +1,10 @@
 import Freezer from 'freezer-js';
 
 export default new Freezer({
-	forms: {},
+	app_loading: true,
+	company: {},
 	user: {},
+	forms: {},
 	sites: []
 });
 

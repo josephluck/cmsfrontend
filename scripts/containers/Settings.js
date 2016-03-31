@@ -9,24 +9,6 @@ import Block from 'components/Block';
 class Settings extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			company: [],
-			company_loading: true
-		});
-	}
-	componentWillMount() {
-		Api.get({
-			url: {
-				name: 'company',
-				id: this.props.company_id
-			}
-		}).then((body) => {
-			Store.get().company.reset(body);
-			Store.get().set({company_loading: false})
-		}, (err) => {
-			Store.get().company.reset([]);
-			Store.get().set({company_loading: false})
-		})
 	}
 	render() {
 	  return (
@@ -43,10 +25,6 @@ class Settings extends React.Component {
 			</div>
 	  );
 	}
-}
-
-Settings.defaultProps = {
-	company: {}
 }
 
 export default warmUp(Settings, [

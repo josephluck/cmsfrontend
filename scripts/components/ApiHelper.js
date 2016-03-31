@@ -1,6 +1,7 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
+import Api from 'utils/Api';
 
 import Markdown from 'remarkable';
 import hljs from 'highlight.js';
@@ -26,17 +27,17 @@ class ApiHelper extends React.Component {
   	let api_url;
   	switch (this.props.route) {
   		case 'page':
-  			api_url = `pages/${this.props.params.id}`
+  			api_url = `pages/${this.props.params.page_id}`
   	}
 
     let code_snippet = `
       var settings = {
         'async': true,
         'crossDomain': true,
-        'url': 'http://api.cms-api.dev/pages/17',
+        'url': '${Api.API_ROOT + api_url}',
         'method': 'GET',
         'headers': {
-          'authorization': 'T7edZnPgiy-EZUZf-vgg',
+          'authorization': '${this.props.auth_token}',
           'content-type': 'application/json',
           'cache-control': 'no-cache',
         },
@@ -111,6 +112,7 @@ function showHelp() {
 }
 
 export default warmUp(ApiHelper, [
+  ['auth_token', 'company', 'auth_token'],
 	['showing', 'help_showing'],
 	['showHelp', showHelp],
 	['closeHelp', closeHelp]

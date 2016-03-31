@@ -19,6 +19,29 @@ class RequireLogin extends Component {
 			}).then((res) => {
 				Store.get().user.reset(res);
 				Api.setToken(res.auth_token);
+
+				Api.get({
+					url: {
+						name: 'company',
+						id: res.company_id
+					}
+				}).then((body) => {
+					Store.get().set({
+						company: body
+					});
+					Store.get().set({company_loading: false});
+					Store.get().set({
+						app_loading: false
+					});
+				}, (err) => {
+					Store.get().set({
+						company: {}
+					});
+					Store.get().set({company_loading: false})
+					Api.removeToken();
+					Store.get().user.reset({});
+					window.location.hash = '#login';
+				})
 			}, (err) => {
 				Api.removeToken();
 				Store.get().user.reset({});
@@ -44,5 +67,6 @@ class RequireLogin extends Component {
 }
 
 export default warmUp(RequireLogin, [
-	['user', 'user']
+	['user', 'user'],
+	['loading', 'app_loading']
 ]);

@@ -177,5 +177,6 @@ export default {
   get,
   destroy,
   setToken,
-  removeToken
+  removeToken,
+  API_ROOT
 }
