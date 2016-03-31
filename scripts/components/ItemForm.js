@@ -21,7 +21,7 @@ function ItemForm({
       <FormInput title="Title">
         <input name="title"
           type="text"
-          value={state.data.title}
+          defaultValue={state.data.title}
           onChange={(e) => {
             onTitleType(e.target.value);
           }} />
@@ -34,7 +34,7 @@ function ItemForm({
           <div key={i}>
             <FormInput title="Content">
               <textarea name={`fields[${i}]['content']`}
-                value={field.content}
+                defaultValue={field.content}
                 onChange={(e) => {
                   onFieldContentType(i, e.target.value)
                 }}>

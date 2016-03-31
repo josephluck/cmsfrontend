@@ -28,7 +28,7 @@ class ViewSettings extends React.Component {
 			  	<div className="box container">
 			  		<div className="flex bottom-margin">
 			  			<span className="field-label">
-			  				{"Name"}
+			  				{"Company name"}
 			  			</span>
 			  			<span className="field">
 			  				{this.props.company.name}
@@ -36,7 +36,7 @@ class ViewSettings extends React.Component {
 			  		</div>
 			  		<div className="flex bottom-margin">
 			  			<span className="field-label">
-			  				{"Email"}
+			  				{"Company email"}
 			  			</span>
 			  			<span className="field">
 			  				{this.props.company.email}
@@ -50,8 +50,8 @@ class ViewSettings extends React.Component {
 			  				{this.props.company.auth_token}
 			  			</span>
 			  			<span className="field-help top-margin">
-			  				{"Use this key to authenticate GET requests to the Aircontent API. "}
-			  				<a href="">{"Help me"}</a>
+			  				{"Use this key to authenticate requests to the Aircontent API. "}
+			  				<a href="">{"Show me how"}</a>
 			  			</span>
 			  		</div>
 			  	</div>

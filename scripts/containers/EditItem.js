@@ -13,9 +13,7 @@ class EditItem extends React.Component {
 		super(props);
 		Store.get().forms.set({edit_item: {
 			errors: {},
-			data: {
-				fields: [{}]
-			}
+			data: {}
 		}})
 	}
 	componentWillMount() {
@@ -79,14 +77,17 @@ class EditItem extends React.Component {
 
 		  	<div className="container">
 		  		<Block loading={!this.props.item.id}>
-			  		<ItemForm
-			  			state={this.props.form}
-			  			onSubmit={this.props.submitItem}
-			  			onTitleType={this.props.onTitleType}
-			  			addAnotherField={this.props.addAnotherField}
-			  			removeField={this.props.removeField}
-			  			onFieldContentType={this.props.onFieldContentType}>
-			  		</ItemForm>
+		  			{this.props.form.data.fields ?
+		  				<ItemForm
+		  					state={this.props.form}
+		  					onSubmit={this.props.submitItem}
+		  					onTitleType={this.props.onTitleType}
+		  					addAnotherField={this.props.addAnotherField}
+		  					removeField={this.props.removeField}
+		  					onFieldContentType={this.props.onFieldContentType}>
+		  				</ItemForm>
+		  				: null
+		  			}
 			  	</Block>
 		  	</div>
 		  </div>
@@ -144,9 +145,7 @@ function onFieldContentType(i, content) {
 EditItem.defaultProps = {
 	form: {
 		errors: {},
-		data: {
-			fields: [{}]
-		}
+		data: {}
 	}
 }
 
