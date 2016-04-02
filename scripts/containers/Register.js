@@ -40,7 +40,7 @@ function submitRegister (form) {
 		Api.setToken(res.user.auth_token);
 
 
-		window.location.hash = "#pages/view";
+		window.location.hash = "#sites/view";
 	}, (err) => {
 		Store.get().forms.register.set({
 			"loading": false,
