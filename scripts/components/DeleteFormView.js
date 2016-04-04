@@ -25,6 +25,7 @@ function DeleteFormView({
       <div className="container modal-content">
         <div>
           {children}
+          {"Please enter "}
           <strong>
             {`${randomWord}`}
           </strong>
