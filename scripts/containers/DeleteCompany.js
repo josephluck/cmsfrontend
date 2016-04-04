@@ -30,17 +30,16 @@ function submitDelete() {
 	Store.get().company.set({
 		"loading": true
 	});
-	console.log('WILL DELETE COMPANY')
-	// Api.destroy({
-	// 	url: {
-	// 		name: 'company',
-	// 		id: Store.get().company.id
-	// 	}
-	// }).then((res) => {
-	// 	Api.removeToken();
-	// 	Store.get().user.reset({});
-	// 	window.location.hash = "/";
-	// });
+	Api.destroy({
+		url: {
+			name: 'company',
+			id: Store.get().company.id
+		}
+	}).then((res) => {
+		Api.removeToken();
+		Store.get().user.reset({});
+		window.location.hash = "/";
+	});
 }
 
 function onConfirmationType(text) {
