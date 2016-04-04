@@ -11,9 +11,6 @@ class ApiHelper extends React.Component {
     super(props)
   }
 
-  componentDidMount () {
-  }
-
   componentDidUpdate () {
     hljs.initHighlightingOnLoad()
     if (document.getElementById('code-block')) {
