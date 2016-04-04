@@ -63,7 +63,7 @@ function submitPage (form) {
 		"error": false
 	});
 
-	form['site_id'] = 1;
+	form['site_id'] = Store.get().site.id;
 
 	Api.put({
 		url: {

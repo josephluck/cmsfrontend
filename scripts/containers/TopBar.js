@@ -10,7 +10,7 @@ function TopBar({}) {
 	  		<Logo className="flex-0" />
 	  		<a>
 	  			<span className="ss-wind"></span>
-	  			{"AirContent"}
+	  			{"Air Content"}
 	  		</a>
 	  		<div className="flex-1 text-align-right">
 		  		<Profile></Profile>

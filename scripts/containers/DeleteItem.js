@@ -57,6 +57,7 @@ function submitDelete() {
 }
 
 export default warmUp(DeleteItem, [
+	['site', 'site'],
 	['page', 'page'],
 	['section', 'section'],
 	['item', 'item'],
