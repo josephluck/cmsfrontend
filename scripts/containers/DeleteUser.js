@@ -3,7 +3,7 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
-import { Link } from 'react-router';
+import DeleteForm from 'components/DeleteForm';
 
 class DeleteUser extends React.Component {
 	constructor(props, context) {
@@ -11,25 +11,12 @@ class DeleteUser extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div className="modal">
-	  		<div className="container">
-	  			<h3>Delete user</h3>
-	  		</div>
-	  		<div className="container modal-content">
-	  			<p>{`To confirm you want to delete user ${this.props.team_member.email} press the delete button below.`}</p>
-	  		</div>
-  			<div className="modal-footer container text-align-right">
-  				<Link to={"users/view"}>
-  					{"Cancel"}
-  				</Link>
-  				<button onClick={this.props.submitDelete}>
-  					{this.props.team_member.loading ?
-  						"Deleting"
-  						: "Delete"
-  					}
-  				</button>
-  			</div>
-		  </div>
+	  	<DeleteForm
+	  		title="Delete user"
+	  		loading={this.props.team_member.loading}
+	  		onSubmit={this.props.submitDelete}
+	  		cancelLinkPath={"users/view"}>
+	  	</DeleteForm>
 	  );
 	}
 }
