@@ -2,21 +2,23 @@ import React from 'react';
 import FormHelper from 'utils/FormHelper';
 
 import FormInput from 'components/FormInput';
+import { Link } from 'react-router';
 
 function ItemForm({
-	onSubmit,
-	state,
+  onSubmit,
+  state,
   onTitleType,
   addAnotherField,
   removeField,
-  onFieldContentType
+  onFieldContentType,
+  cancelPath
 }) {
   return (
-  	<form name="item"
+    <form name="item"
       onSubmit={(e) => {
-    		e.preventDefault();
-    		onSubmit(state.data.toJS());
-    	}}>
+        e.preventDefault();
+        onSubmit(state.data.toJS());
+      }}>
 
       <FormInput title="Title">
         <input name="title"
@@ -68,11 +70,14 @@ function ItemForm({
       })}
 
       <div className="text-align-right">
-  		  <button type="submit">
+        <Link to={cancelPath}>
+          {"Cancel"}
+        </Link>
+        <button type="submit" className="left-margin">
           {state.loading ? "Saving" : "Save"}
         </button>
       </div>
-  	</form>
+    </form>
   );
 }
 

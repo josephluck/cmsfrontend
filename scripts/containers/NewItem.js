@@ -67,7 +67,8 @@ class NewItem extends React.Component {
 		  			addAnotherField={this.props.addAnotherField}
 		  			removeField={this.props.removeField}
 		  			onFieldContentType={this.props.onFieldContentType}
-		  			state={this.props.form}>
+		  			state={this.props.form}
+		  			cancelPath={`sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`}>
 		  		</ItemForm>
 		  	</div>
 		  </div>
