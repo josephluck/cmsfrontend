@@ -1,9 +1,9 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
-
 import Store from 'store/Store';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import ApiHelper from 'components/ApiHelper';
@@ -16,6 +16,26 @@ class ViewSite extends React.Component {
 	render() {
 	  return (
 	  	<div>
+				<MidBar
+					breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: this.props.site.title
+						}
+					]}
+					actions={[
+						{
+							name: 'Delete',
+							path: `sites/${this.props.site.id}/view/delete`
+						},
+						{
+							name: 'Edit',
+							path: `sites/${this.props.site.id}/edit`
+						}
+					]} />
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
 	  	  		<div className="container flex vertical-align">

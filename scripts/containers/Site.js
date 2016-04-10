@@ -3,9 +3,6 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
-import Block from 'components/Block';
-import MidBar from 'components/MidBar';
-
 class Site extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,9 +12,9 @@ class Site extends React.Component {
 			},
 			site_loading: true
 		});
-	}
 
-	componentWillMount() {
+		console.log('Fired');
+
 		Api.get({
 			url: {
 				name: 'site',
@@ -32,31 +29,7 @@ class Site extends React.Component {
 		})
 	}
 	render() {
-	  return (
-	  	<Block loading={!this.props.site.id}>
-  			<MidBar
-  				breadcrumbs={[
-						{
-							name: 'Sites',
-							link: 'sites/view'
-						},
-						{
-							name: this.props.site.title
-						}
-					]}
-					actions={[
-						{
-							name: 'Delete',
-							path: `sites/${this.props.site.id}/view/delete`
-						},
-						{
-							name: 'Edit',
-							path: `sites/${this.props.site.id}/edit`
-						}
-					]} />
-		  	{this.props.children}
-			</Block>
-	  );
+	  return this.props.children
 	}
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {Link} from 'react-router'
 
@@ -10,11 +9,7 @@ class PageActions extends React.Component {
 
 	render() {
 	  return (
-	  	<ReactCSSTransitionGroup
-			  component="div"
-			  transitionName="animate-breadcrumbs"
-			  transitionEnterTimeout={400}
-			  transitionLeaveTimeout={0}>
+	  	<div>
 			  <button className="transparent">{"-"}</button>
 		  	{this.props.actions.map((action, i) => {
 	  			return (
@@ -25,7 +20,7 @@ class PageActions extends React.Component {
 	  				</Link>
 	  			)
 		  	})}
-		  </ReactCSSTransitionGroup>
+		  </div>
 	  );
 	}
 }
