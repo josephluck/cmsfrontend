@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import SectionForm from 'components/SectionForm';
 
 class NewSection extends React.Component {
@@ -16,32 +17,24 @@ class NewSection extends React.Component {
 	render() {
 	  return (
 	  	<div>
-		  	<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{this.props.page.title ?
-				  					<span>
-				  						{" / "}
-				  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
-				  						{" / New section"}
-				  					</span>
-				  					: null
-				  				}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-		  		<button className="transparent">{"Hidden"}</button>
-		  	</div>
-
-		  	<hr />
-
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: this.props.site.title,
+							link: `sites/${this.props.site.id}/view`
+						},
+						{
+							name: this.props.page.title,
+							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+						},
+						{
+							name: 'New section'
+						}
+					]} />
 		  	<div className="container">
 		  		<SectionForm
 		  			onSubmit={submitSection}
