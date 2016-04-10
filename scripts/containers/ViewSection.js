@@ -2,6 +2,7 @@ import React from 'react';
 import { warmUp } from 'react-freezer-js';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 
@@ -13,46 +14,34 @@ class ViewSection extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  		<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{this.props.page.title ?
-				  					<span>
-						  				{" / "}
-						  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
-						  				{this.props.section.title ?
-						  					<span>
-						  						{" / "}
-						  						{this.props.section.title}
-						  					</span>
-						  					: null
-						  				}
-						  			</span>
-					  				: null
-					  			}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-	  			<div>
-		  			<Link className="button"
-		  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/delete`}>
-		  				{"Delete"}
-		  			</Link>
-		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/edit`}>
-		  				{"Edit"}
-		  			</Link>
-		  		</div>
-	  		</div>
-
-	  		<hr />
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: this.props.site.title,
+							link: `sites/${this.props.site.id}/view`
+						},
+						{
+							name: this.props.page.title,
+							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+						},
+						{
+							name: this.props.section.title
+						}
+					]}
+					actions={[
+						{
+							name: 'Delete',
+							path: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/delete`
+						},
+						{
+							name: 'Edit',
+							path: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/edit`
+						}
+					]} />
 
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
