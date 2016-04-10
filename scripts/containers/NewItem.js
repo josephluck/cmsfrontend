@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import ItemForm from 'components/ItemForm';
 
 class NewItem extends React.Component {
@@ -27,38 +28,28 @@ class NewItem extends React.Component {
 	render() {
 	  return (
 	  	<div>
-		  	<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{this.props.page.title ?
-				  					<span>
-						  				{" / "}
-						  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
-						  				{this.props.section.title ?
-						  					<span>
-						  						{" / "}
-						  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>{this.props.section.title}</Link>
-						  						{" / New item"}
-						  					</span>
-						  					: null
-						  				}
-						  			</span>
-					  				: null
-					  			}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-		  		<button className="transparent">{"Hidden"}</button>
-		  	</div>
-
-		  	<hr />
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: this.props.site.title,
+							link: `sites/${this.props.site.id}/view`
+						},
+						{
+							name: this.props.page.title,
+							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+						},
+						{
+							name: this.props.section.title,
+							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
+						},
+						{
+							name: 'New item'
+						}
+					]} />
 
 		  	<div className="container">
 		  		<ItemForm
