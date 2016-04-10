@@ -33,18 +33,6 @@ class Site extends React.Component {
 	render() {
 	  return (
 	  	<div>
-		  	<div className="subnav container flex vertical-align">
-		  		<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-				  		{" / New site"}
-		  			</h3>
-		  		</div>
-		  		<button className="transparent">{"Hidden"}</button>
-		  	</div>
-
-		  	<hr />
-
 		  	<div className="container">
 		  		<SiteForm
 		  			onSubmit={submitSite}

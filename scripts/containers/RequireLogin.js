@@ -3,10 +3,11 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import PersistentStorage from 'utils/PersistentStorage';
 import Api from 'utils/Api';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import TopBar from 'containers/TopBar';
 import Breadcrumbs from 'containers/Breadcrumbs';
+import PageActions from 'containers/PageActions';
 
 class RequireLogin extends Component {
 	componentWillMount() {
@@ -64,13 +65,15 @@ class RequireLogin extends Component {
 			  				<div className="flex-1">
 		  						<Breadcrumbs />
 		  					</div>
+		  					<PageActions />
 		  				</div>
 		  			</div>
+		  			<hr />
 		  			<ReactCSSTransitionGroup
 		  			  component="div"
-		  			  transitionName="example"
+		  			  transitionName="animate-page"
 		  			  transitionEnterTimeout={400}
-		  			  transitionLeaveTimeout={400}>
+		  			  transitionLeaveTimeout={0}>
 		  			  {React.cloneElement(this.props.children, {
 		  			    key: this.props.location.key
 		  			  })}

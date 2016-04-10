@@ -16,6 +16,11 @@ class Sites extends React.Component {
 		});
 	}
 	componentWillMount() {
+		Store.trigger('PAGE_ACTIONS_ADD', {
+			name: 'New site',
+			path: 'sites/new'
+		})
+
 		Api.get({
 			url: {
 				name: 'sites'
@@ -28,23 +33,15 @@ class Sites extends React.Component {
 			Store.get().set({sites_loading: false})
 		});
 	}
+	componentWillUnmount() {
+		console.log('Unmounting');
+		Store.trigger('PAGE_ACTIONS_REMOVE', {
+			name: 'New site'
+		})
+	}
 	render() {
 	  return (
 	  	<div>
-	  		<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-	  				<h3>
-	  					{"Sites"}
-	  				</h3>
-	  			</div>
-	  			<Link className="button"
-	  				to="sites/new">
-	  				{"New site"}
-	  			</Link>
-	  		</div>
-
-	  		<hr />
-
 		  	<div className="container">
 			  	<Block loading={this.props.loading}>
 			  		<SitesList sites={this.props.sites} />

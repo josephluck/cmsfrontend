@@ -2,6 +2,7 @@ import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import * as _ from 'underscore';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {Link} from 'react-router'
 
@@ -15,24 +16,30 @@ class Breadcrumbs extends React.Component {
 		});
 	}
 
-	componentWillReceiveProps(props) {
-
-	}
-
 	render() {
 	  return (
 	  	<h3>
-		  	{this.props.breadcrumbs.map((crumb, i) => {
-		  		if (crumb.link) {
+		  	<ReactCSSTransitionGroup
+  			  component="div"
+  			  transitionName="animate-breadcrumbs"
+  			  transitionEnterTimeout={400}
+  			  transitionLeaveTimeout={0}>
+			  	{this.props.breadcrumbs.map((crumb, i) => {
 		  			return (
-		  				<Link key={i} to={crumb.link}>{crumb.name}</Link>
+		  				<span key={i}>
+		  					{i > 0 ?
+		  						<span>{" / "}</span>
+		  						: null
+		  					}
+		  					{crumb.link ?
+		  						<Link key={i} to={crumb.link}>{crumb.name}</Link>
+		  						:
+		  						<span key={i}>{crumb.name}</span>
+		  					}
+		  				</span>
 		  			)
-		  		} else {
-		  			return (
-		  				<span key={i}>{crumb.name}</span>
-		  			)
-		  		}
-		  	})}
+			  	})}
+			  </ReactCSSTransitionGroup>
 			</h3>
 	  );
 	}
@@ -59,7 +66,9 @@ Store.on('BREADCRUMBS_REPLACE', function(payload) {
 	let current_breadcrumbs = Store.get().breadcrumbs,
 			breadcrumb_to_replace = _.findWhere(current_breadcrumbs, {name: payload.name});
 
-	breadcrumb_to_replace.reset(payload);
+	if (breadcrumb_to_replace) {
+		breadcrumb_to_replace.reset(payload);
+	}
 })
 
 export default warmUp(Breadcrumbs, [
