@@ -3,6 +3,8 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
+import Block from 'components/Block';
+
 class Site extends React.Component {
 	constructor(props) {
 		super(props);
@@ -23,48 +25,37 @@ class Site extends React.Component {
 		}).then((body) => {
 			Store.get().site.reset(body);
 			Store.get().set({site_loading: false});
-			this.addBreadcrumbsAndActions(body.title);
+
+
+			Store.trigger('BREADCRUMBS_SET', [
+				{
+					name: 'Sites',
+					link: 'sites/view'
+				},
+				{
+					name: body.title
+				}
+			])
+			Store.trigger('PAGE_ACTIONS_SET', [
+				{
+					name: 'Delete',
+					path: `sites/${body.id}/view/delete`
+				},
+				{
+					name: 'Edit',
+					path: `sites/${body.id}/edit`
+				}
+			])
 		}, (err) => {
 			Store.get().site.reset({});
 			Store.get().set({site_loading: false})
 		})
 	}
-	componentWillUnmount() {
-		this.removeBreadcrumbsAndActions();
-	}
-	addBreadcrumbsAndActions(title) {
-		Store.trigger('BREADCRUMBS_ADD', {
-			name: title
-		})
-		Store.trigger('BREADCRUMBS_REPLACE', {
-			name: 'Sites',
-			link: 'sites/view'
-		})
-		Store.trigger('PAGE_ACTIONS_SET', [
-			{
-				name: 'Delete',
-				path: `sites/${this.props.site.id}/view/delete`
-			},
-			{
-				name: 'Edit',
-				path: `sites/${this.props.site.id}/edit`
-			}
-		])
-	}
-	removeBreadcrumbsAndActions() {
-		Store.trigger('BREADCRUMBS_REMOVE', {
-			name: this.props.site.title
-		})
-		Store.trigger('BREADCRUMBS_REPLACE', {
-			name: 'Sites'
-		})
-	}
-
 	render() {
 	  return (
-	  	<div>
+	  	<Block loading={!this.props.site.id}>
 		  	{this.props.children}
-			</div>
+			</Block>
 	  );
 	}
 }

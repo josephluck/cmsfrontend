@@ -73,7 +73,7 @@ class RequireLogin extends Component {
 		  			  component="div"
 		  			  transitionName="animate-page"
 		  			  transitionEnterTimeout={400}
-		  			  transitionLeaveTimeout={0}>
+		  			  transitionLeaveTimeout={400}>
 		  			  {React.cloneElement(this.props.children, {
 		  			    key: this.props.location.key
 		  			  })}

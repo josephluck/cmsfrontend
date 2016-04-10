@@ -21,10 +21,11 @@ class PageActions extends React.Component {
 			  transitionName="animate-breadcrumbs"
 			  transitionEnterTimeout={400}
 			  transitionLeaveTimeout={0}>
-			  <button className="transparent">{"Hidden"}</button>
+			  <button className="transparent">{"-"}</button>
 		  	{this.props.actions.map((action, i) => {
 	  			return (
-	  				<Link to={action.path}
+	  				<Link key={i}
+	  					to={action.path}
 	  					className="button left-margin">
 	  					{action.name}
 	  				</Link>

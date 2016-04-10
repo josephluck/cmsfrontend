@@ -3,6 +3,8 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
+import Block from 'components/Block';
+
 class Page extends React.Component {
 	constructor(props) {
 		super(props);
@@ -33,9 +35,9 @@ class Page extends React.Component {
 
 	render() {
 	  return (
-	  	<div>
+	  	<Block loading={!this.props.page.id}>
 		  	{this.props.children}
-			</div>
+			</Block>
 	  );
 	}
 }

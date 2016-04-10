@@ -16,6 +16,11 @@ class Sites extends React.Component {
 		});
 	}
 	componentWillMount() {
+		Store.trigger('BREADCRUMBS_SET', [
+			{
+				name: 'Sites'
+			}
+		])
 		Store.trigger('PAGE_ACTIONS_SET', [
 			{
 				name: 'New site',

@@ -13,29 +13,27 @@ class Page extends React.Component {
 			errors: {}
 		}})
 	}
+	componentWillMount() {
+		debugger
+		Store.trigger('BREADCRUMBS_SET', [
+			{
+				name: 'Sites',
+				link: 'sites/view'
+			},
+			{
+				name: this.props.site.title,
+				link: `sites/${this.props.site.id}/view`
+			},
+			{
+				name: 'New page'
+			}
+		])
+		Store.trigger('PAGE_ACTIONS_SET', [])
+	}
 	render() {
 	  return (
 	  	<div>
-		  	<div className="subnav container flex vertical-align">
-		  		<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{" / New page"}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-		  		<button className="transparent">{"Hidden"}</button>
-		  	</div>
-
-		  	<hr />
-
-		  	<div className="container">
+	  		<div className="container">
 		  		<PageForm
 		  			onSubmit={submitPage}
 		  			state={this.props.form}></PageForm>

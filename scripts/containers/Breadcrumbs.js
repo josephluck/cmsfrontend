@@ -49,26 +49,8 @@ Breadcrumbs.defaultProps = {
 	breadcrumbs: []
 }
 
-Store.on('BREADCRUMBS_ADD', function(payload) {
-	let current_breadcrumbs = Store.get().breadcrumbs,
-			breadcrumb_already_exists = _.findWhere(current_breadcrumbs, {name: payload.name}) !== undefined;
-
-	if (!breadcrumb_already_exists) {
-		Store.get().breadcrumbs.push(payload);
-	}
-})
-
-Store.on('BREADCRUMBS_REMOVE', function(payload) {
-	Store.get().breadcrumbs.reset(_.reject(Store.get().breadcrumbs, function(crumb){ return crumb.name === payload.name }));
-})
-
-Store.on('BREADCRUMBS_REPLACE', function(payload) {
-	let current_breadcrumbs = Store.get().breadcrumbs,
-			breadcrumb_to_replace = _.findWhere(current_breadcrumbs, {name: payload.name});
-
-	if (breadcrumb_to_replace) {
-		breadcrumb_to_replace.reset(payload);
-	}
+Store.on('BREADCRUMBS_SET', function(payload) {
+	Store.get().breadcrumbs.reset(payload);
 })
 
 export default warmUp(Breadcrumbs, [

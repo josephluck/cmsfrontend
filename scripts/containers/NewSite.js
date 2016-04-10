@@ -13,22 +13,16 @@ class Site extends React.Component {
 			errors: {}
 		}})
 	}
-	componentWillUnmount() {
-		Store.trigger('BREADCRUMBS_REMOVE', {
-			name: 'New site'
-		})
-		Store.trigger('BREADCRUMBS_REPLACE', {
-			name: 'Sites'
-		})
-	}
 	componentWillMount() {
-		Store.trigger('BREADCRUMBS_ADD', {
-			name: 'New site'
-		})
-		Store.trigger('BREADCRUMBS_REPLACE', {
-			name: 'Sites',
-			link: 'sites/view'
-		})
+		Store.trigger('BREADCRUMBS_SET', [
+			{
+				name: 'Sites',
+				link: 'sites/view'
+			},
+			{
+				name: 'New site'
+			}
+		])
 		Store.trigger('PAGE_ACTIONS_SET', [])
 	}
 	render() {
