@@ -31,12 +31,10 @@ function ItemForm({
           }} />
       </FormInput>
 
-      <hr className="container" />
-
       {state.data.fields.map((field, i) => {
         return (
           <div key={i}>
-            <FormInput title="Content">
+            <FormInput>
               <Editor theme="snow"
                 value={field.content}
                 onChange={(content) => {
@@ -50,18 +48,11 @@ function ItemForm({
                   className="quill-contents"
                   dangerouslySetInnerHTML={{__html: field.content}} />
               </Editor>
-
-              <textarea name={`fields[${i}]['content']`}
-                defaultValue={field.content}
-                onChange={(e) => {
-                  onFieldContentType(i, e.target.value)
-                }}>
-              </textarea>
-
+              <div className="clearfix"></div>
             </FormInput>
 
             {state.data.fields.length !== 1 ?
-              <button className="add-another right-margin"
+              <button className="add-another right-margin bottom-margin"
                 onClick={(e) => {
                   e.preventDefault();
                   removeField(i);
@@ -72,7 +63,7 @@ function ItemForm({
             }
 
             {i !== state.data.fields.length -1 ?
-              <hr className="container" />
+              null
               :
               <button className="add-another"
                 onClick={(e) => {

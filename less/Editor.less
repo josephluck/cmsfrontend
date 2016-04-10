@@ -1,6 +1,7 @@
 .quill {
 	background: @pureWhite;
 	border: @borderWidth solid @darkGray;
+	height: 300px;
 	 * {
 	 	font-family: 'Roboto Condensed', sans-serif;
 	 }
@@ -31,13 +32,6 @@
 			border: @borderWidth solid @darkGray;
 		}
 	}
-	.ql-tooltip {
-		margin-left: @padding;
-		padding: @padding/2 @padding;
-		border: @borderWidth solid @darkGray;
-		background: @white;
-		box-shadow: none;
-	}
 
 	// Remove buttons from toolbar
 	.ql-format-separator {
@@ -47,6 +41,37 @@
 		&.ql-background,
 		&.ql-font {
 			display: none;
+		}
+	}
+
+	// Tooltips / popups
+
+
+	.ql-tooltip {
+		margin-left: @padding;
+		padding: @padding/2 @padding;
+		border: @borderWidth solid @darkGray;
+		background: @white;
+		box-shadow: none;
+		&.ql-image-tooltip {
+			margin-top: -1px;
+			text-align: right;
+			.preview {
+				height: 120px;
+				margin: @padding/2 0px;
+				img {
+					z-index: 1;
+				}
+			}
+			a {
+				width: auto;
+				display: inline-block;
+				float: none;
+			}
+		}
+		input {
+			padding: @padding/2 @padding !important;
+			border: @borderWidth solid @darkGray !important;
 		}
 	}
 }
