@@ -3,6 +3,7 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import PersistentStorage from 'utils/PersistentStorage';
 import Api from 'utils/Api';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import TopBar from 'containers/TopBar';
 
@@ -57,7 +58,15 @@ class RequireLogin extends Component {
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
-		  			{this.props.children}
+		  			<ReactCSSTransitionGroup
+		  			  component="div"
+		  			  transitionName="example"
+		  			  transitionEnterTimeout={400}
+		  			  transitionLeaveTimeout={400}>
+		  			  {React.cloneElement(this.props.children, {
+		  			    key: this.props.location.pathname
+		  			  })}
+		  			</ReactCSSTransitionGroup>
 		  		</div>
 		  		: null
 	  		}

@@ -16,8 +16,8 @@
 
 .example-enter {
   opacity: 0.01;
-  transform: translateX(5em);
-  transition: all 2s ease-in;
+  transform: translateX(1em);
+  transition: all 0.3s ease-in;
   position: absolute;
   width: 100%;
 }
@@ -32,14 +32,20 @@
 .example-leave {
   opacity: 1;
   transform: translateX(0);
-  transition: all 2s ease-in;
+  transition: all 0.3s ease-in;
   position: absolute;
   width: 100%;
 }
 
 .example-leave.example-leave-active {
   opacity: 0;
-  transform: translateX(-5em);
+  transform: translateX(-1em);
   position: absolute;
   width: 100%;
+}
+
+.example-leave.example-leave-active {
+  &:nth-child(2) {
+    display: none;
+  }
 }

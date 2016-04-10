@@ -28,7 +28,7 @@ class EditPage extends React.Component {
 				  				{this.props.page.title ?
 				  					<span>
 						  				{" / "}
-						  				<Link to={`pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
+						  				<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>{this.props.page.title}</Link>
 						  				{" / Edit"}
 						  			</span>
 					  				: null
