@@ -18,24 +18,21 @@ class EditSite extends React.Component {
 	render() {
 	  return (
 	  	<div>
-		  	<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{" / Edit"}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-		  		<button className="transparent">{"Hidden"}</button>
-		  	</div>
-
-		  	<hr />
+				<MidBar
+					breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: this.props.site.title,
+							link: `sites/${this.props.site.id}/view`
+						},
+						{
+							name: 'Edit'
+						}
+					]}
+					actions={[]} />
 
 		  	<div className="container">
 		  		<Block loading={!this.props.site.title}>
