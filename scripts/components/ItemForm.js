@@ -4,6 +4,8 @@ import FormHelper from 'utils/FormHelper';
 import FormInput from 'components/FormInput';
 import { Link } from 'react-router';
 
+import Editor from 'react-quill';
+
 function ItemForm({
   onSubmit,
   state,
@@ -35,12 +37,27 @@ function ItemForm({
         return (
           <div key={i}>
             <FormInput title="Content">
+              <Editor theme="snow"
+                value={field.content}
+                onChange={(content) => {
+                  onFieldContentType(i, content)
+                }}>
+                <Editor.Toolbar key="toolbar"
+                  ref="toolbar"
+                  items={Editor.Toolbar.defaultItems} />
+                <div key="editor"
+                  ref="editor"
+                  className="quill-contents"
+                  dangerouslySetInnerHTML={{__html: field.content}} />
+              </Editor>
+
               <textarea name={`fields[${i}]['content']`}
                 defaultValue={field.content}
                 onChange={(e) => {
                   onFieldContentType(i, e.target.value)
                 }}>
               </textarea>
+
             </FormInput>
 
             {state.data.fields.length !== 1 ?

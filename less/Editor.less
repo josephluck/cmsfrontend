@@ -1,0 +1,52 @@
+.quill {
+	background: @pureWhite;
+	border: @borderWidth solid @darkGray;
+	 * {
+	 	font-family: 'Roboto Condensed', sans-serif;
+	 }
+	.ql-container {
+		padding: @padding;
+	}
+	.ql-toolbar {
+		padding: @padding/2 @padding;
+		border-bottom: @borderWidth solid @darkGray;
+	}
+	.ql-format-group {
+		margin-right: 0px !important;
+	}
+	.ql-size {
+		width: 70px !important;
+		margin-right: 5px;
+		.ql-picker-label {
+			padding-left: 0px !important;
+		}
+	}
+	.ql-format-button,
+	.ql-align .ql-picker-label {
+		width: 34px !important;
+	}
+	.ql-picker.ql-expanded {
+		.ql-picker-label,
+		.ql-picker-options {
+			border: @borderWidth solid @darkGray;
+		}
+	}
+	.ql-tooltip {
+		margin-left: @padding;
+		padding: @padding/2 @padding;
+		border: @borderWidth solid @darkGray;
+		background: @white;
+		box-shadow: none;
+	}
+
+	// Remove buttons from toolbar
+	.ql-format-separator {
+		display: none !important;
+	}
+	.ql-picker {
+		&.ql-background,
+		&.ql-font {
+			display: none;
+		}
+	}
+}
