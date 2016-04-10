@@ -8,12 +8,6 @@ import Block from 'components/Block';
 class Page extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			page: {
-				sections: []
-			},
-			page_loading: true
-		});
 	}
 
 	componentWillMount() {
@@ -34,11 +28,7 @@ class Page extends React.Component {
 	}
 
 	render() {
-	  return (
-	  	<Block loading={!this.props.page.id}>
-		  	{this.props.children}
-			</Block>
-	  );
+	  return this.props.children
 	}
 }
 

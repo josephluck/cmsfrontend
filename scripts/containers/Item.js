@@ -6,12 +6,6 @@ import Api from 'utils/Api';
 class Item extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			item: {
-				fields: []
-			},
-			item_loading: true
-		});
 	}
 
 	componentWillMount() {

@@ -10,10 +10,6 @@ import PagesList from 'components/PagesList';
 class Pages extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			pages: [],
-			pages_loading: true
-		});
 	}
 	componentWillMount() {
 		Api.get({

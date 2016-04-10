@@ -58,15 +58,7 @@ class RequireLogin extends Component {
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
-		  			<ReactCSSTransitionGroup
-		  			  component="div"
-		  			  transitionName="animate-page"
-		  			  transitionEnterTimeout={400}
-		  			  transitionLeaveTimeout={400}>
-		  			  {React.cloneElement(this.props.children, {
-		  			    key: this.props.location.key
-		  			  })}
-		  			</ReactCSSTransitionGroup>
+		  			{this.props.children}
 		  		</div>
 		  		: null
 	  		}
@@ -79,3 +71,13 @@ export default warmUp(RequireLogin, [
 	['user', 'user'],
 	['loading', 'app_loading']
 ]);
+
+// <ReactCSSTransitionGroup
+//   component="div"
+//   transitionName="animate-page"
+//   transitionEnterTimeout={400}
+//   transitionLeaveTimeout={400}>
+//   {React.cloneElement(this.props.children, {
+//     key: this.props.location.key
+//   })}
+// </ReactCSSTransitionGroup>

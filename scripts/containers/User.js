@@ -6,10 +6,6 @@ import Api from 'utils/Api';
 class User extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			team_member: {},
-			team_member_loading: true
-		});
 	}
 
 	componentWillMount() {

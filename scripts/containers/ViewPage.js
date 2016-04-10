@@ -4,6 +4,7 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import ApiHelper from 'components/ApiHelper';
@@ -16,43 +17,30 @@ class ViewPage extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  		<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-				  				{" / "}
-				  				<Link to={`sites/${this.props.site.id}/view`}>{this.props.site.title}</Link>
-				  				{this.props.page.title ?
-				  					<span>
-				  						{" / "}
-				  						{this.props.page.title}
-				  					</span>
-				  					: null
-				  				}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-	  			<div>
-	  				<ApiHelper
-	  					route="page"
-	  					params={this.props.params}>
-	  				</ApiHelper>
-		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/view/delete`}>
-		  				{"Delete"}
-		  			</Link>
-		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/edit`}>
-		  				{"Edit"}
-		  			</Link>
-		  		</div>
-	  		</div>
-
-	  		<hr />
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: this.props.site.title,
+							link: `sites/${this.props.site.id}/view`
+						},
+						{
+							name: this.props.page.title
+						}
+					]}
+					actions={[
+						{
+							name: 'Delete',
+							path: `sites/${this.props.site.id}/pages/${this.props.page.id}/view/delete`
+						},
+						{
+							name: 'Edit',
+							path: `sites/${this.props.site.id}/pages/${this.props.page.id}/edit`
+						}
+					]} />
 
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>

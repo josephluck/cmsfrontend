@@ -6,12 +6,6 @@ import Api from 'utils/Api';
 class Section extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			section: {
-				items: []
-			},
-			section_loading: true
-		});
 	}
 
 	componentWillMount() {

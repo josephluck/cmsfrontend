@@ -11,10 +11,6 @@ import MidBar from 'components/MidBar';
 class Sites extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			sites: [],
-			sites_loading: true
-		});
 	}
 	componentWillMount() {
 		Api.get({

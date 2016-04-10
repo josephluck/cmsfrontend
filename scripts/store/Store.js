@@ -2,10 +2,23 @@ import Freezer from 'freezer-js';
 
 export default new Freezer({
 	app_loading: true,
-	company: {},
-	user: {},
 	forms: {},
+	breadcrumbs: [],
+	user: {},
+	company: {},
+	team_member: {},
 	sites: [],
-	breadcrumbs: []
+	site: {
+		pages: []
+	},
+	page: {
+		sections: []
+	},
+	section: {
+		items: []
+	},
+	item: {
+		fields: []
+	}
 });
 

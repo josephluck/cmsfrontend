@@ -6,15 +6,6 @@ import Api from 'utils/Api';
 class Site extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			site: {
-				pages: []
-			},
-			site_loading: true
-		});
-
-		console.log('Fired');
-
 		Api.get({
 			url: {
 				name: 'site',
