@@ -29,6 +29,7 @@ class Site extends React.Component {
 			name: 'Sites',
 			link: 'sites/view'
 		})
+		Store.trigger('PAGE_ACTIONS_SET', [])
 	}
 	render() {
 	  return (

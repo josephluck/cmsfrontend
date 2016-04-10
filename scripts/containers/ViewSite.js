@@ -16,33 +16,6 @@ class ViewSite extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  		<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="sites/view">{"Sites"}</Link>
-		  				{this.props.site.title ?
-		  					<span>
-		  						{" / "}
-		  						{this.props.site.title}
-		  					</span>
-		  					: null
-		  				}
-		  			</h3>
-		  		</div>
-	  			<div>
-		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/view/delete`}>
-		  				{"Delete"}
-		  			</Link>
-		  			<Link className="button left-margin"
-		  				to={`sites/${this.props.site.id}/edit`}>
-		  				{"Edit"}
-		  			</Link>
-		  		</div>
-	  		</div>
-
-	  		<hr />
-
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
 	  	  		<div className="container flex vertical-align">

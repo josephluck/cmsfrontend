@@ -16,10 +16,12 @@ class Sites extends React.Component {
 		});
 	}
 	componentWillMount() {
-		Store.trigger('PAGE_ACTIONS_ADD', {
-			name: 'New site',
-			path: 'sites/new'
-		})
+		Store.trigger('PAGE_ACTIONS_SET', [
+			{
+				name: 'New site',
+				path: 'sites/new'
+			}
+		])
 
 		Api.get({
 			url: {
@@ -32,12 +34,6 @@ class Sites extends React.Component {
 			Store.get().sites.reset([]);
 			Store.get().set({sites_loading: false})
 		});
-	}
-	componentWillUnmount() {
-		console.log('Unmounting');
-		Store.trigger('PAGE_ACTIONS_REMOVE', {
-			name: 'New site'
-		})
 	}
 	render() {
 	  return (

@@ -22,10 +22,41 @@ class Site extends React.Component {
 			}
 		}).then((body) => {
 			Store.get().site.reset(body);
-			Store.get().set({site_loading: false})
+			Store.get().set({site_loading: false});
+			this.addBreadcrumbsAndActions(body.title);
 		}, (err) => {
 			Store.get().site.reset({});
 			Store.get().set({site_loading: false})
+		})
+	}
+	componentWillUnmount() {
+		this.removeBreadcrumbsAndActions();
+	}
+	addBreadcrumbsAndActions(title) {
+		Store.trigger('BREADCRUMBS_ADD', {
+			name: title
+		})
+		Store.trigger('BREADCRUMBS_REPLACE', {
+			name: 'Sites',
+			link: 'sites/view'
+		})
+		Store.trigger('PAGE_ACTIONS_SET', [
+			{
+				name: 'Delete',
+				path: `sites/${this.props.site.id}/view/delete`
+			},
+			{
+				name: 'Edit',
+				path: `sites/${this.props.site.id}/edit`
+			}
+		])
+	}
+	removeBreadcrumbsAndActions() {
+		Store.trigger('BREADCRUMBS_REMOVE', {
+			name: this.props.site.title
+		})
+		Store.trigger('BREADCRUMBS_REPLACE', {
+			name: 'Sites'
 		})
 	}
 

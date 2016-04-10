@@ -25,7 +25,7 @@ class PageActions extends React.Component {
 		  	{this.props.actions.map((action, i) => {
 	  			return (
 	  				<Link to={action.path}
-	  					className="button">
+	  					className="button left-margin">
 	  					{action.name}
 	  				</Link>
 	  			)
@@ -39,17 +39,8 @@ PageActions.defaultProps = {
 	actions: []
 }
 
-Store.on('PAGE_ACTIONS_ADD', function(payload) {
-	let current_actions = Store.get().actions,
-			action_already_exists = _.findWhere(current_actions, {name: payload.name}) !== undefined;
-
-	if (!action_already_exists) {
-		Store.get().actions.push(payload);
-	}
-})
-
-Store.on('PAGE_ACTIONS_REMOVE', function(payload) {
-	Store.get().actions.reset(_.reject(Store.get().actions, function(action){ return action.name === payload.name }));
+Store.on('PAGE_ACTIONS_SET', function(payload) {
+	Store.get().actions.reset(payload);
 })
 
 export default warmUp(PageActions, [
