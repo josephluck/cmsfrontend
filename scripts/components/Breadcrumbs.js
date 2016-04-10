@@ -1,19 +1,10 @@
 import React from 'react';
-import { warmUp } from 'react-freezer-js';
-import Store from 'store/Store';
-import * as _ from 'underscore';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
 import {Link} from 'react-router'
 
 class Breadcrumbs extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			breadcrumbs: [{
-				name: 'Sites'
-			}]
-		});
 	}
 
 	render() {
@@ -45,14 +36,4 @@ class Breadcrumbs extends React.Component {
 	}
 }
 
-Breadcrumbs.defaultProps = {
-	breadcrumbs: []
-}
-
-Store.on('BREADCRUMBS_SET', function(payload) {
-	Store.get().breadcrumbs.reset(payload);
-})
-
-export default warmUp(Breadcrumbs, [
-	['breadcrumbs', 'breadcrumbs']
-]);
+export default Breadcrumbs;

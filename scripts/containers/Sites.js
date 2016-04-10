@@ -6,6 +6,7 @@ import Api from 'utils/Api';
 import { Link } from 'react-router';
 import Block from 'components/Block';
 import SitesList from 'components/SitesList';
+import MidBar from 'components/MidBar';
 
 class Sites extends React.Component {
 	constructor(props) {
@@ -16,18 +17,6 @@ class Sites extends React.Component {
 		});
 	}
 	componentWillMount() {
-		Store.trigger('BREADCRUMBS_SET', [
-			{
-				name: 'Sites'
-			}
-		])
-		Store.trigger('PAGE_ACTIONS_SET', [
-			{
-				name: 'New site',
-				path: 'sites/new'
-			}
-		])
-
 		Api.get({
 			url: {
 				name: 'sites'
@@ -43,6 +32,18 @@ class Sites extends React.Component {
 	render() {
 	  return (
 	  	<div>
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Sites'
+						}
+					]}
+					actions={[
+						{
+							name: 'New site',
+							path: 'sites/new'
+						}
+					]} />
 		  	<div className="container">
 			  	<Block loading={this.props.loading}>
 			  		<SitesList sites={this.props.sites} />

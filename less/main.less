@@ -17,7 +17,7 @@
 .animate-page-enter {
   opacity: 0;
   transform: translateX(1em);
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
   position: absolute;
   width: 100%;
 }
@@ -32,7 +32,7 @@
 .animate-page-leave {
   opacity: 1;
   transform: translateX(0);
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
   position: absolute;
   width: 100%;
 }
@@ -50,7 +50,7 @@
 
 .animate-breadcrumbs-enter {
   opacity: 0;
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
 }
 
 .animate-breadcrumbs-enter.animate-breadcrumbs-enter-active {
@@ -60,7 +60,7 @@
 
 .animate-breadcrumbs-leave {
   opacity: 1;
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
 }
 
 .animate-breadcrumbs-leave.animate-breadcrumbs-leave-active {

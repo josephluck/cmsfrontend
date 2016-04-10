@@ -1,7 +1,4 @@
 import React from 'react';
-import { warmUp } from 'react-freezer-js';
-import Store from 'store/Store';
-import * as _ from 'underscore';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {Link} from 'react-router'
@@ -9,9 +6,6 @@ import {Link} from 'react-router'
 class PageActions extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			actions: []
-		});
 	}
 
 	render() {
@@ -36,14 +30,4 @@ class PageActions extends React.Component {
 	}
 }
 
-PageActions.defaultProps = {
-	actions: []
-}
-
-Store.on('PAGE_ACTIONS_SET', function(payload) {
-	Store.get().actions.reset(payload);
-})
-
-export default warmUp(PageActions, [
-	['actions', 'actions']
-]);
+export default PageActions;

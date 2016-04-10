@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import SiteForm from 'components/SiteForm';
 
 class Site extends React.Component {
@@ -13,21 +14,20 @@ class Site extends React.Component {
 			errors: {}
 		}})
 	}
-	componentWillMount() {
-		Store.trigger('BREADCRUMBS_SET', [
-			{
-				name: 'Sites',
-				link: 'sites/view'
-			},
-			{
-				name: 'New site'
-			}
-		])
-		Store.trigger('PAGE_ACTIONS_SET', [])
-	}
 	render() {
 	  return (
 	  	<div>
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Sites',
+							link: 'sites/view'
+						},
+						{
+							name: 'New site'
+						}
+					]}
+					actions={[]} />
 		  	<div className="container">
 		  		<SiteForm
 		  			onSubmit={submitSite}

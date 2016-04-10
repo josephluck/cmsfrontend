@@ -5,9 +5,7 @@ import PersistentStorage from 'utils/PersistentStorage';
 import Api from 'utils/Api';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import TopBar from 'containers/TopBar';
-import Breadcrumbs from 'containers/Breadcrumbs';
-import PageActions from 'containers/PageActions';
+import TopBar from 'components/TopBar';
 
 class RequireLogin extends Component {
 	componentWillMount() {
@@ -60,15 +58,6 @@ class RequireLogin extends Component {
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
-		  			<div className="mid-bar">
-			  			<div className="subnav container flex vertical-align">
-			  				<div className="flex-1">
-		  						<Breadcrumbs />
-		  					</div>
-		  					<PageActions />
-		  				</div>
-		  			</div>
-		  			<hr />
 		  			<ReactCSSTransitionGroup
 		  			  component="div"
 		  			  transitionName="animate-page"
