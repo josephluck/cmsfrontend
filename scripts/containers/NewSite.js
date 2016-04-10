@@ -17,10 +17,17 @@ class Site extends React.Component {
 		Store.trigger('BREADCRUMBS_REMOVE', {
 			name: 'New site'
 		})
+		Store.trigger('BREADCRUMBS_REPLACE', {
+			name: 'Sites'
+		})
 	}
 	componentWillMount() {
 		Store.trigger('BREADCRUMBS_ADD', {
 			name: 'New site'
+		})
+		Store.trigger('BREADCRUMBS_REPLACE', {
+			name: 'Sites',
+			link: 'sites/view'
 		})
 	}
 	render() {

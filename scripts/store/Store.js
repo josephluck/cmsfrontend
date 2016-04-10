@@ -5,6 +5,7 @@ export default new Freezer({
 	company: {},
 	user: {},
 	forms: {},
-	sites: []
+	sites: [],
+	breadcrumbs: []
 });
 

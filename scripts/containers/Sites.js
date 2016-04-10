@@ -23,10 +23,6 @@ class Sites extends React.Component {
 		}).then((body) => {
 			Store.get().sites.reset(body);
 			Store.get().set({sites_loading: false})
-
-			Store.trigger('BREADCRUMBS_ADD', {
-				name: 'Sites'
-			})
 		}, (err) => {
 			Store.get().sites.reset([]);
 			Store.get().set({sites_loading: false})
