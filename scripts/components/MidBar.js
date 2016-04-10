@@ -4,8 +4,8 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import PageActions from 'components/PageActions';
 
 function MidBar({
-	breadcrumbs,
-	actions
+	breadcrumbs = [],
+	actions = []
 }) {
   return (
   	<div>

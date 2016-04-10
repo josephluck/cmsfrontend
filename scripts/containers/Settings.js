@@ -19,8 +19,7 @@ class Settings extends React.Component {
 						{
 							name: 'Settings'
 						}
-					]}
-					actions={[]} />
+					]} />
 		  	<div className="container">
 			  	{this.props.children}
 			  </div>

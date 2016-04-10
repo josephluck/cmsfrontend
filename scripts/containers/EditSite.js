@@ -31,8 +31,7 @@ class EditSite extends React.Component {
 						{
 							name: 'Edit'
 						}
-					]}
-					actions={[]} />
+					]} />
 
 		  	<div className="container">
 		  		<Block loading={!this.props.site.title}>

@@ -30,8 +30,7 @@ class Page extends React.Component {
 	  				{
 	  					name: 'New page'
 	  				}
-	  			]}
-	  			actions={[]} />
+	  			]} />
 	  		<div className="container">
 		  		<PageForm
 		  			onSubmit={submitPage}

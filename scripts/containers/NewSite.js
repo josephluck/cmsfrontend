@@ -26,8 +26,7 @@ class Site extends React.Component {
 						{
 							name: 'New site'
 						}
-					]}
-					actions={[]} />
+					]} />
 		  	<div className="container">
 		  		<SiteForm
 		  			onSubmit={submitSite}

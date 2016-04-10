@@ -27,8 +27,7 @@ class EditUser extends React.Component {
 						{
 							name: 'Change password'
 						}
-					]}
-					actions={[]} />
+					]} />
 
 		  	<div className="container">
 		  		<Block loading={!this.props.team_member.email}>
