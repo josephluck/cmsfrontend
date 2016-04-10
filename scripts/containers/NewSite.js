@@ -13,6 +13,16 @@ class Site extends React.Component {
 			errors: {}
 		}})
 	}
+	componentWillUnmount() {
+		Store.trigger('BREADCRUMBS_REMOVE', {
+			name: 'New site'
+		})
+	}
+	componentWillMount() {
+		Store.trigger('BREADCRUMBS_ADD', {
+			name: 'New site'
+		})
+	}
 	render() {
 	  return (
 	  	<div>

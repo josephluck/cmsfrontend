@@ -15,7 +15,7 @@
 @import "Editor.less";
 
 .example-enter {
-  opacity: 0.01;
+  opacity: 0;
   transform: translateX(1em);
   transition: all 0.3s ease-in;
   position: absolute;
@@ -42,10 +42,4 @@
   transform: translateX(-1em);
   position: absolute;
   width: 100%;
-}
-
-.example-leave.example-leave-active {
-  &:nth-child(2) {
-    display: none;
-  }
 }

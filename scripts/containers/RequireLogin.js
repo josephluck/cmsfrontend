@@ -6,6 +6,7 @@ import Api from 'utils/Api';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import TopBar from 'containers/TopBar';
+import Breadcrumbs from 'containers/Breadcrumbs';
 
 class RequireLogin extends Component {
 	componentWillMount() {
@@ -53,18 +54,26 @@ class RequireLogin extends Component {
 		}
 	}
 	render() {
+		console.log(this.props);
 		return (
 	  	<div>
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
+		  			<div className="mid-bar">
+			  			<div className="subnav container flex vertical-align">
+			  				<div className="flex-1">
+		  						<Breadcrumbs />
+		  					</div>
+		  				</div>
+		  			</div>
 		  			<ReactCSSTransitionGroup
 		  			  component="div"
 		  			  transitionName="example"
 		  			  transitionEnterTimeout={400}
 		  			  transitionLeaveTimeout={400}>
 		  			  {React.cloneElement(this.props.children, {
-		  			    key: this.props.location.pathname
+		  			    key: this.props.location.key
 		  			  })}
 		  			</ReactCSSTransitionGroup>
 		  		</div>
