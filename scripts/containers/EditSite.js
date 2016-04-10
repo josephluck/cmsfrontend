@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import SiteForm from 'components/SiteForm';
 

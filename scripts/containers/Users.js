@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import UsersList from 'components/UsersList';
 
@@ -31,15 +32,18 @@ class Users extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  		<div className="subnav container flex vertical-align">
-	  			<h3 className="flex-1">Users</h3>
-	  			<Link className="button"
-	  				to="users/new">
-	  				{"New user"}
-	  			</Link>
-	  		</div>
-
-	  		<hr />
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Users'
+						}
+					]}
+					actions={[
+						{
+							name: 'New user',
+							path: 'users/new'
+						}
+					]} />
 
 		  	<div className="container">
 			  	<Block loading={this.props.loading}>

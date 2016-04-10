@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 
 import { Link } from 'react-router';
+import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import UserForm from 'components/UserForm';
 
@@ -17,22 +18,17 @@ class EditUser extends React.Component {
 	render() {
 	  return (
 	  	<div>
-		  	<div className="subnav container flex vertical-align">
-	  			<div className="flex-1">
-		  			<h3>
-		  				<Link to="users/view">{"Users"}</Link>
-		  				{this.props.team_member.email ?
-		  					<span>
-				  				{" / Change password"}
-				  			</span>
-			  				: null
-			  			}
-		  			</h3>
-		  		</div>
-		  		<button className="transparent">{"Hidden"}</button>
-		  	</div>
-
-		  	<hr />
+  			<MidBar
+  				breadcrumbs={[
+						{
+							name: 'Users',
+							link: 'users/view'
+						},
+						{
+							name: 'Change password'
+						}
+					]}
+					actions={[]} />
 
 		  	<div className="container">
 		  		<Block loading={!this.props.team_member.email}>
