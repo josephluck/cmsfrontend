@@ -98,25 +98,29 @@ class AccessHelper extends React.Component {
 				<div className="container">
 					<h3>{"Api help"}</h3>
 				</div>
-				<div className="container modal-content">
-          <div className="tabs">
-            <Link to={`${base_root}/jquery`}
-              className="tab">
-              {"jquery"}
-            </Link>
-            <Link to={`${base_root}/node`}
-              className="tab">
-              {"node"}
-            </Link>
-            <Link to={`${base_root}/http`}
-              className="tab">
-              {"http"}
-            </Link>
-            <Link to={`${base_root}/air framework`}
-              className="tab">
-              {"air framework"}
-            </Link>
-          </div>
+        <div className="tabs with-top-border">
+          <Link to={`${base_root}/jquery`}
+            className="tab"
+            activeClassName="active">
+            {"jquery"}
+          </Link>
+          <Link to={`${base_root}/node`}
+            className="tab"
+            activeClassName="active">
+            {"node"}
+          </Link>
+          <Link to={`${base_root}/http`}
+            className="tab"
+            activeClassName="active">
+            {"http"}
+          </Link>
+          <Link to={`${base_root}/air framework`}
+            className="tab"
+            activeClassName="active">
+            {"air framework"}
+          </Link>
+        </div>
+				<div className="container modal-content without-top-border">
           <div id="code-block" dangerouslySetInnerHTML={{__html: codeContent}} />
 				</div>
 				<div className="modal-footer container text-align-right">

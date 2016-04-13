@@ -1,0 +1,31 @@
+.tabs {
+	display: flex;
+	&.with-top-border {
+		border-top: @borderWidth solid @darkGray;
+	}
+	.tab {
+		flex: 1;
+		padding: @padding/2 @padding;
+		text-align: center;
+		background: @pureWhite;
+		border-bottom: @borderWidth solid @darkGray;
+		border-left: @borderWidth solid transparent;
+		border-right: @borderWidth solid transparent;
+		&.active {
+			background: @white;
+			border-bottom-color: transparent;
+			border-left: @borderWidth solid @darkGray;
+			border-right: @borderWidth solid @darkGray;
+		}
+		&:first-child {
+			.active {
+				border-left: @borderWidth solid transparent;
+			}
+		}
+		&:last-child {
+			.active {
+				border-left: @borderWidth solid transparent;
+			}
+		}
+	}
+}
