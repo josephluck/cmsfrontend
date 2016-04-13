@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Link} from 'react-router'
+import {Link} from 'react-router';
 
 class PageActions extends React.Component {
 	constructor(props) {
@@ -10,7 +10,6 @@ class PageActions extends React.Component {
 	render() {
 	  return (
 	  	<div>
-			  <button className="transparent">{"-"}</button>
 		  	{this.props.actions.map((action, i) => {
 	  			return (
 	  				<Link key={i}

@@ -7,7 +7,6 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
-import ApiHelper from 'components/ApiHelper';
 
 class ViewPage extends React.Component {
 	constructor(props) {
@@ -31,6 +30,7 @@ class ViewPage extends React.Component {
 							name: this.props.page.title
 						}
 					]}
+					current_path={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}
 					actions={[
 						{
 							name: 'Delete',

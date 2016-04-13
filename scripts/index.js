@@ -48,6 +48,9 @@ import Item from 'containers/Item';
 import EditItem from 'containers/EditItem';
 import DeleteItem from 'containers/DeleteItem';
 
+// Misc
+import AccessHelper from 'components/AccessHelper';
+
 render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
@@ -86,6 +89,9 @@ render((
               <Route path=":page_id" component={Page}>
                 <Route path="view" component={ViewPage}>
                   <Route path="delete" component={DeletePage} />
+                  <Route path="access" component={AccessHelper}>
+                    <Route path=":language" />
+                  </Route>
                 </Route>
                 <Route path="edit" component={EditPage} />
                 <Route path="new_section" component={NewSection} />

@@ -6,7 +6,6 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
-import ApiHelper from 'components/ApiHelper';
 
 class ViewSite extends React.Component {
 	constructor(props) {
