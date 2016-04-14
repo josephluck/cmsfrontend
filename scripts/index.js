@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 
 // App/Login
 import App from './App';
@@ -52,7 +52,7 @@ import DeleteItem from 'containers/DeleteItem';
 import AccessHelper from 'components/AccessHelper';
 
 render((
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Register} />
     	<Route path="login" component={Login}></Route>

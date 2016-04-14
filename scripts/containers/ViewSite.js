@@ -19,7 +19,7 @@ class ViewSite extends React.Component {
 					breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title
@@ -28,11 +28,11 @@ class ViewSite extends React.Component {
 					actions={[
 						{
 							name: 'Delete',
-							path: `sites/${this.props.site.id}/view/delete`
+							path: `/sites/${this.props.site.id}/view/delete`
 						},
 						{
 							name: 'Edit',
-							path: `sites/${this.props.site.id}/edit`
+							path: `/sites/${this.props.site.id}/edit`
 						}
 					]} />
 	  		<div className="container">
@@ -40,7 +40,7 @@ class ViewSite extends React.Component {
 	  	  		<div className="container flex vertical-align">
 	  	  			<h3 className="flex-1">Pages</h3>
 	  	  			<Link className="button"
-	  	  				to={`sites/${this.props.site.id}/pages/new`}>
+	  	  				to={`/sites/${this.props.site.id}/pages/new`}>
 	  	  				{"New page"}
 	  	  			</Link>
 	  	  		</div>
@@ -54,9 +54,9 @@ class ViewSite extends React.Component {
 			  		  					className="list-item flex">
 			  		  					<span className="flex-1 ellipsis">{page.title}</span>
 			  		  					<span className="flex-0 list-buttons">
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
+			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
+			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
+			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
 			  		  					</span>
 			  		  				</li>
 			  		  			)

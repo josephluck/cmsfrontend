@@ -16,9 +16,9 @@ function SitesList({
 							className="list-item flex">
 							<span className="flex-1 ellipsis">{site.title}</span>
 							<span className="flex-0 list-buttons">
-								<Link to={`sites/${site.id}/view`}>{"View"}</Link>
-								<Link to={`sites/${site.id}/edit`}>{"Edit"}</Link>
-								<Link to={`sites/${site.id}/view/delete`}>{"Delete"}</Link>
+								<Link to={`/sites/${site.id}/view`}>{"View"}</Link>
+								<Link to={`/sites/${site.id}/edit`}>{"Edit"}</Link>
+								<Link to={`/sites/${site.id}/view/delete`}>{"Delete"}</Link>
 							</span>
 						</li>
 					)

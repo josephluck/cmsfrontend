@@ -21,11 +21,11 @@ class Page extends React.Component {
 	  			breadcrumbs={[
 	  				{
 	  					name: 'Sites',
-	  					link: 'sites/view'
+	  					link: '/sites/view'
 	  				},
 	  				{
 	  					name: this.props.site.title,
-	  					link: `sites/${this.props.site.id}/view`
+	  					link: `/sites/${this.props.site.id}/view`
 	  				},
 	  				{
 	  					name: 'New page'
@@ -56,7 +56,7 @@ function submitPage (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().site.pages.unshift(res);
-		window.location.hash = `#sites/${Store.get().site.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/view`);
 	}, (err) => {
 		Store.get().forms.page.set({
 			"loading": false,

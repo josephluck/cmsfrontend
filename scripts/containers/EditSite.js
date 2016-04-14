@@ -22,11 +22,11 @@ class EditSite extends React.Component {
 					breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title,
-							link: `sites/${this.props.site.id}/view`
+							link: `/sites/${this.props.site.id}/view`
 						},
 						{
 							name: 'Edit'
@@ -61,7 +61,7 @@ function submitSite (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().site.reset(res);
-		window.location.hash = `#sites/${Store.get().site.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/view`);
 	}, (err) => {
 		Store.get().forms.site.set({
 			"loading": false,

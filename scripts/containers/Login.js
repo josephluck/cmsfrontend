@@ -42,7 +42,7 @@ function submitLogin (form) {
 		Store.get().user.reset(res);
 		Api.setToken(res.auth_token);
 
-		window.location.hash = "#sites/view";
+		Api.redirect("/sites/view");
 	}, (err) => {
 		Store.get().forms.login.set({
 			"loading": false,

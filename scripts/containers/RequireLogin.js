@@ -41,15 +41,15 @@ class RequireLogin extends Component {
 					Store.get().set({company_loading: false})
 					Api.removeToken();
 					Store.get().user.reset({});
-					window.location.hash = '#login';
+					Api.redirect('/login');
 				})
 			}, (err) => {
 				Api.removeToken();
 				Store.get().user.reset({});
-				window.location.hash = '#login';
+				Api.redirect('/login');
 			})
 		} else {
-			window.location.hash = '#login';
+			Api.redirect('/login');
 		}
 	}
 	render() {
@@ -58,15 +58,7 @@ class RequireLogin extends Component {
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
-		  			<ReactCSSTransitionGroup
-		  			  component="div"
-		  			  transitionName="animate-page"
-		  			  transitionEnterTimeout={400}
-		  			  transitionLeaveTimeout={400}>
-		  			  {React.cloneElement(this.props.children, {
-		  			    key: this.props.location.key
-		  			  })}
-		  			</ReactCSSTransitionGroup>
+		  			{this.props.children}
 		  		</div>
 		  		: null
 	  		}

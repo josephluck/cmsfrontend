@@ -22,15 +22,15 @@ class EditPage extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title,
-							link: `sites/${this.props.site.id}/view`
+							link: `/sites/${this.props.site.id}/view`
 						},
 						{
 							name: this.props.page.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/view`
 						},
 						{
 							name: 'Edit'
@@ -67,7 +67,7 @@ function submitPage (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().page.reset(res);
-		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`);
 	}, (err) => {
 		Store.get().forms.page.set({
 			"loading": false,

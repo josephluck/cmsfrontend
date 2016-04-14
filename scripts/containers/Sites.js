@@ -15,7 +15,7 @@ class Sites extends React.Component {
 	componentWillMount() {
 		Api.get({
 			url: {
-				name: 'sites'
+				name: '/sites'
 			}
 		}).then((body) => {
 			Store.get().sites.reset(body);
@@ -37,7 +37,7 @@ class Sites extends React.Component {
 					actions={[
 						{
 							name: 'New site',
-							path: 'sites/new'
+							path: '/sites/new'
 						}
 					]} />
 		  	<div className="container">
@@ -56,5 +56,5 @@ Sites.defaultProps = {
 
 export default warmUp(Sites, [
 	['sites', 'sites'],
-	['loading', 'sites_loading']
+	['loading', '/sites_loading']
 ]);

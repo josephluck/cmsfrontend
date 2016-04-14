@@ -18,15 +18,15 @@ class ViewSection extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title,
-							link: `sites/${this.props.site.id}/view`
+							link: `/sites/${this.props.site.id}/view`
 						},
 						{
 							name: this.props.page.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/view`
 						},
 						{
 							name: this.props.section.title
@@ -35,11 +35,11 @@ class ViewSection extends React.Component {
 					actions={[
 						{
 							name: 'Delete',
-							path: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/delete`
+							path: `/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/delete`
 						},
 						{
 							name: 'Edit',
-							path: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/edit`
+							path: `/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/edit`
 						}
 					]} />
 
@@ -48,7 +48,7 @@ class ViewSection extends React.Component {
 	  	  		<div className="container flex vertical-align">
 	  	  			<h3 className="flex-1">Items</h3>
 	  	  			<Link className="button"
-	  	  				to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/new_item`}>
+	  	  				to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/new_item`}>
 	  	  				{"New item"}
 	  	  			</Link>
 	  	  		</div>
@@ -62,8 +62,8 @@ class ViewSection extends React.Component {
 			  		  					className="list-item flex">
 			  		  					<span className="flex-1 ellipsis">{item.title}</span>
 			  		  					<span className="flex-0 list-buttons">
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>
-			  		  						<Link to={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/items/${item.id}/delete`}>{"Delete"}</Link>
+			  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>
+			  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/items/${item.id}/delete`}>{"Delete"}</Link>
 			  		  					</span>
 			  		  				</li>
 			  		  			)

@@ -32,19 +32,19 @@ class NewItem extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title,
-							link: `sites/${this.props.site.id}/view`
+							link: `/sites/${this.props.site.id}/view`
 						},
 						{
 							name: this.props.page.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/view`
 						},
 						{
 							name: this.props.section.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
 						},
 						{
 							name: 'New item'
@@ -59,7 +59,7 @@ class NewItem extends React.Component {
 		  			removeField={this.props.removeField}
 		  			onFieldContentType={this.props.onFieldContentType}
 		  			state={this.props.form}
-		  			cancelPath={`sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`}>
+		  			cancelPath={`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`}>
 		  		</ItemForm>
 		  	</div>
 		  </div>
@@ -82,7 +82,7 @@ function submitItem(form) {
 		payload: form
 	}).then((res) => {
 		Store.get().section.items.push(res);
-		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`);
 	}, (err) => {
 		Store.get().forms.new_item.set({
 			"loading": false,

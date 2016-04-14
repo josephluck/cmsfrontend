@@ -59,7 +59,7 @@ function submitUser (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().team_member.reset(res);
-		window.location.hash = `#users/view`;
+		Api.redirect(`/users/view`);
 	}, (err) => {
 		Store.get().forms.team_member.set({
 			"loading": false,

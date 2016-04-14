@@ -42,19 +42,19 @@ class EditItem extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title,
-							link: `sites/${this.props.site.id}/view`
+							link: `/sites/${this.props.site.id}/view`
 						},
 						{
 							name: this.props.page.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/view`
 						},
 						{
 							name: this.props.section.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
 						},
 						{
 							name: this.props.item.title
@@ -74,7 +74,7 @@ class EditItem extends React.Component {
 		  					addAnotherField={this.props.addAnotherField}
 		  					removeField={this.props.removeField}
 		  					onFieldContentType={this.props.onFieldContentType}
-		  					cancelPath={`sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`}>
+		  					cancelPath={`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`}>
 		  				</ItemForm>
 		  				: null
 		  			}
@@ -102,7 +102,7 @@ function submitItem(form) {
 	}).then((res) => {
 		let item_index = _.findIndex(Store.get().section.items.toJS(), function(item) { return item.id == res.id });
 		Store.get().section.items[item_index].reset(res);
-		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`);
 	}, (err) => {
 		Store.get().forms.edit_item.set({
 			"loading": false,

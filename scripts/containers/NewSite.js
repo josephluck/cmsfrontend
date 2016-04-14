@@ -21,7 +21,7 @@ class Site extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: 'New site'
@@ -45,12 +45,12 @@ function submitSite (form) {
 
 	Api.post({
 		url: {
-			name: 'sites'
+			name: '/sites'
 		},
 		payload: form
 	}).then((res) => {
 		Store.get().sites.unshift(res);
-		window.location.hash = "#sites/view";
+		Api.redirect("/sites/view");
 	}, (err) => {
 		Store.get().forms.site.set({
 			"loading": false,

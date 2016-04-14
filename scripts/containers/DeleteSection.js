@@ -15,7 +15,7 @@ class DeleteSection extends React.Component {
 	  		title="Delete section"
 	  		loading={this.props.section.loading}
 	  		onSubmit={this.props.submitDelete}
-	  		cancelLinkPath={`sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>
+	  		cancelLinkPath={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`}>
 	  	</DeleteForm>
 	  );
 	}
@@ -37,7 +37,7 @@ function submitDelete() {
 
 		Store.get().page.sections.splice(section_index, 1);
 
-		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`);
 	}, (err) => {
 		debugger
 	})

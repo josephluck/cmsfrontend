@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import PersistentStorage from 'utils/PersistentStorage';
+import {browserHistory} from 'react-router';
 
 if (window.location.hostname !== 'localhost') {
   var API_ROOT = 'https://young-earth-94007.herokuapp.com/';
@@ -141,7 +142,7 @@ function getApiUrl(options) {
     case 'user':
       return API_ROOT + `users/${options.id}`;
       break;
-    case 'sites':
+    case '/sites':
       return API_ROOT + 'sites';
       break;
     case 'site':
@@ -171,6 +172,13 @@ function getApiUrl(options) {
   }
 }
 
+
+// Redirect (usually after POST, PUT, DELETE)
+function redirect(path) {
+  browserHistory.push(path);
+}
+
+
 export default {
   post,
   put,
@@ -178,5 +186,6 @@ export default {
   destroy,
   setToken,
   removeToken,
+  redirect,
   API_ROOT
 }

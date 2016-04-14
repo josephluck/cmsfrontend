@@ -38,9 +38,7 @@ function submitRegister (form) {
 	}).then((res) => {
 		Store.get().user.reset(res.user);
 		Api.setToken(res.user.auth_token);
-
-
-		window.location.hash = "#sites/view";
+		Api.redirect("/sites/view");
 	}, (err) => {
 		Store.get().forms.register.set({
 			"loading": false,

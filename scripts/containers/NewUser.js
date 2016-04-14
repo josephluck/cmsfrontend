@@ -50,7 +50,7 @@ function submitUser (form) {
 		},
 		payload: form
 	}).then((res) => {
-		window.location.hash = "#users/view";
+		Api.redirect("/users/view");
 	}, (err) => {
 		Store.get().forms.user.set({
 			"loading": false,

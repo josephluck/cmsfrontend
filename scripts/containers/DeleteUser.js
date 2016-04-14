@@ -37,7 +37,7 @@ function submitDelete() {
 
 		Store.get().users.splice(team_member_index, 1);
 
-		window.location.hash = "#users/view";
+		Api.redirect("/users/view");
 	}, (err) => {
 		debugger
 	})

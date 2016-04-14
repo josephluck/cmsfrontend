@@ -36,7 +36,7 @@ function LoginForm({
             <span>
               {"Don't have an account yet? "}
             </span>
-            <a href="#/">
+            <a href="/">
               {"Register"}
             </a>
           </div>

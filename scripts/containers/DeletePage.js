@@ -15,7 +15,7 @@ class DeletePage extends React.Component {
 	  		title="Delete page"
 	  		loading={this.props.page.loading}
 	  		onSubmit={this.props.submitDelete}
-	  		cancelLinkPath={`sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>
+	  		cancelLinkPath={`/sites/${this.props.site.id}/pages/${this.props.page.id}/view`}>
 	  	</DeleteForm>
 	  );
 	}
@@ -37,7 +37,7 @@ function submitDelete() {
 
 		Store.get().site.pages.splice(section_index, 1);
 
-		window.location.hash = `#sites/${Store.get().site.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/view`);
 	}, (err) => {
 		debugger
 	})

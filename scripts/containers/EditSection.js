@@ -22,19 +22,19 @@ class EditSection extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Sites',
-							link: 'sites/view'
+							link: '/sites/view'
 						},
 						{
 							name: this.props.site.title,
-							link: `sites/${this.props.site.id}/view`
+							link: `/sites/${this.props.site.id}/view`
 						},
 						{
 							name: this.props.page.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/view`
 						},
 						{
 							name: this.props.section.title,
-							link: `sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
+							link: `/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view`
 						},
 						{
 							name: 'Edit'
@@ -71,7 +71,7 @@ function submitPage (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().section.reset(res);
-		window.location.hash = `#sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`;
+		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`);
 	}, (err) => {
 		Store.get().forms.section.set({
 			"loading": false,

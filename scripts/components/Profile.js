@@ -72,7 +72,7 @@ function onLogoutClick(e) {
 		Store.get().set({
 			profileDropdownOpen: false
 		});
-		window.location.hash = "#login";
+		Api.redirect("/login");
 	}, (err) => {
 		debugger
 	})

@@ -38,7 +38,7 @@ function submitDelete() {
 	}).then((res) => {
 		Api.removeToken();
 		Store.get().user.reset({});
-		window.location.hash = "/";
+		Api.redirect("/");
 	});
 }
 
