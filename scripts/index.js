@@ -52,65 +52,64 @@ import DeleteItem from 'containers/DeleteItem';
 import AccessHelper from 'components/AccessHelper';
 
 render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Register} />
-    	<Route path="login" component={Login}></Route>
-    	<Route component={RequireLogin}>
+<Router history={browserHistory}>
+  <Route path="/" component={App}>
+    <IndexRoute component={Register} />
+  	<Route path="login" component={Login}></Route>
+  	<Route component={RequireLogin}>
 
-        <Route path="settings" component={Settings}>
-          <Route path="view" component={ViewSettings}>
-            <Route path="delete" component={DeleteCompany} />
-          </Route>
+      <Route path="settings" component={Settings}>
+        <Route path="view" component={ViewSettings}>
+          <Route path="delete" component={DeleteCompany} />
         </Route>
+      </Route>
 
-        <Route path="users">
-          <Route path="new" component={NewUser} />
-          <Route path="view" component={Users}>
-            <Route path=":id" component={User}>
-              <Route path="delete" component={DeleteUser} />
-            </Route>
-          </Route>
+      <Route path="users">
+        <Route path="new" component={NewUser} />
+        <Route path="view" component={Users}>
           <Route path=":id" component={User}>
-            <Route path="edit" component={EditUser} />
+            <Route path="delete" component={DeleteUser} />
           </Route>
         </Route>
+        <Route path=":id" component={User}>
+          <Route path="edit" component={EditUser} />
+        </Route>
+      </Route>
 
-        <Route path="sites">
-          <Route path="view" component={Sites} />
-          <Route path="new" component={NewSite} />
-          <Route path=":site_id" component={Site}>
-            <Route path="view" component={ViewSite}>
-              <Route path="delete" component={DeleteSite} />
-            </Route>
-            <Route path="edit" component={EditSite} />
-            <Route path="pages">
-              <Route path="new" component={NewPage} />
-              <Route path=":page_id" component={Page}>
-                <Route path="view" component={ViewPage}>
-                  <Route path="delete" component={DeletePage} />
-                  <Route path="access" component={AccessHelper}>
-                    <Route path=":language" />
-                  </Route>
+      <Route path="sites">
+        <Route path="view" component={Sites} />
+        <Route path="new" component={NewSite} />
+        <Route path=":site_id" component={Site}>
+          <Route path="view" component={ViewSite}>
+            <Route path="delete" component={DeleteSite} />
+          </Route>
+          <Route path="edit" component={EditSite} />
+          <Route path="pages">
+            <Route path="new" component={NewPage} />
+            <Route path=":page_id" component={Page}>
+              <Route path="view" component={ViewPage}>
+                <Route path="delete" component={DeletePage} />
+                <Route path="access" component={AccessHelper}>
+                  <Route path=":language" />
                 </Route>
-                <Route path="edit" component={EditPage} />
-                <Route path="new_section" component={NewSection} />
-                <Route path="sections">
-                  <Route path=":section_id" component={Section}>
-                    <Route path="view" component={ViewSection}>
-                      <Route path="delete" component={DeleteSection} />
-                      <Route path="items">
-                        <Route path=":item_id" component={Item}>
-                          <Route path="delete" component={DeleteItem} />
-                        </Route>
-                      </Route>
-                    </Route>
-                    <Route path="edit" component={EditSection} />
-                    <Route path="new_item" component={NewItem} />
+              </Route>
+              <Route path="edit" component={EditPage} />
+              <Route path="new_section" component={NewSection} />
+              <Route path="sections">
+                <Route path=":section_id" component={Section}>
+                  <Route path="view" component={ViewSection}>
+                    <Route path="delete" component={DeleteSection} />
                     <Route path="items">
                       <Route path=":item_id" component={Item}>
-                        <Route path="edit" component={EditItem} />
+                        <Route path="delete" component={DeleteItem} />
                       </Route>
+                    </Route>
+                  </Route>
+                  <Route path="edit" component={EditSection} />
+                  <Route path="new_item" component={NewItem} />
+                  <Route path="items">
+                    <Route path=":item_id" component={Item}>
+                      <Route path="edit" component={EditItem} />
                     </Route>
                   </Route>
                 </Route>
@@ -118,10 +117,8 @@ render((
             </Route>
           </Route>
         </Route>
-
-    		<Route path="pages">
-    		</Route>
-    	</Route>
-    </Route>
-  </Router>
+      </Route>
+  	</Route>
+  </Route>
+</Router>
 ), document.getElementById('root'))

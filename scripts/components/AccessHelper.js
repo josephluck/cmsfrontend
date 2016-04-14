@@ -11,15 +11,19 @@ import {Link} from 'react-router';
 class AccessHelper extends React.Component {
   constructor(props, state) {
     super(props);
+    this.props = props;
     this.state = {};
   }
 
-  componentWillReceiveProps() {
+  componentDidMount() {
+    this.generateCode();
+  }
+
+  componentWillReceiveProps(props) {
     this.generateCode();
   }
 
   generateCode() {
-    console.log('Generating Code for ' + this.props.params.language)
     var api_url;
 
     if (window.location.href.includes('/pages/')) {

@@ -27,8 +27,8 @@ export function ModalTransition({
     <ReactCSSTransitionGroup
       component="div"
       transitionName="modal-transition"
-      transitionEnterTimeout={4000}
-      transitionLeaveTimeout={4000}>
+      transitionEnterTimeout={600}
+      transitionLeaveTimeout={600}>
       {React.cloneElement(children, {
         key: transitionKey
       })}

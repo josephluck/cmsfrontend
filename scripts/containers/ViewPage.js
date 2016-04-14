@@ -15,6 +15,7 @@ class ViewPage extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.location.pathname.split('/')[6]);
 	  return (
 	  	<div>
   			<MidBar
@@ -42,7 +43,6 @@ class ViewPage extends React.Component {
 							path: `/sites/${this.props.site.id}/pages/${this.props.page.id}/edit`
 						}
 					]} />
-
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
 	  	  		<div className="container flex vertical-align">
@@ -74,7 +74,7 @@ class ViewPage extends React.Component {
 	  		  	</div>
 			  	</Block>
 			  </div>
-			  <ModalTransition transitionKey={window.location.pathname}>
+			  <ModalTransition transitionKey={this.props.location.pathname.split('/')[6] || 'root'}>
 			  	{this.props.children || <div></div>}
 			  </ModalTransition>
 			</div>
