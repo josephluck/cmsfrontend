@@ -15,7 +15,6 @@ class ViewPage extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.location.pathname.split('/')[6]);
 	  return (
 	  	<div>
   			<MidBar

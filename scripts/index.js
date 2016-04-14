@@ -50,6 +50,7 @@ import DeleteItem from 'containers/DeleteItem';
 
 // Misc
 import AccessHelper from 'components/AccessHelper';
+import AccessLanguage from 'components/AccessLanguage';
 
 render((
 <Router history={browserHistory}>
@@ -90,7 +91,7 @@ render((
               <Route path="view" component={ViewPage}>
                 <Route path="delete" component={DeletePage} />
                 <Route path="access" component={AccessHelper}>
-                  <Route path=":language" />
+                  <Route path=":language" component={AccessLanguage} />
                 </Route>
               </Route>
               <Route path="edit" component={EditPage} />

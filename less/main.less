@@ -48,23 +48,50 @@
 
 .modal-transition-enter {
   opacity: 0.01;
-  transform: translatey(-2em);
-  transition: all 0.5s ease-in-out;
+  transform: translateY(-2em);
+  transition: all 0.3s ease-in-out;
   position: absolute;
 }
 .modal-transition-enter.modal-transition-enter-active {
   opacity: 1;
-  transform: translatey(0);
+  transform: translateY(0);
   position: absolute;
 }
 .modal-transition-leave {
   opacity: 1;
-  transform: translatey(0);
-  transition: all 0.5s ease-in-out;
+  transform: translateY(0);
+  transition: all 0.3s ease-in-out;
   position: absolute;
 }
 .modal-transition-leave.modal-transition-leave-active {
   opacity: 0.01;
-  transform: translatey(2em);
+  transform: translateY(2em);
+  position: absolute;
+}
+
+
+
+
+
+.slide-transition-enter {
+  opacity: 0.01;
+  transform: translateX(-5em);
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+}
+.slide-transition-enter.slide-transition-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  position: absolute;
+}
+.slide-transition-leave {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+}
+.slide-transition-leave.slide-transition-leave-active {
+  opacity: 0.01;
+  transform: translateX(5em);
   position: absolute;
 }

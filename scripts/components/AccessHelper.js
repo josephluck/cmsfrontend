@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router';
 import Markdown from 'remarkable';
 import hljs from 'highlight.js';
 import {Link} from 'react-router';
+import {SlideTransition} from 'components/Transitions';
 
 class AccessHelper extends React.Component {
   constructor(props, state) {
@@ -72,74 +73,57 @@ class AccessHelper extends React.Component {
   }
 
   render() {
-    var codeContent = new Markdown('full', {
-                        html: true,
-                        xhtmlOut: false,
-                        breaks: false,
-                        langPrefix: 'language-',
-                        linkify: true,
-                        linkTarget: '',
-                        typographer: false,
-                        highlight: function (str, lang) {
-                          if (lang && hljs.getLanguage(lang)) {
-                            try {
-                              return hljs.highlight(lang, str).value;
-                            } catch (__) {}
-                          }
-                          try {
-                            return hljs.highlightAuto(str).value;
-                          } catch (__) {}
-                          return '';
-                        }
-                      }).render(this.state.code_snippet);
-
-    let base_root = this.props.location.pathname.split('/');
-    base_root.pop()
-    base_root = base_root.join('/');
+    let base_route = this.props.location.pathname.split('/'),
+        back_route = this.props.location.pathname.split('/');
+    base_route.pop()
+    back_route.pop();
+    back_route.pop();
+    base_route = base_route.join('/');
+    back_route = back_route.join('/');
 
     return (
-			<div className="modal">
+			<div className="modal overflow-hidden">
 				<div className="container">
 					<h3>{"Api help"}</h3>
 				</div>
         <div className="tabs with-top-border">
-          <Link to={`${base_root}/jquery`}
+          <Link to={`${base_route}/jquery`}
             className="tab"
             activeClassName="active">
             {"jquery"}
           </Link>
-          <Link to={`${base_root}/node`}
+          <Link to={`${base_route}/node`}
             className="tab"
             activeClassName="active">
             {"node"}
           </Link>
-          <Link to={`${base_root}/http`}
+          <Link to={`${base_route}/http`}
             className="tab"
             activeClassName="active">
             {"http"}
           </Link>
-          <Link to={`${base_root}/air framework`}
+          <Link to={`${base_route}/air_framework`}
             className="tab"
             activeClassName="active">
             {"air framework"}
           </Link>
         </div>
 				<div className="container modal-content without-top-border">
-          <div id="code-block" dangerouslySetInnerHTML={{__html: codeContent}} />
+          <SlideTransition transitionKey={this.props.location.pathname}>
+            {this.props.children}
+          </SlideTransition>
 				</div>
 				<div className="modal-footer container text-align-right">
-					<a href=""
-            onClick={() => {
-              debugger
-            }}>
+					<Link to={back_route}>
 						{"Close"}
-					</a>
-          <button
+					</Link>
+          <Link to={back_route}
+            className="button"
             onClick={() => {
               debugger
             }}>
             {"Copy & close"}
-          </button>
+          </Link>
 				</div>
 			</div>
     );
