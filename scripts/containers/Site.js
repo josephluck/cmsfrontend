@@ -21,11 +21,8 @@ class Site extends React.Component {
 		})
 	}
 	render() {
-		console.log(this.props.location.pathname);
-		const key = this.props.location.pathname.split('/')[4] || 'root';
-
 	  return (
-	  	<PageTransition transitionKey={key}>
+	  	<PageTransition transitionKey={this.props.location.pathname.split('/')[4] || 'root'}>
 	  		{this.props.children}
 	  	</PageTransition>
 	  )

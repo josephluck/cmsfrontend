@@ -41,3 +41,30 @@
   position: absolute;
   width: 100%;
 }
+
+
+
+
+
+.modal-transition-enter {
+  opacity: 0.01;
+  transform: translatey(-5em);
+  transition: all 3s ease-in-out;
+  position: absolute;
+}
+.modal-transition-enter.modal-transition-enter-active {
+  opacity: 1;
+  transform: translatey(0);
+  position: absolute;
+}
+.modal-transition-leave {
+  opacity: 1;
+  transform: translatey(0);
+  transition: all 3s ease-in-out;
+  position: absolute;
+}
+.modal-transition-leave.modal-transition-leave-active {
+  opacity: 0.01;
+  transform: translatey(5em);
+  position: absolute;
+}
