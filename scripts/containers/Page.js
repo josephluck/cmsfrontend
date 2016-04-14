@@ -2,6 +2,7 @@ import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
+import {PageTransition} from 'components/Transitions';
 
 import Block from 'components/Block';
 
@@ -28,7 +29,11 @@ class Page extends React.Component {
 	}
 
 	render() {
-	  return this.props.children
+	  return (
+	  	<PageTransition transitionKey={this.props.location.pathname.split('/')[5] || 'root'}>
+	  		{this.props.children}
+	  	</PageTransition>
+	  )
 	}
 }
 

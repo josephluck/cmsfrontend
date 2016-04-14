@@ -40,7 +40,7 @@ class ViewSite extends React.Component {
 	  	  		<div className="container flex vertical-align">
 	  	  			<h3 className="flex-1">Pages</h3>
 	  	  			<Link className="button"
-	  	  				to={`/sites/${this.props.site.id}/pages/new`}>
+	  	  				to={`/sites/${this.props.site.id}/new_page`}>
 	  	  				{"New page"}
 	  	  			</Link>
 	  	  		</div>

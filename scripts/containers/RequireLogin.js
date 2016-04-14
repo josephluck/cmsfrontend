@@ -4,6 +4,7 @@ import Store from 'store/Store';
 import PersistentStorage from 'utils/PersistentStorage';
 import Api from 'utils/Api';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {PageTransition} from 'components/Transitions';
 
 import TopBar from 'components/TopBar';
 
@@ -58,7 +59,9 @@ class RequireLogin extends Component {
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
-		  			{this.props.children}
+		  			<PageTransition transitionKey={this.props.location.pathname.split('/')[2] || 'root'}>
+		  				{this.props.children}
+		  			</PageTransition>
 		  		</div>
 		  		: null
 	  		}
