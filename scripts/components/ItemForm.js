@@ -52,13 +52,15 @@ function ItemForm({
             </FormInput>
 
             {state.data.fields.length !== 1 ?
-              <button className="add-another right-margin bottom-margin"
-                onClick={(e) => {
-                  e.preventDefault();
-                  removeField(i);
-                }}>
-                {"Remove"}
-              </button>
+              <div className="bottom-margin">
+                <button className="add-another right-margin bottom-margin"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeField(i);
+                  }}>
+                  {"Remove"}
+                </button>
+              </div>
               : null
             }
 
