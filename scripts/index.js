@@ -2,6 +2,9 @@ import React from 'react';
 import {render} from 'react-dom';
 import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 
+// Website
+import Website from 'containers/Website';
+
 // App/Login
 import App from './App';
 import LoginContainer from 'containers/LoginContainer';
@@ -57,6 +60,7 @@ import AccessLanguage from 'components/AccessLanguage';
 render((
 <Router history={browserHistory}>
 <Route path="/" component={App}>
+  <IndexRoute component={Website} />
   <Route component={LoginContainer}>
     <Route path="register" component={Register} />
   	<Route path="login" component={Login} />
