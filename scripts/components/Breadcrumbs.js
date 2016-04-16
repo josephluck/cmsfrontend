@@ -12,14 +12,22 @@ class Breadcrumbs extends React.Component {
 		  	{this.props.breadcrumbs.map((crumb, i) => {
 	  			return (
 	  				<span key={i}>
-	  					{i > 0 ?
-	  						<span>{" / "}</span>
-	  						: null
-	  					}
-	  					{crumb.link ?
-	  						<Link key={i} to={crumb.link}>{crumb.name}</Link>
+		  				{i > 0 ?
+		  					<span>{" / "}</span>
+		  					: null
+		  				}
+	  					{crumb.name ?
+	  						<span>
+	  							{crumb.link ?
+	  								<Link key={i} to={crumb.link}>{crumb.name}</Link>
+	  								:
+	  								<span key={i}>{crumb.name}</span>
+	  							}
+	  						</span>
 	  						:
-	  						<span key={i}>{crumb.name}</span>
+	  						<span>
+	  							{"..."}
+	  						</span>
 	  					}
 	  				</span>
 	  			)
