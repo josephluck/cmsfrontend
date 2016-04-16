@@ -38,7 +38,7 @@ function submitDelete() {
 	}).then((res) => {
 		Api.removeToken();
 		Store.get().user.reset({});
-		Api.redirect("/");
+		Api.redirect("/register");
 	});
 }
 

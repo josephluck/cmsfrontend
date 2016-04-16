@@ -49,9 +49,9 @@ class Login extends React.Component {
 		        <span>
 		          {"Don't have an account yet? "}
 		        </span>
-		        <a href="/">
+		        <Link to="/register">
 		          {"Register"}
-		        </a>
+		        </Link>
 		      </div>
 		      <div class="flex-0">
 		  		  <button type="submit">

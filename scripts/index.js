@@ -58,8 +58,8 @@ render((
 <Router history={browserHistory}>
 <Route path="/" component={App}>
   <Route component={LoginContainer}>
-    <IndexRoute component={Register} />
-  	<Route path="login" component={Login}></Route>
+    <Route path="register" component={Register} />
+  	<Route path="login" component={Login} />
   </Route>
 	<Route component={RequireLogin}>
 
