@@ -19,7 +19,7 @@ function DeleteFormView({
         e.preventDefault();
         onSubmit();
       }}>
-      <div className="container">
+      <div className="modal-header">
         <h3>{title}</h3>
       </div>
       <div className="container modal-content">

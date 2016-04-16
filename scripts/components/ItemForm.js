@@ -12,8 +12,7 @@ function ItemForm({
   onTitleType,
   addAnotherField,
   removeField,
-  onFieldContentType,
-  cancelPath
+  onFieldContentType
 }) {
   return (
     <form name="item"
@@ -80,9 +79,6 @@ function ItemForm({
       })}
 
       <div className="text-align-right">
-        <Link to={cancelPath}>
-          {"Cancel"}
-        </Link>
         <button type="submit" className="left-margin">
           {state.loading ? "Saving" : "Save"}
         </button>

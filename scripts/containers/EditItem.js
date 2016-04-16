@@ -73,8 +73,7 @@ class EditItem extends React.Component {
 		  					onTitleType={this.props.onTitleType}
 		  					addAnotherField={this.props.addAnotherField}
 		  					removeField={this.props.removeField}
-		  					onFieldContentType={this.props.onFieldContentType}
-		  					cancelPath={`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`}>
+		  					onFieldContentType={this.props.onFieldContentType}>
 		  				</ItemForm>
 		  				: null
 		  			}
