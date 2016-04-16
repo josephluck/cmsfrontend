@@ -19,7 +19,7 @@ class NewUser extends React.Component {
 		  	<div className="subnav container flex vertical-align">
 		  		<div className="flex-1">
 		  			<h3>
-		  				<Link to="users/view">{"Users"}</Link>
+		  				<Link to="/users/view">{"Users"}</Link>
 		  				{" / New"}
 		  			</h3>
 		  		</div>

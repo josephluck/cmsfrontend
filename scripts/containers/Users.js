@@ -43,7 +43,7 @@ class Users extends React.Component {
 					actions={[
 						{
 							name: 'New user',
-							path: 'users/new'
+							path: '/users/new'
 						}
 					]} />
 
