@@ -73,7 +73,8 @@ class ViewPage extends React.Component {
 	  		  	</div>
 			  	</Block>
 			  </div>
-			  <ModalTransition transitionKey={this.props.location.pathname.split('/')[6] || 'root'}>
+			  <ModalTransition routes={this.props.routes}
+			  	route={this.props.route}>
 			  	{this.props.children || <div></div>}
 			  </ModalTransition>
 			</div>

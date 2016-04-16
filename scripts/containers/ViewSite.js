@@ -69,7 +69,8 @@ class ViewSite extends React.Component {
 			  	</Block>
 			  </div>
 
-			  <ModalTransition transitionKey={this.props.location.pathname.split('/')[4] || 'root'}>
+			  <ModalTransition routes={this.props.routes}
+			  	route={this.props.route}>
 			  	{this.props.children || <div></div>}
 			  </ModalTransition>
 			</div>
