@@ -11,28 +11,33 @@
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
-	.modal-content {
-		flex: 1;
-		overflow: auto;
-		margin: 0px;
-		padding: @padding @padding*2;
-		border-top: solid @borderWidth @darkGray;
-		background: @appBackground;
+}
+.modal-header {
+	background: @pureWhite;
+	padding: @padding @padding*2;
+}
+.modal-content {
+	flex: 1;
+	overflow: auto;
+	margin: 0px;
+	padding: @padding @padding*2;
+	border-top: solid @borderWidth @darkGray;
+	background: @appBackground;
 	&.without-top-border {
-			border-top: 0px;
-		}
-		.container {
-			padding: @padding 0px;
-			margin: 0px;
-		}
+		border-top: 0px;
 	}
-	.modal-footer {
-		border-top: solid @borderWidth @darkGray;
+	.container {
+		padding: @padding 0px;
 		margin: 0px;
-		padding: @padding @padding*2;
-		a, button {
-			margin-left: @padding;
-		}
+	}
+}
+.modal-footer {
+	border-top: solid @borderWidth @darkGray;
+	margin: 0px;
+	padding: @padding @padding*2;
+	background: @pureWhite;
+	button, .button {
+		margin-left: @padding;
 	}
 }
 

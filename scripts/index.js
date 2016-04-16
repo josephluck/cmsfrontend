@@ -4,6 +4,7 @@ import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 
 // App/Login
 import App from './App';
+import LoginContainer from 'containers/LoginContainer';
 import Register from 'containers/Register';
 import Login from 'containers/Login';
 import RequireLogin from 'containers/RequireLogin';
@@ -21,6 +22,7 @@ import EditUser from 'containers/EditUser';
 import DeleteUser from 'containers/DeleteUser';
 
 // Sites
+import SitesContainer from 'containers/SitesContainer';
 import Sites from 'containers/Sites';
 import NewSite from 'containers/NewSite';
 import Site from 'containers/Site';
@@ -55,8 +57,10 @@ import AccessLanguage from 'components/AccessLanguage';
 render((
 <Router history={browserHistory}>
 <Route path="/" component={App}>
-  <IndexRoute component={Register} />
-	<Route path="login" component={Login}></Route>
+  <Route component={LoginContainer}>
+    <IndexRoute component={Register} />
+  	<Route path="login" component={Login}></Route>
+  </Route>
 	<Route component={RequireLogin}>
 
     <Route path="settings" component={Settings}>
@@ -77,7 +81,7 @@ render((
       </Route>
     </Route>
 
-    <Route path="sites">
+    <Route path="sites" component={SitesContainer}>
       <Route path="view" component={Sites} />
       <Route path="new" component={NewSite} />
       <Route path=":site_id" component={Site}>

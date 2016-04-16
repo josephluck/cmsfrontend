@@ -4,7 +4,8 @@ import Store from 'store/Store';
 import Api from 'utils/Api';
 import PersistentStorage from 'utils/PersistentStorage';
 
-import LoginForm from 'components/LoginForm';
+import FormInput from 'components/FormInput';
+import ErrorBar from 'components/ErrorBar';
 import {Link} from 'react-router';
 
 class Login extends React.Component {
@@ -17,11 +18,47 @@ class Login extends React.Component {
 	render() {
 	  return (
 	  	<div>
-		  	<div className="container">
-		  		<LoginForm
-		  			onSubmit={submitLogin}
-		  			state={this.props.form}></LoginForm>
-		  	</div>
+	  		<div className="modal-header">
+	  			<h3>{"Login"}</h3>
+	  		</div>
+  			<form name="login"
+  		    onSubmit={(e) => {
+  		  		e.preventDefault();
+  		  		this.props.submitLogin(FormHelper.serialize(e.target));
+  		  	}}>
+			  	<div className="container modal-content">
+			  		<div>
+			  		  {this.props.form.errors ?
+			  		    <ErrorBar text={this.props.form.errors}></ErrorBar>
+			  		    : null
+			  		  }
+		  		    <FormInput title="Email">
+		  		      <input name="email"
+		  		        type="text" />
+		  		    </FormInput>
+
+		  		    <FormInput title="Password">
+		  		      <input name="password"
+		  		        type="password" />
+		  		    </FormInput>
+			  		</div>
+			  	</div>
+			  </form>
+		    <div className="modal-footer container flex vertical-align">
+		      <div className="flex-1">
+		        <span>
+		          {"Don't have an account yet? "}
+		        </span>
+		        <a href="/">
+		          {"Register"}
+		        </a>
+		      </div>
+		      <div class="flex-0">
+		  		  <button type="submit">
+		          {this.props.form.loading ? "Logging in" : "Login"}
+		        </button>
+		      </div>
+		    </div>
 		  </div>
 	  );
 	}
