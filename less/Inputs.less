@@ -15,6 +15,12 @@
 		font-size: 1em;
 		resize: vertical;
 		border-radius: @buttonBorderRadius;
+		transition: @defaultTransitionQuick;
+		&:focus {
+			outline: none;
+			box-shadow: none;
+			border-color: @lightBlue;
+		}
 	}
 	.form-input-error {
 		width: 100%;
@@ -46,8 +52,13 @@ button, .button {
 	cursor: pointer;
 	color: @black !important;
 	border-radius: @buttonBorderRadius;
-	&:hover {
+	transition: @defaultTransitionQuick;
+	&:hover,
+	&:focus {
 		color: @black !important;
+		outline: none;
+		box-shadow: none;
+		border-color: @lightBlue;
 	}
 	&.add-another {
 		background: transparent;
