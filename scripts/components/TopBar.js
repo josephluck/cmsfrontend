@@ -9,7 +9,7 @@ function TopBar({}) {
 	  	<div className="top-bar flex flex-horizontal vertical-align">
 	  		<Logo className="flex-0" />
 	  		<a>
-	  			<span className="ss-wind"></span>
+	  			<span className="logo ss-wind"></span>
 	  			{"Air Content"}
 	  		</a>
 	  		<div className="flex-1 text-align-right">

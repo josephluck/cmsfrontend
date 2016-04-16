@@ -3,6 +3,7 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 import PersistentStorage from 'utils/PersistentStorage';
+import FormHelper from 'utils/FormHelper';
 
 import FormInput from 'components/FormInput';
 import ErrorBar from 'components/ErrorBar';
@@ -17,33 +18,31 @@ class Login extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div>
+  		<form name="login"
+  	    onSubmit={(e) => {
+  	  		e.preventDefault();
+  	  		this.props.submitLogin(FormHelper.serialize(e.target));
+  	  	}}>
 	  		<div className="modal-header">
 	  			<h3>{"Login"}</h3>
 	  		</div>
-  			<form name="login"
-  		    onSubmit={(e) => {
-  		  		e.preventDefault();
-  		  		this.props.submitLogin(FormHelper.serialize(e.target));
-  		  	}}>
-			  	<div className="container modal-content">
-			  		<div>
-			  		  {this.props.form.errors ?
-			  		    <ErrorBar text={this.props.form.errors}></ErrorBar>
-			  		    : null
-			  		  }
-		  		    <FormInput title="Email">
-		  		      <input name="email"
-		  		        type="text" />
-		  		    </FormInput>
+		  	<div className="container modal-content">
+		  		<div>
+		  		  {this.props.form.errors ?
+		  		    <ErrorBar text={this.props.form.errors}></ErrorBar>
+		  		    : null
+		  		  }
+	  		    <FormInput title="Email">
+	  		      <input name="email"
+	  		        type="text" />
+	  		    </FormInput>
 
-		  		    <FormInput title="Password">
-		  		      <input name="password"
-		  		        type="password" />
-		  		    </FormInput>
-			  		</div>
-			  	</div>
-			  </form>
+	  		    <FormInput title="Password">
+	  		      <input name="password"
+	  		        type="password" />
+	  		    </FormInput>
+		  		</div>
+		  	</div>
 		    <div className="modal-footer container flex vertical-align">
 		      <div className="flex-1">
 		        <span>
@@ -59,7 +58,7 @@ class Login extends React.Component {
 		        </button>
 		      </div>
 		    </div>
-		  </div>
+		  </form>
 	  );
 	}
 }
