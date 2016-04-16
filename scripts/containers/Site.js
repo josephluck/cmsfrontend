@@ -36,6 +36,5 @@ Site.defaultProps = {
 }
 
 export default warmUp(Site, [
-	['site', 'site'],
-	['loading', 'site_loading']
+	['site', 'site']
 ]);

@@ -7,11 +7,12 @@
 	}
 	input, select, textarea {
 		background: @pureWhite;
-		padding: @padding/2 @padding;
+		padding: @padding/2;
 		border: @borderWidth solid @darkGray;
 		width: 100%;
 		font-size: 1em;
 		resize: vertical;
+		border-radius: @buttonBorderRadius;
 	}
 }
 
@@ -25,9 +26,10 @@ button, .button {
 	display: inline-block;
 	font-family: inherit;
 	cursor: pointer;
-	color: @black;
+	color: @black !important;
+	border-radius: @buttonBorderRadius;
 	&:hover {
-		color: @black;
+		color: @black !important;
 	}
 	&.add-another {
 		background: transparent;
