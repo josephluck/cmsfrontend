@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
+import {ModalTransition} from 'components/Transitions';
 
 class ViewSite extends React.Component {
 	constructor(props) {
@@ -13,6 +14,7 @@ class ViewSite extends React.Component {
 	}
 
 	render() {
+		// console.log('ViewSite.js: ' + this.props.location.pathname.split('/')[4]);
 	  return (
 	  	<div>
 				<MidBar
@@ -67,7 +69,9 @@ class ViewSite extends React.Component {
 			  	</Block>
 			  </div>
 
-			  {this.props.children}
+			  <ModalTransition transitionKey={this.props.location.pathname.split('/')[4] || 'root'}>
+			  	{this.props.children || <div></div>}
+			  </ModalTransition>
 			</div>
 	  );
 	}

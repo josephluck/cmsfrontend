@@ -32,15 +32,13 @@ class DeleteForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <DeleteFormView {...this.props}
-          onConfirmationTextType={this.onConfirmationTextType.bind(this)}
-          onSubmit={this.onSubmit.bind(this)}
-          randomWord={this.state.random_word}
-          error={this.state.error}>
-          {this.props.children}
-        </DeleteFormView>
-      </div>
+      <DeleteFormView {...this.props}
+        onConfirmationTextType={this.onConfirmationTextType.bind(this)}
+        onSubmit={this.onSubmit.bind(this)}
+        randomWord={this.state.random_word}
+        error={this.state.error}>
+        {this.props.children}
+      </DeleteFormView>
     );
   }
 }

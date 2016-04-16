@@ -15,10 +15,12 @@
 @import "Editor.less";
 @import "Tabs.less";
 
+@pageTransitionDuration: 0.3s;
+
 .animate-page-enter {
   opacity: 0.01;
   transform: translateX(1em);
-  transition: all 0.3s ease-in-out;
+  transition: all @pageTransitionDuration ease-in-out;
   position: absolute;
   width: 100%;
 }
@@ -31,7 +33,7 @@
 .animate-page-leave {
   opacity: 1;
   transform: translateX(0);
-  transition: all 0.3s ease-in-out;
+  transition: all @pageTransitionDuration ease-in-out;
   position: absolute;
   width: 100%;
 }
@@ -49,24 +51,20 @@
 .modal-transition-enter {
   opacity: 0.01;
   transform: translateY(-2em);
-  transition: all 0.3s ease-in-out;
-  position: absolute;
+  transition: all @pageTransitionDuration ease-in-out;
 }
 .modal-transition-enter.modal-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  position: absolute;
 }
 .modal-transition-leave {
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.3s ease-in-out;
-  position: absolute;
+  transition: all @pageTransitionDuration ease-in-out;
 }
 .modal-transition-leave.modal-transition-leave-active {
   opacity: 0.01;
   transform: translateY(2em);
-  position: absolute;
 }
 
 
@@ -76,7 +74,7 @@
 .slide-transition-enter {
   opacity: 0.01;
   transform: translateX(-5em);
-  transition: all 0.4s ease-in-out;
+  transition: all @pageTransitionDuration ease-in-out;
   position: absolute;
 }
 .slide-transition-enter.slide-transition-enter-active {
@@ -87,7 +85,7 @@
 .slide-transition-leave {
   opacity: 1;
   transform: translateX(0);
-  transition: all 0.4s ease-in-out;
+  transition: all @pageTransitionDuration ease-in-out;
   position: absolute;
 }
 .slide-transition-leave.slide-transition-leave-active {

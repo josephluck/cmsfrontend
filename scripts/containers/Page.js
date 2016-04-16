@@ -30,9 +30,10 @@ class Page extends React.Component {
 
 	render() {
 	  return (
-	  	<PageTransition transitionKey={this.props.location.pathname.split('/')[5] || 'root'}>
-	  		{this.props.children}
-	  	</PageTransition>
+  		<PageTransition routes={this.props.routes}
+  			route={this.props.route}>
+  			{this.props.children}
+  		</PageTransition>
 	  )
 	}
 }

@@ -59,7 +59,8 @@ class RequireLogin extends Component {
 	  		{this.props.user.email ?
 	  			<div>
 		  			<TopBar />
-		  			<PageTransition transitionKey={this.props.location.pathname.split('/')[2] || 'root'}>
+		  			<PageTransition routes={this.props.routes}
+		  				route={this.props.route}>
 		  				{this.props.children}
 		  			</PageTransition>
 		  		</div>
