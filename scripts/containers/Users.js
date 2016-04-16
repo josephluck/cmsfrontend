@@ -8,6 +8,8 @@ import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import UsersList from 'components/UsersList';
 
+import {ModalTransition} from 'components/Transitions';
+
 class Users extends React.Component {
 	constructor(props) {
 		super(props);
@@ -53,7 +55,10 @@ class Users extends React.Component {
 			  	</Block>
 			  </div>
 
-			  {this.props.children}
+			  <ModalTransition routes={this.props.routes}
+			  	route={this.props.route}>
+			  	{this.props.children || <div></div>}
+			  </ModalTransition>
 			</div>
 	  );
 	}

@@ -24,17 +24,17 @@ function Profile({
 				  	{"Close"}
 				  </a>
     			<div className="dropdown-menu">
-  			  	<Link to="settings/view"
+  			  	<Link to="/settings/view"
   			  		className="menu-item"
   			  		onClick={closeDropdown}>
   			  		{"Settings"}
   			  	</Link>
-  			  	<Link to="sites/view"
+  			  	<Link to="/sites/view"
   			  		className="menu-item"
   			  		onClick={closeDropdown}>
   			  		{"Sites"}
   			  	</Link>
-  			  	<Link to="users/view"
+  			  	<Link to="/users/view"
   			  		className="menu-item"
   			  		onClick={closeDropdown}>
   			  		{"Users"}

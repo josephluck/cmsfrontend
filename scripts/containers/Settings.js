@@ -6,6 +6,7 @@ import Api from 'utils/Api';
 import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
+import {PageTransition} from 'components/Transitions';
 
 class Settings extends React.Component {
 	constructor(props) {
@@ -21,7 +22,10 @@ class Settings extends React.Component {
 						}
 					]} />
 		  	<div className="container">
-			  	{this.props.children}
+			  	<PageTransition routes={this.props.routes}
+			  		route={this.props.route}>
+			  		{this.props.children}
+			  	</PageTransition>
 			  </div>
 			</div>
 	  );

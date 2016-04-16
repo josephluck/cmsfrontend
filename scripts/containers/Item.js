@@ -3,6 +3,8 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
+import {ModalTransition} from 'components/Transitions';
+
 class Item extends React.Component {
 	constructor(props) {
 		super(props);
@@ -24,7 +26,12 @@ class Item extends React.Component {
 	}
 
 	render() {
-	  return this.props.children
+	  return (
+	  	<ModalTransition routes={this.props.routes}
+	  		route={this.props.route}>
+	  		{this.props.children || <div></div>}
+	  	</ModalTransition>
+	  )
 	}
 }
 

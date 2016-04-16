@@ -4,6 +4,7 @@ import Store from 'store/Store';
 
 import {Link} from 'react-router';
 import Block from 'components/Block';
+import {ModalTransition} from 'components/Transitions';
 
 class ViewSettings extends React.Component {
 	constructor(props) {
@@ -17,11 +18,11 @@ class ViewSettings extends React.Component {
 		  		<div className="container flex vertical-align">
 		  			<h3 className="flex-1">{"Company details"}</h3>
 		  			<Link className="button"
-		  				to="settings/view/delete">
+		  				to="/settings/view/delete">
 		  				{"Delete account"}
 		  			</Link>
 		  			<Link className="button left-margin"
-		  				to="settings">
+		  				to="/settings">
 		  				{"Edit"}
 		  			</Link>
 		  		</div>
@@ -56,7 +57,10 @@ class ViewSettings extends React.Component {
 			  		</div>
 			  	</div>
 		  	</Block>
-		  	{this.props.children}
+		  	<ModalTransition routes={this.props.routes}
+		  		route={this.props.route}>
+		  		{this.props.children || <div></div>}
+		  	</ModalTransition>
 		  </div>
 	  );
 	}

@@ -3,6 +3,8 @@ import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
+import {PageTransition} from 'components/Transitions';
+
 class Section extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,9 +28,10 @@ class Section extends React.Component {
 
 	render() {
 	  return (
-	  	<div>
-		  	{this.props.children}
-			</div>
+	  	<PageTransition routes={this.props.routes}
+	  		route={this.props.route}>
+	  		{this.props.children}
+	  	</PageTransition>
 	  );
 	}
 }

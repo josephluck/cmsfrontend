@@ -15,7 +15,7 @@ class DeleteUser extends React.Component {
 	  		title="Delete user"
 	  		loading={this.props.team_member.loading}
 	  		onSubmit={this.props.submitDelete}
-	  		cancelLinkPath={"users/view"}>
+	  		cancelLinkPath={"/users/view"}>
 	  	</DeleteForm>
 	  );
 	}
