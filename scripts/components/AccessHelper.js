@@ -82,8 +82,8 @@ class AccessHelper extends React.Component {
     back_route = back_route.join('/');
 
     return (
-			<div className="modal overflow-hidden">
-				<div className="container">
+			<div className="modal">
+				<div className="modal-header">
 					<h3>{"Api help"}</h3>
 				</div>
         <div className="tabs with-top-border">

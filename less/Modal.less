@@ -7,14 +7,31 @@
 	margin-left: -325px;
 	width: 650px;
 	background: @pureWhite;
-	box-shadow: 0px 0px 0px 1000px rgba(140, 140, 140, 0.8);
+	border: solid @borderWidth @darkGray;
+	border-radius: @modalBorderRadius;
+	box-shadow: @modalBoxShadow;
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
+	&:before {
+		content: ' ';
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.2);
+		z-index: 6;
+	}
+	* {
+		z-index: 11;
+	}
 }
 .modal-header {
 	background: @pureWhite;
 	padding: @padding @padding*2;
+	border-top-left-radius: @modalBorderRadius;
+	border-top-right-radius: @modalBorderRadius;
 }
 .modal-content {
 	flex: 1;
@@ -36,6 +53,8 @@
 	margin: 0px;
 	padding: @padding @padding*2;
 	background: @pureWhite;
+	border-bottom-left-radius: @modalBorderRadius;
+	border-bottom-right-radius: @modalBorderRadius;
 	button, .button {
 		margin-left: @padding;
 	}
