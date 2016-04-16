@@ -7,10 +7,9 @@ function TopBar({}) {
   return (
   	<div>
 	  	<div className="top-bar flex flex-horizontal vertical-align">
-	  		<Logo className="flex-0" />
 	  		<a>
-	  			<span className="logo ss-wind"></span>
-	  			{"Air Content"}
+	  			<span className="ss-wind"></span>
+	  			<strong>{"Air Content"}</strong>
 	  		</a>
 	  		<div className="flex-1 text-align-right">
 		  		<Profile></Profile>
