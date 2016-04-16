@@ -25,11 +25,9 @@
   },
   "homepage": "https://github.com/vasanthk/react-es6-webpack-boilerplate",
   "dependencies": {
-    "babel-runtime": "^6.3.19",
     "freezer-js": "^0.9.0",
     "highlight.js": "^9.2.0",
     "hljs": "^6.2.3",
-    "http-server": "^0.9.0",
     "react": "^15.0.1",
     "react-addons-css-transition-group": "^15.0.1",
     "react-dom": "^15.0.1",
@@ -41,6 +39,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babel-runtime": "^6.3.19",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.3.21",
     "babel-eslint": "^5.0.0-beta6",
