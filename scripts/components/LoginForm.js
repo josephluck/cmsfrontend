@@ -8,7 +8,6 @@ function LoginForm({
 	onSubmit,
 	state
 }) {
-  console.log(state);
   return (
     <div>
       {state.errors ?

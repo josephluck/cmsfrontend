@@ -19,10 +19,10 @@ function UsersList({
 								<span className="flex-1 ellipsis">{user.email}</span>
 								<span className="flex-0 list-buttons">
 									{currentUser.id !== user.id ?
-										<Link to={`users/view/${user.id}/delete`}>{"Delete"}</Link>
+										<Link to={`/users/view/${user.id}/delete`}>{"Delete"}</Link>
 										:
 										<span>
-											<Link to={`users/${user.id}/edit`}>{"Change password"}</Link>
+											<Link to={`/users/${user.id}/edit`}>{"Change password"}</Link>
 										</span>
 									}
 								</span>

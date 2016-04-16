@@ -9,7 +9,7 @@ function SectionForm({
   data
 }) {
   return (
-  	<form name="page"
+  	<form name="section"
       onSubmit={(e) => {
     		e.preventDefault();
     		onSubmit(FormHelper.serialize(e.target));
