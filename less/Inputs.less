@@ -1,11 +1,13 @@
-.input {
+.form-input {
 	margin-bottom: @padding;
-	label {
+	.form-input-label {
 		width: 100%;
 		display: block;
-		padding: 0 0 @padding/2;
+		padding: 0 @padding/2 @padding/4;
 	}
-	input, select, textarea {
+	input,
+	select,
+	textarea {
 		background: @pureWhite;
 		padding: @padding/2;
 		border: @borderWidth solid @darkGray;
@@ -13,6 +15,22 @@
 		font-size: 1em;
 		resize: vertical;
 		border-radius: @buttonBorderRadius;
+	}
+	.form-input-error {
+		width: 100%;
+		display: block;
+		padding: @padding/4 @padding/2 0;
+		color: @red
+	}
+	&.with-error {
+		.form-input-label {
+			color: @red;
+		}
+		input,
+		select,
+		textarea {
+			border-color: @red;
+		}
 	}
 }
 
