@@ -1,7 +1,7 @@
 import React from 'react';
 import {PageTransition} from 'components/Transitions';
 
-class SitesContainer extends React.Component {
+class PageTransitionContainer extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -15,4 +15,4 @@ class SitesContainer extends React.Component {
 	}
 }
 
-export default SitesContainer
+export default PageTransitionContainer

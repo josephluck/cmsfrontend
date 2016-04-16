@@ -25,7 +25,6 @@ import EditUser from 'containers/EditUser';
 import DeleteUser from 'containers/DeleteUser';
 
 // Sites
-import SitesContainer from 'containers/SitesContainer';
 import Sites from 'containers/Sites';
 import NewSite from 'containers/NewSite';
 import Site from 'containers/Site';
@@ -54,6 +53,7 @@ import EditItem from 'containers/EditItem';
 import DeleteItem from 'containers/DeleteItem';
 
 // Misc
+import PageTransitionContainer from 'containers/PageTransitionContainer';
 import AccessHelper from 'components/AccessHelper';
 import AccessLanguage from 'components/AccessLanguage';
 
@@ -73,7 +73,7 @@ render((
       </Route>
     </Route>
 
-    <Route path="users">
+    <Route path="users" component={PageTransitionContainer}>
       <Route path="new" component={NewUser} />
       <Route path="view" component={Users}>
         <Route path=":id" component={User}>
@@ -85,7 +85,7 @@ render((
       </Route>
     </Route>
 
-    <Route path="sites" component={SitesContainer}>
+    <Route path="sites" component={PageTransitionContainer}>
       <Route path="view" component={Sites} />
       <Route path="new" component={NewSite} />
       <Route path=":site_id" component={Site}>
