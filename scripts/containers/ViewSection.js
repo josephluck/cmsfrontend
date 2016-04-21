@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
+import {ModalTransition} from 'components/Transitions';
 
 class ViewSection extends React.Component {
 	constructor(props) {
@@ -74,7 +75,10 @@ class ViewSection extends React.Component {
 			  	</Block>
 			  </div>
 
-			  {this.props.children}
+			  <ModalTransition routes={this.props.routes}
+			  	route={this.props.route}>
+			  	{this.props.children || <div></div>}
+			  </ModalTransition>
 			</div>
 	  );
 	}

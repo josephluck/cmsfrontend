@@ -24,11 +24,6 @@ function Profile({
 				  	{"Close"}
 				  </a>
     			<div className="dropdown-menu">
-  			  	<Link to="/settings/view"
-  			  		className="menu-item"
-  			  		onClick={closeDropdown}>
-  			  		{"Settings"}
-  			  	</Link>
   			  	<Link to="/sites/view"
   			  		className="menu-item"
   			  		onClick={closeDropdown}>
@@ -38,6 +33,11 @@ function Profile({
   			  		className="menu-item"
   			  		onClick={closeDropdown}>
   			  		{"Users"}
+  			  	</Link>
+  			  	<Link to="/settings/view"
+  			  		className="menu-item"
+  			  		onClick={closeDropdown}>
+  			  		{"Settings"}
   			  	</Link>
   			  	<a href=""
   			  		className="menu-item"

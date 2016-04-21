@@ -10,6 +10,7 @@
 		padding: @padding;
 		box-sizing: border-box;
 		height: 255px;
+		font-size: 16px;
 	}
 	.ql-toolbar {
 		padding: @padding/2 @padding;
@@ -65,11 +66,34 @@
 				img {
 					z-index: 1;
 				}
+				span {
+					left: 0;
+				}
 			}
 			a {
 				width: auto;
 				display: inline-block;
 				float: none;
+				background: @pureWhite;
+				border: @borderWidth solid @darkGray;
+				padding: @padding/2 @padding;
+				outline: none;
+				box-shadow: none;
+				font-size: 1em;
+				display: inline-block;
+				font-family: inherit;
+				cursor: pointer;
+				color: @black !important;
+				border-radius: @buttonBorderRadius;
+				transition: @defaultTransitionQuick;
+				&:hover {
+					color: @black !important;
+				}
+				&:focus {
+					outline: none;
+					box-shadow: none;
+					border-color: @lightBlue;
+				}
 			}
 		}
 		input {
