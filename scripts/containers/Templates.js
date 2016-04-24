@@ -5,24 +5,24 @@ import Api from 'utils/Api';
 
 import { Link } from 'react-router';
 import Block from 'components/Block';
-import SitesList from 'components/SitesList';
+import TemplatesList from 'components/TemplatesList';
 import MidBar from 'components/MidBar';
 
-class Sites extends React.Component {
+class Templates extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	componentWillMount() {
 		Api.get({
 			url: {
-				name: 'sites'
+				name: 'templates'
 			}
 		}).then((body) => {
-			Store.get().sites.reset(body);
-			Store.get().set({sites_loading: false})
+			Store.get().templates.reset(body);
+			Store.get().set({templates_loading: false})
 		}, (err) => {
-			Store.get().sites.reset([]);
-			Store.get().set({sites_loading: false})
+			Store.get().templates.reset([]);
+			Store.get().set({templates_loading: false})
 		});
 	}
 	render() {
@@ -31,18 +31,18 @@ class Sites extends React.Component {
   			<MidBar
   				breadcrumbs={[
 						{
-							name: 'Sites'
+							name: 'Templates'
 						}
 					]}
 					actions={[
 						{
-							name: 'New site',
-							path: '/sites/new'
+							name: 'New template',
+							path: '/templates/new'
 						}
 					]} />
 		  	<div className="container">
 			  	<Block loading={this.props.loading}>
-			  		<SitesList sites={this.props.sites} />
+			  		<TemplatesList templates={this.props.templates} />
 			  	</Block>
 			  </div>
 			</div>
@@ -50,11 +50,11 @@ class Sites extends React.Component {
 	}
 }
 
-Sites.defaultProps = {
-	sites: []
+Templates.defaultProps = {
+	templates: []
 }
 
-export default warmUp(Sites, [
-	['sites', 'sites'],
-	['loading', '/sites_loading']
+export default warmUp(Templates, [
+	['templates', 'templates'],
+	['loading', '/templates_loading']
 ]);

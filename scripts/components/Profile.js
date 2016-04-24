@@ -29,6 +29,11 @@ function Profile({
   			  		onClick={closeDropdown}>
   			  		{"Sites"}
   			  	</Link>
+  			  	<Link to="/templates/view"
+  			  		className="menu-item"
+  			  		onClick={closeDropdown}>
+  			  		{"Templates"}
+  			  	</Link>
   			  	<Link to="/users/view"
   			  		className="menu-item"
   			  		onClick={closeDropdown}>

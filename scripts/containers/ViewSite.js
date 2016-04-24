@@ -14,7 +14,6 @@ class ViewSite extends React.Component {
 	}
 
 	render() {
-		// console.log('ViewSite.js: ' + this.props.location.pathname.split('/')[4]);
 	  return (
 	  	<div>
 				<MidBar

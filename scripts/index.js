@@ -12,6 +12,14 @@ import Register from 'containers/Register';
 import Login from 'containers/Login';
 import RequireLogin from 'containers/RequireLogin';
 
+// Template
+import Templates from 'containers/Templates';
+import NewTemplate from 'containers/NewTemplate';
+import Template from 'containers/Template';
+import ViewTemplate from 'containers/ViewTemplate';
+import EditTemplate from 'containers/EditTemplate';
+import DeleteTemplate from 'containers/DeleteTemplate';
+
 // Settings
 import Settings from 'containers/Settings';
 import ViewSettings from 'containers/ViewSettings';
@@ -70,6 +78,17 @@ render((
     <Route path="settings" component={Settings}>
       <Route path="view" component={ViewSettings}>
         <Route path="delete" component={DeleteCompany} />
+      </Route>
+    </Route>
+
+    <Route path="templates" component={PageTransitionContainer}>
+      <Route path="view" component={Templates} />
+      <Route path="new" component={NewTemplate} />
+      <Route path=":template_id" component={Template}>
+        <Route path="view" component={ViewTemplate}>
+          <Route path="delete" component={DeleteTemplate} />
+        </Route>
+        <Route path="edit" component={EditTemplate} />
       </Route>
     </Route>
 

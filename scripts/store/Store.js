@@ -7,6 +7,8 @@ export default new Freezer({
 	user: {},
 	company: {},
 	team_member: {},
+	templates: [],
+	template: {},
 	sites: [],
 	site: {
 		pages: []

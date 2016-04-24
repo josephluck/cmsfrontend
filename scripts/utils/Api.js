@@ -136,13 +136,19 @@ function getApiUrl(options) {
     case 'company':
       return API_ROOT + `companies/${options.id}`;
       break;
+    case 'templates':
+      return API_ROOT + 'field_templates';
+      break;
+    case 'template':
+      return API_ROOT + `field_templates/${options.template_id}`;
+      break;
     case 'users':
       return API_ROOT + 'users';
       break;
     case 'user':
       return API_ROOT + `users/${options.id}`;
       break;
-    case '/sites':
+    case 'sites':
       return API_ROOT + 'sites';
       break;
     case 'site':
