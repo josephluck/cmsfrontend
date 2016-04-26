@@ -30,6 +30,9 @@ class Template extends React.Component {
 	  		<div className="container">
 		  		<TemplateForm
 		  			onSubmit={submitTemplate}
+		  			onAddAttribute={onAddAttribute}
+		  			onEditAttribute={onEditAttribute}
+		  			onDeleteAttribute={onDeleteAttribute}
 		  			state={this.props.form}></TemplateForm>
 		  	</div>
 		  </div>
@@ -37,7 +40,19 @@ class Template extends React.Component {
 	}
 }
 
-function submitTemplate (form) {
+function onAddAttribute() {
+	debugger
+}
+
+function onEditAttribute(attribute) {
+	debugger
+}
+
+function onDeleteAttribute(attribute) {
+	debugger
+}
+
+function submitTemplate(form) {
 	Store.get().forms.template.set({
 		"loading": true,
 		"error": false
