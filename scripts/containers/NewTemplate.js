@@ -41,7 +41,7 @@ class Template extends React.Component {
 		  	</div>
 	  		{this.props.attribute_form_showing === "yes" ?
 	  			<AttributeForm
-	  				attribute={this.props.attribute_currently_editing || {}}
+	  				attributeCurrentlyEditing={this.props.attribute_currently_editing || {}}
 	  				onCancel={this.props.onAttributeFormCancelLinkPressed}
 	  				onSubmit={this.props.onAttributeFormSubmit}
 	  				title={"New attribute"}>

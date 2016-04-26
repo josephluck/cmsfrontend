@@ -37,43 +37,48 @@ function TemplateForm({
         </a>
       </div>
       <ul className="list form-input">
-        <li className="list-header flex">
-          <span className="flex-2">
-            {"Title"}
-          </span>
-          <span className="flex-1">
-            {"Type"}
-          </span>
-          <span className="flex-0 list-buttons">
-            <span>{"Edit"}</span>
-            <span>{"Delete"}</span>
-          </span>
-        </li>
-        {state.attributes.map((attribute, i) => {
-          return (
-            <li key={i}
-              className="list-item flex">
-              <span className="flex-2 ellipsis">{attribute.title}</span>
-              <span className="flex-1 ellipsis">{attribute.kind}</span>
+        {state.attributes.length ?
+          <div>
+            <li className="list-header flex">
+              <span className="flex-2">
+                {"Title"}
+              </span>
+              <span className="flex-1">
+                {"Type"}
+              </span>
               <span className="flex-0 list-buttons">
-                <a href=""
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onEditAttribute(attribute);
-                  }}>
-                  {"Edit"}
-                </a>
-                <a href=""
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onDeleteAttribute(attribute);
-                  }}>
-                  {"Delete"}
-                </a>
+                <span>{"Edit"}</span>
+                <span>{"Delete"}</span>
               </span>
             </li>
-          )
-        })}
+            {state.attributes.map((attribute, i) => {
+              return (
+                <li key={i}
+                  className="list-item flex">
+                  <span className="flex-2 ellipsis">{attribute.title}</span>
+                  <span className="flex-1 ellipsis">{attribute.kind}</span>
+                  <span className="flex-0 list-buttons">
+                    <a href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onEditAttribute(attribute);
+                      }}>
+                      {"Edit"}
+                    </a>
+                    <a href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onDeleteAttribute(attribute);
+                      }}>
+                      {"Delete"}
+                    </a>
+                  </span>
+                </li>
+              )
+            })}
+          </div>
+          : <li className="list-item">{"No attributes saved yet"}</li>
+        }
       </ul>
 
       <div className="text-align-right">
