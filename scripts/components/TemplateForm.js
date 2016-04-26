@@ -7,18 +7,10 @@ function TemplateForm({
 	state,
   data,
   onSubmit,
-  onAddAttribute,
+  onNewAttribute,
   onEditAttribute,
   onDeleteAttribute
 }) {
-  if (!data.attributes) {
-    data.attributes = [
-      {
-        name: "Src",
-        kind: "Dropdown"
-      }
-    ]
-  }
   return (
   	<form name="template"
       onSubmit={(e) => {
@@ -39,7 +31,7 @@ function TemplateForm({
           href=""
           onClick={(e) => {
             e.preventDefault();
-            onAddAttribute();
+            onNewAttribute();
           }}>
           {"New attribute"}
         </a>
@@ -94,7 +86,9 @@ function TemplateForm({
 }
 
 TemplateForm.defaultProps = {
-  data: {}
+  data: {
+    attributes: []
+  }
 }
 
 export default TemplateForm;

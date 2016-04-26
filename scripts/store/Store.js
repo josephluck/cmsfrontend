@@ -21,6 +21,7 @@ export default new Freezer({
 	},
 	item: {
 		fields: []
-	}
+	},
+	attribute_form_showing: "no"
 });
 

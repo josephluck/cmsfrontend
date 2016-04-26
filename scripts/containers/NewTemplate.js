@@ -6,13 +6,12 @@ import Api from 'utils/Api';
 import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import TemplateForm from 'components/TemplateForm';
+import AttributeForm from 'components/AttributeForm';
+import {ModalTransition} from 'components/Transitions';
 
 class Template extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().forms.set({template: {
-			errors: {}
-		}})
 	}
 	render() {
 	  return (
@@ -29,19 +28,32 @@ class Template extends React.Component {
 	  			]} />
 	  		<div className="container">
 		  		<TemplateForm
-		  			onSubmit={submitTemplate}
-		  			onAddAttribute={onAddAttribute}
-		  			onEditAttribute={onEditAttribute}
-		  			onDeleteAttribute={onDeleteAttribute}
+		  			onSubmit={this.props.submitTemplate}
+		  			onNewAttribute={this.props.onNewAttribute}
+		  			onEditAttribute={this.props.onEditAttribute}
+		  			onDeleteAttribute={this.props.onDeleteAttribute}
 		  			state={this.props.form}></TemplateForm>
 		  	</div>
+	  		{this.props.attribute_form_showing === "yes" ?
+	  			<AttributeForm
+	  				attribute={this.props.form.attributes.filter((attribute) => {
+	  					return attribute.editing === true
+	  				})}
+	  				onCancel={this.props.onAttributeFormCancelLinkPressed}
+	  				onSubmit={this.props.onAttributeFormSubmit}
+	  				title={"New attribute"}>
+	  			</AttributeForm>
+	  			: null
+	  		}
 		  </div>
 	  );
 	}
 }
 
-function onAddAttribute() {
-	debugger
+function onNewAttribute() {
+	Store.get().set({
+		attribute_form_showing: "yes"
+	})
 }
 
 function onEditAttribute(attribute) {
@@ -49,7 +61,16 @@ function onEditAttribute(attribute) {
 }
 
 function onDeleteAttribute(attribute) {
-	debugger
+}
+
+function onAttributeFormCancelLinkPressed() {
+	Store.get().set({
+		attribute_form_showing: "no"
+	})
+}
+
+function onAttributeFormSubmit(attribute) {
+	Store.get().forms.template.attributes.unshift(attribute);
 }
 
 function submitTemplate(form) {
@@ -77,12 +98,19 @@ function submitTemplate(form) {
 
 Template.defaultProps = {
 	form: {
-		errors: {}
+		errors: {},
+		attributes: []
 	}
 }
 
 export default warmUp(Template, [
+	['attribute_form_showing', 'attribute_form_showing'],
 	['template', 'template'],
 	['form', 'forms', 'template'],
-	['submitTemplate', submitTemplate]
+	['submitTemplate', submitTemplate],
+	['onNewAttribute', onNewAttribute],
+	['onEditAttribute', onEditAttribute],
+	['onDeleteAttribute', onDeleteAttribute],
+	['onAttributeFormCancelLinkPressed', onAttributeFormCancelLinkPressed],
+	['onAttributeFormSubmit', onAttributeFormSubmit]
 ]);
