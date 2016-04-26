@@ -14,8 +14,15 @@ class AttributeForm extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    debugger
-    // this.props.onSubmit(FormHelper.serialize(e.target));
+    let form_values = FormHelper.serialize(e.target);
+
+    if (form_values.title === "") {
+      return false
+    } else if ((form_values.kind === "dropdown" || form_values.kind === "multi_select") && form_values.options.length === 0) {
+      return false
+    } else {
+      this.props.onSubmit(FormHelper.serialize(e.target), this.props.attribute);
+    }
   }
   render() {
     return (
@@ -27,15 +34,15 @@ class AttributeForm extends React.Component {
           <h3>{this.props.title}</h3>
         </div>
         <div className="container modal-content">
-          <FormInput title="Name"
-            error={this.state.errors.name}>
+          <FormInput title="Title"
+            error={this.state.errors.title}>
             <input name="title"
               defaultValue={this.props.attribute.title}
               type="text" />
           </FormInput>
 
           <FormInput title="Kind"
-            error={this.state.errors.name}>
+            error={this.state.errors.kind}>
             <select name="kind"
               defaultValue={this.props.attribute.kind}>
               <option value="text">{"Text input"}</option>

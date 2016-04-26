@@ -39,7 +39,7 @@ function TemplateForm({
       <ul className="list form-input">
         <li className="list-header flex">
           <span className="flex-2">
-            {"Name"}
+            {"Title"}
           </span>
           <span className="flex-1">
             {"Type"}
@@ -49,11 +49,11 @@ function TemplateForm({
             <span>{"Delete"}</span>
           </span>
         </li>
-        {data.attributes.map((attribute, i) => {
+        {state.attributes.map((attribute, i) => {
           return (
             <li key={i}
               className="list-item flex">
-              <span className="flex-2 ellipsis">{attribute.name}</span>
+              <span className="flex-2 ellipsis">{attribute.title}</span>
               <span className="flex-1 ellipsis">{attribute.kind}</span>
               <span className="flex-0 list-buttons">
                 <a href=""

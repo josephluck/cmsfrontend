@@ -12,8 +12,13 @@ import {ModalTransition} from 'components/Transitions';
 class Template extends React.Component {
 	constructor(props) {
 		super(props);
+		Store.get().forms.set({template: {
+			errors: {},
+			attributes: []
+		}})
 	}
 	render() {
+		console.log(Store.get().forms.template)
 	  return (
 	  	<div>
 	  		<MidBar
@@ -36,9 +41,7 @@ class Template extends React.Component {
 		  	</div>
 	  		{this.props.attribute_form_showing === "yes" ?
 	  			<AttributeForm
-	  				attribute={this.props.form.attributes.filter((attribute) => {
-	  					return attribute.editing === true
-	  				})}
+	  				attribute={this.props.attribute_currently_editing || {}}
 	  				onCancel={this.props.onAttributeFormCancelLinkPressed}
 	  				onSubmit={this.props.onAttributeFormSubmit}
 	  				title={"New attribute"}>
@@ -57,7 +60,12 @@ function onNewAttribute() {
 }
 
 function onEditAttribute(attribute) {
-	debugger
+	Store.get().set({
+		attribute_currently_editing: attribute
+	})
+	Store.get().set({
+		attribute_form_showing: "yes"
+	})
 }
 
 function onDeleteAttribute(attribute) {
@@ -69,8 +77,22 @@ function onAttributeFormCancelLinkPressed() {
 	})
 }
 
-function onAttributeFormSubmit(attribute) {
-	Store.get().forms.template.attributes.unshift(attribute);
+function onAttributeFormSubmit(new_attribute, original_attribute) {
+	if (original_attribute.title) {
+		let attributes = Store.get().forms.template.attributes;
+		for (let i = 0, x = attributes.length; i < x; i++) {
+			if (attributes[i] === original_attribute) {
+				attributes.splice(i, 1, new_attribute);
+			}
+		}
+		Store.get().attribute_currently_editing.reset({});
+	} else {
+		Store.get().forms.template.attributes.unshift(new_attribute);
+	}
+
+	Store.get().set({
+		attribute_form_showing: "no"
+	})
 }
 
 function submitTemplate(form) {
@@ -105,7 +127,7 @@ Template.defaultProps = {
 
 export default warmUp(Template, [
 	['attribute_form_showing', 'attribute_form_showing'],
-	['template', 'template'],
+	['attribute_currently_editing', 'attribute_currently_editing'],
 	['form', 'forms', 'template'],
 	['submitTemplate', submitTemplate],
 	['onNewAttribute', onNewAttribute],
