@@ -45,6 +45,18 @@ function TemplateForm({
         </a>
       </div>
       <ul className="list form-input">
+        <li className="list-header flex">
+          <span className="flex-2">
+            {"Name"}
+          </span>
+          <span className="flex-1">
+            {"Type"}
+          </span>
+          <span className="flex-0 list-buttons">
+            <span>{"Edit"}</span>
+            <span>{"Delete"}</span>
+          </span>
+        </li>
         {data.attributes.map((attribute, i) => {
           return (
             <li key={i}

@@ -7,6 +7,17 @@
 	border-radius: @listBorderRadius;
 }
 
+.list-header {
+	padding: @padding/2 @padding;
+	border-bottom: solid @borderWidth @darkGray;
+	.list-buttons {
+		opacity: 0;
+		span {
+			margin-left: @padding/2;
+		}
+	}
+}
+
 .list-item {
 	padding: @padding;
 	border-bottom: solid @borderWidth @darkGray;
