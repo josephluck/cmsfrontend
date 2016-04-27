@@ -15,7 +15,11 @@ class AttributeForm extends React.Component {
           uuid: Date.now()
         }
       ],
-      show_options: false
+      show_options: false,
+      new_option: {
+        name: "",
+        value: ""
+      }
     }
 
     if (props.attributeCurrentlyEditing.options && props.attributeCurrentlyEditing.options.length) {
@@ -88,6 +92,19 @@ class AttributeForm extends React.Component {
     })
 
     this.state.options.splice(option_index, 1)
+    this.forceUpdate();
+  }
+  handleNewOptionChange(attribute, e) {
+    this.state.new_option[attribute] = e.target.value;
+    this.forceUpdate();
+  }
+  handleAddNewOption(e) {
+    e.preventDefault();
+    this.state.options.push(this.state.new_option);
+    this.state.new_option = {
+      name: "",
+      value: ""
+    };
     this.forceUpdate();
   }
   render() {
@@ -172,6 +189,24 @@ class AttributeForm extends React.Component {
                     </li>
                   )
                 })}
+                <li className="list-item flex">
+                  <input className="flex-1"
+                    type="text"
+                    placeholder="Name"
+                    value={this.state.new_option.name}
+                    onChange={this.handleNewOptionChange.bind(this, "name")} />
+                  <input className="flex-1"
+                    type="text"
+                    placeholder="Value"
+                    value={this.state.new_option.value}
+                    onChange={this.handleNewOptionChange.bind(this, "value")} />
+                  <span className="flex-0 list-buttons">
+                    <a href=""
+                      onClick={this.handleAddNewOption.bind(this)}>
+                      {"Save"}
+                    </a>
+                  </span>
+                </li>
               </ul>
             </div>
             : null
