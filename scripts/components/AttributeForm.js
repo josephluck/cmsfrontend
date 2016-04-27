@@ -60,12 +60,18 @@ class AttributeForm extends React.Component {
   }
   handleEditOption(option, e) {
     e.preventDefault();
+    e.persist();
     let option_index = this.state.options.findIndex(function(opt, i) {
       return opt.uuid === option.uuid
     })
 
     this.state.options[option_index].editing = true;
     this.forceUpdate();
+
+    setTimeout(() => {
+      let input = e.target.parentElement.parentElement.parentElement.querySelector('input');
+      input.focus();
+    }, 10);
   }
   handleOptionChange(option, attribute, e) {
     let option_index = this.state.options.findIndex(function(opt, i) {
@@ -141,7 +147,10 @@ class AttributeForm extends React.Component {
                 <li className="list-header flex">
                   <span className="flex-1">{"Name"}</span>
                   <span className="flex-1">{"Value"}</span>
-                  <span className="flex-0 list-buttons"></span>
+                  <span className="flex-0 list-buttons">
+                    <span>{"Edit"}</span>
+                    <span>{"Delete"}</span>
+                  </span>
                 </li>
                 {this.state.options.map((option, i) => {
                   return (
@@ -168,12 +177,14 @@ class AttributeForm extends React.Component {
                         </span>
                         :
                         <span className="flex">
-                          <input className="flex-1"
-                            value={option.name}
-                            onChange={this.handleOptionChange.bind(this, option, "name")} />
-                          <input className="flex-1"
-                            value={option.value}
-                            onChange={this.handleOptionChange.bind(this, option, "value")} />
+                          <div className="inline-edit-wrapper flex-1">
+                            <input value={option.name}
+                              onChange={this.handleOptionChange.bind(this, option, "name")} />
+                          </div>
+                          <div className="inline-edit-wrapper flex-1">
+                            <input value={option.value}
+                              onChange={this.handleOptionChange.bind(this, option, "value")} />
+                          </div>
                           <span className="flex-0 list-buttons">
                             <a href=""
                               onClick={this.handleSaveOption.bind(this, option)}>
@@ -190,17 +201,22 @@ class AttributeForm extends React.Component {
                   )
                 })}
                 <li className="list-item flex">
-                  <input className="flex-1"
-                    type="text"
-                    placeholder="Name"
-                    value={this.state.new_option.name}
-                    onChange={this.handleNewOptionChange.bind(this, "name")} />
-                  <input className="flex-1"
-                    type="text"
-                    placeholder="Value"
-                    value={this.state.new_option.value}
-                    onChange={this.handleNewOptionChange.bind(this, "value")} />
+                  <div className="inline-edit-wrapper flex-1">
+                    <input type="text"
+                      placeholder="Name"
+                      value={this.state.new_option.name}
+                      onChange={this.handleNewOptionChange.bind(this, "name")} />
+                  </div>
+                  <div className="inline-edit-wrapper flex-1">
+                    <input type="text"
+                      placeholder="Value"
+                      value={this.state.new_option.value}
+                      onChange={this.handleNewOptionChange.bind(this, "value")} />
+                  </div>
                   <span className="flex-0 list-buttons">
+                    <a className="invisible">
+                      {"Delete"}
+                    </a>
                     <a href=""
                       onClick={this.handleAddNewOption.bind(this)}>
                       {"Save"}
