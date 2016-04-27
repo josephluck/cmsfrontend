@@ -58,10 +58,9 @@ function TemplateForm({
                   <span className="flex-2 ellipsis">{attribute.title}</span>
                   <span className="flex-1 ellipsis">
                     {attribute.kind}
-                    {attribute.kind === "dropdown" || attribute.kind === "multi-dropdown" ?
-                      <div>
-                        {attribute.options.length}
-                      </div>
+                    {attribute.kind === "dropdown" || attribute.kind === "multi_select" ?
+                      <span>{attribute.options.length}
+                      </span>
                       : null
                     }
                   </span>

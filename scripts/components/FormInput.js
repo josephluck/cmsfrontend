@@ -19,7 +19,7 @@ function FormInput({
 	  	{children}
 	  	{error ?
         <span className="form-input-error">
-          {title || "This value"}{" "}{error}
+          {(title || "") + " "}{error}
         </span>
         : null
       }

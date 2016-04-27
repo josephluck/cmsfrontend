@@ -12,11 +12,12 @@ class AttributeForm extends React.Component {
       show_options: false,
       new_option: {
         name: "",
-        value: ""
+        value: "",
+        errors: {}
       }
     }
 
-    if (props.attributeCurrentlyEditing.options && props.attributeCurrentlyEditing.options.length) {
+    if (props.attributeCurrentlyEditing.options && props.attributeCurrentlyEditing.options.length > 0) {
       this.state.show_options = true;
     }
   }
@@ -46,7 +47,7 @@ class AttributeForm extends React.Component {
       input.focus();
     }, 10);
   }
-  handleOptionChange(option, attribute, e) {
+  handleEditOptionInputChange(option, attribute, e) {
     let option_index = this.state.options.findIndex(function(opt, i) {
       return opt.uuid === option.uuid
     })
@@ -54,14 +55,29 @@ class AttributeForm extends React.Component {
     this.state.options[option_index][attribute] = e.target.value;
     this.forceUpdate();
   }
-  handleSaveOption(option, e) {
+  handleEditSaveOption(option, e) {
     e.preventDefault();
     let option_index = this.state.options.findIndex(function(opt, i) {
       return opt.uuid === option.uuid
     })
 
-    this.state.options[option_index] = option;
-    this.state.options[option_index].editing = false;
+    if (option.value.length > 0) {
+      this.state.options[option_index].errors["value"] = undefined
+    } else {
+      this.state.options[option_index].errors["value"] = "Please enter a value";
+    }
+
+    if (option.name.length > 0) {
+      this.state.options[option_index].errors["name"] = undefined
+    } else {
+      this.state.options[option_index].errors["name"] = "Please enter a name";
+    }
+
+    if (option.name.length > 0 && option.value.length > 0) {
+      this.state.options[option_index] = option;
+      this.state.options[option_index].editing = false;
+    }
+
     this.forceUpdate();
   }
   handleDeleteOption(option, e) {
@@ -79,12 +95,29 @@ class AttributeForm extends React.Component {
   }
   handleAddNewOption(e) {
     e.preventDefault();
-    this.state.options.push(this.state.new_option);
-    this.state.new_option = {
-      name: "",
-      value: "",
-      uuid: Date.now()
-    };
+
+    if (this.state.new_option.value.length > 0) {
+      this.state.new_option.errors["value"] = undefined;
+    } else {
+      this.state.new_option.errors["value"] = "Please enter a value";
+    }
+
+    if (this.state.new_option.name.length > 0) {
+      this.state.new_option.errors["name"] = undefined;
+    } else {
+      this.state.new_option.errors["name"] = "Please enter a name";
+    }
+
+    if (this.state.new_option.name.length > 0 && this.state.new_option.value.length > 0) {
+      this.state.options.push(this.state.new_option);
+      this.state.new_option = {
+        name: "",
+        value: "",
+        uuid: Date.now(),
+        errors: {}
+      }
+    }
+
     this.forceUpdate();
   }
   onSubmit(e) {
@@ -102,6 +135,7 @@ class AttributeForm extends React.Component {
       this.forceUpdate();
       return false
     } else {
+      this.handleAddNewOption(e);
       let form = {
         options: this.state.options,
         uuid: Date.now(),
@@ -175,16 +209,22 @@ class AttributeForm extends React.Component {
                         :
                         <span className="flex">
                           <div className="inline-edit-wrapper flex-1">
-                            <input value={option.name}
-                              onChange={this.handleOptionChange.bind(this, option, "name")} />
+                            <FormInput error={option.errors.name}>
+                              <input value={option.name}
+                                onChange={this.handleEditOptionInputChange.bind(this, option, "name")} />
+                            </FormInput>
                           </div>
                           <div className="inline-edit-wrapper flex-1">
-                            <input value={option.value}
-                              onChange={this.handleOptionChange.bind(this, option, "value")} />
+                            <div class="form-input">
+                              <FormInput error={option.errors.value}>
+                                <input value={option.value}
+                                  onChange={this.handleEditOptionInputChange.bind(this, option, "value")} />
+                              </FormInput>
+                            </div>
                           </div>
                           <span className="flex-0 list-buttons">
                             <a href=""
-                              onClick={this.handleSaveOption.bind(this, option)}>
+                              onClick={this.handleEditSaveOption.bind(this, option)}>
                               {"Save"}
                             </a>
                             <a href=""
@@ -199,16 +239,20 @@ class AttributeForm extends React.Component {
                 })}
                 <li className="list-item flex">
                   <div className="inline-edit-wrapper flex-1">
-                    <input type="text"
-                      placeholder="Name"
-                      value={this.state.new_option.name}
-                      onChange={this.handleNewOptionChange.bind(this, "name")} />
+                    <FormInput error={this.state.new_option.errors.name}>
+                      <input type="text"
+                        placeholder="Name"
+                        value={this.state.new_option.name}
+                        onChange={this.handleNewOptionChange.bind(this, "name")} />
+                    </FormInput>
                   </div>
                   <div className="inline-edit-wrapper flex-1">
-                    <input type="text"
-                      placeholder="Value"
-                      value={this.state.new_option.value}
-                      onChange={this.handleNewOptionChange.bind(this, "value")} />
+                    <FormInput error={this.state.new_option.errors.value}>
+                      <input type="text"
+                        placeholder="Value"
+                        value={this.state.new_option.value}
+                        onChange={this.handleNewOptionChange.bind(this, "value")} />
+                    </FormInput>
                   </div>
                   <span className="flex-0 list-buttons">
                     <a className="invisible">
