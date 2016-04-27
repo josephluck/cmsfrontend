@@ -18,7 +18,11 @@ class Template extends React.Component {
 		}})
 	}
 	render() {
-		console.log(Store.get().forms.template)
+		var attribute_currently_editing = {}
+		if (this.props.attribute_currently_editing !== undefined) {
+			attribute_currently_editing = this.props.attribute_currently_editing.toJS();
+		}
+
 	  return (
 	  	<div>
 	  		<MidBar
@@ -41,7 +45,7 @@ class Template extends React.Component {
 		  	</div>
 	  		{this.props.attribute_form_showing === "yes" ?
 	  			<AttributeForm
-	  				attributeCurrentlyEditing={this.props.attribute_currently_editing || {}}
+	  				attributeCurrentlyEditing={attribute_currently_editing || {}}
 	  				onCancel={this.props.onAttributeFormCancelLinkPressed}
 	  				onSubmit={this.props.onAttributeFormSubmit}
 	  				title={"New attribute"}>
@@ -81,7 +85,7 @@ function onAttributeFormSubmit(new_attribute, original_attribute) {
 	if (original_attribute.title) {
 		let attributes = Store.get().forms.template.attributes;
 		for (let i = 0, x = attributes.length; i < x; i++) {
-			if (attributes[i] === original_attribute) {
+			if (attributes[i].uuid === original_attribute.uuid) {
 				attributes.splice(i, 1, new_attribute);
 			}
 		}
@@ -121,7 +125,8 @@ function submitTemplate(form) {
 Template.defaultProps = {
 	form: {
 		errors: {},
-		attributes: []
+		attributes: [],
+		attribute_currently_editing: {}
 	}
 }
 

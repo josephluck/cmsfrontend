@@ -8,13 +8,7 @@ class AttributeForm extends React.Component {
     super(props);
     this.state = {
       errors: {},
-      options: [
-        {
-          name: "Large",
-          value: "large",
-          uuid: Date.now()
-        }
-      ],
+      options: props.attributeCurrentlyEditing.options || [],
       show_options: false,
       new_option: {
         name: "",
@@ -24,27 +18,6 @@ class AttributeForm extends React.Component {
 
     if (props.attributeCurrentlyEditing.options && props.attributeCurrentlyEditing.options.length) {
       this.state.show_options = true;
-    }
-  }
-  onSubmit(e) {
-    e.preventDefault();
-    let form_values = FormHelper.serialize(e.target);
-
-    this.state.errors = {};
-
-    if (form_values.title === "") {
-      this.state.errors["title"] = "can't be blank";
-      this.forceUpdate();
-      return false
-    } else if ((form_values.kind === "dropdown" || form_values.kind === "multi_select") && this.state.options.length === 0) {
-      this.state.errors["options"] = "Please enter at least one option";
-      this.forceUpdate();
-      return false
-    } else {
-      this.props.onSubmit({
-        options: this.state.options,
-        ...form_values
-      }, this.props.attributeCurrentlyEditing);
     }
   }
   onKindChange(e) {
@@ -109,9 +82,33 @@ class AttributeForm extends React.Component {
     this.state.options.push(this.state.new_option);
     this.state.new_option = {
       name: "",
-      value: ""
+      value: "",
+      uuid: Date.now()
     };
     this.forceUpdate();
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    let form_values = FormHelper.serialize(e.target);
+
+    this.state.errors = {};
+
+    if (form_values.title === "") {
+      this.state.errors["title"] = "can't be blank";
+      this.forceUpdate();
+      return false
+    } else if ((form_values.kind === "dropdown" || form_values.kind === "multi_select") && this.state.options.length === 0) {
+      this.state.errors["options"] = "Please enter at least one option";
+      this.forceUpdate();
+      return false
+    } else {
+      let form = {
+        options: this.state.options,
+        uuid: Date.now(),
+        ...form_values
+      }
+      this.props.onSubmit(form, this.props.attributeCurrentlyEditing);
+    }
   }
   render() {
     return (
