@@ -11,7 +11,8 @@ class AttributeForm extends React.Component {
       options: [
         {
           name: "Large",
-          value: "large"
+          value: "large",
+          uuid: Date.now()
         }
       ],
       show_options: false
@@ -53,6 +54,42 @@ class AttributeForm extends React.Component {
       })
     }
   }
+  handleEditOption(option, e) {
+    e.preventDefault();
+    let option_index = this.state.options.findIndex(function(opt, i) {
+      return opt.uuid === option.uuid
+    })
+
+    this.state.options[option_index].editing = true;
+    this.forceUpdate();
+  }
+  handleOptionChange(option, attribute, e) {
+    let option_index = this.state.options.findIndex(function(opt, i) {
+      return opt.uuid === option.uuid
+    })
+
+    this.state.options[option_index][attribute] = e.target.value;
+    this.forceUpdate();
+  }
+  handleSaveOption(option, e) {
+    e.preventDefault();
+    let option_index = this.state.options.findIndex(function(opt, i) {
+      return opt.uuid === option.uuid
+    })
+
+    this.state.options[option_index] = option;
+    this.state.options[option_index].editing = false;
+    this.forceUpdate();
+  }
+  handleDeleteOption(option, e) {
+    e.preventDefault();
+    let option_index = this.state.options.findIndex(function(opt, i) {
+      return opt.uuid === option.uuid
+    })
+
+    this.state.options.splice(option_index, 1)
+    this.forceUpdate();
+  }
   render() {
     return (
       <form className="modal"
@@ -87,17 +124,51 @@ class AttributeForm extends React.Component {
                 <li className="list-header flex">
                   <span className="flex-1">{"Name"}</span>
                   <span className="flex-1">{"Value"}</span>
+                  <span className="flex-0 list-buttons"></span>
                 </li>
                 {this.state.options.map((option, i) => {
                   return (
                     <li className="list-item flex"
                       key={i}>
-                      <span className="flex-1">
-                        {option.name}
-                      </span>
-                      <span className="flex-1">
-                        {option.value}
-                      </span>
+                      {option.editing !== true ?
+                        <span className="flex">
+                          <span className="flex-1">
+                            {option.name}
+                          </span>
+                          <span className="flex-1">
+                            {option.value}
+                          </span>
+                          <span className="flex-0 list-buttons">
+                            <a href=""
+                              onClick={this.handleEditOption.bind(this, option)}>
+                              {"Edit"}
+                            </a>
+                            <a href=""
+                              onClick={this.handleDeleteOption.bind(this, option)}>
+                              {"Delete"}
+                            </a>
+                          </span>
+                        </span>
+                        :
+                        <span className="flex">
+                          <input className="flex-1"
+                            value={option.name}
+                            onChange={this.handleOptionChange.bind(this, option, "name")} />
+                          <input className="flex-1"
+                            value={option.value}
+                            onChange={this.handleOptionChange.bind(this, option, "value")} />
+                          <span className="flex-0 list-buttons">
+                            <a href=""
+                              onClick={this.handleSaveOption.bind(this, option)}>
+                              {"Save"}
+                            </a>
+                            <a href=""
+                              onClick={this.handleDeleteOption.bind(this, option)}>
+                              {"Delete"}
+                            </a>
+                          </span>
+                        </span>
+                      }
                     </li>
                   )
                 })}
