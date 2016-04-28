@@ -7,47 +7,107 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import TemplateForm from 'components/TemplateForm';
+import AttributeForm from 'components/AttributeForm';
+import {ModalTransition} from 'components/Transitions';
 
-class EditTemplate extends React.Component {
+class Template extends React.Component {
 	constructor(props) {
 		super(props);
 		Store.get().forms.set({template: {
-			errors: {}
+			errors: {},
+			attributes: []
 		}})
 	}
 	render() {
+		var attribute_currently_editing = {}
+		if (this.props.attribute_currently_editing !== undefined) {
+			attribute_currently_editing = this.props.attribute_currently_editing.toJS();
+		}
+
 	  return (
 	  	<div>
-				<MidBar
-					breadcrumbs={[
+	  		<MidBar
+	  			breadcrumbs={[
+	  				{
+	  					name: 'Templates',
+	  					link: '/templates/view'
+	  				},
 						{
-							name: 'Templates',
-							link: '/templates/view'
+							name: this.props.template.title
 						},
 						{
-							name: this.props.template.title,
-							link: `/templates/${this.props.template.id}/view`
-						},
-						{
-							name: 'Edit'
-						}
-					]} />
-
-		  	<div className="container">
-		  		<Block loading={!this.props.template.title}>
+	  					name: 'Edit'
+	  				}
+	  			]} />
+	  		<div className="container">
+	  			<Block loading={!this.props.template.title}>
 			  		<TemplateForm
-			  			onSubmit={submitTemplate}
+			  			onSubmit={this.props.submitTemplate}
+			  			onNewAttribute={this.props.onNewAttribute}
+			  			onEditAttribute={this.props.onEditAttribute}
+			  			onDeleteAttribute={this.props.onDeleteAttribute}
 			  			state={this.props.form}
-			  			data={this.props.template}>
-			  		</TemplateForm>
+			  			data={this.props.template}></TemplateForm>
 			  	</Block>
 		  	</div>
+	  		{this.props.attribute_form_showing === "yes" ?
+	  			<AttributeForm
+	  				attributeCurrentlyEditing={attribute_currently_editing || {}}
+	  				onCancel={this.props.onAttributeFormCancelLinkPressed}
+	  				onSubmit={this.props.onAttributeFormSubmit}
+	  				title={"New attribute"}>
+	  			</AttributeForm>
+	  			: null
+	  		}
 		  </div>
 	  );
 	}
 }
 
-function submitTemplate (form) {
+function onNewAttribute() {
+	Store.get().set({
+		attribute_form_showing: "yes",
+		attribute_currently_editing: {}
+	})
+}
+
+function onEditAttribute(attribute) {
+	Store.get().set({
+		attribute_currently_editing: attribute
+	})
+	Store.get().set({
+		attribute_form_showing: "yes"
+	})
+}
+
+function onDeleteAttribute(attribute) {
+}
+
+function onAttributeFormCancelLinkPressed() {
+	Store.get().set({
+		attribute_form_showing: "no"
+	})
+}
+
+function onAttributeFormSubmit(new_attribute, original_attribute) {
+	if (original_attribute.title) {
+		let attributes = Store.get().forms.template.attributes;
+		for (let i = 0, x = attributes.length; i < x; i++) {
+			if (attributes[i].uuid === original_attribute.uuid) {
+				attributes.splice(i, 1, new_attribute);
+			}
+		}
+		Store.get().attribute_currently_editing.reset({});
+	} else {
+		Store.get().forms.template.attributes.unshift(new_attribute);
+	}
+
+	Store.get().set({
+		attribute_form_showing: "no"
+	})
+}
+
+function submitTemplate(form) {
 	Store.get().forms.template.set({
 		"loading": true,
 		"error": false
@@ -58,10 +118,15 @@ function submitTemplate (form) {
 			name: 'template',
 			template_id: Store.get().template.id
 		},
-		payload: form
+		payload: {
+			field_template: {
+				...form,
+				attributes: Store.get().forms.template.attributes
+			}
+		}
 	}).then((res) => {
-		Store.get().template.reset(res);
-		Api.redirect(`/templates/${Store.get().template.id}/view`);
+		Store.get().templates.unshift(res);
+		Api.redirect(`/templates/view`);
 	}, (err) => {
 		Store.get().forms.template.set({
 			"loading": false,
@@ -71,14 +136,23 @@ function submitTemplate (form) {
 	})
 }
 
-EditTemplate.defaultProps = {
+Template.defaultProps = {
 	form: {
-		errors: {}
+		errors: {},
+		attributes: [],
+		attribute_currently_editing: {}
 	}
 }
 
-export default warmUp(EditTemplate, [
+export default warmUp(Template, [
 	['template', 'template'],
 	['form', 'forms', 'template'],
-	['submitTemplate', submitTemplate]
+	['attribute_form_showing', 'attribute_form_showing'],
+	['attribute_currently_editing', 'attribute_currently_editing'],
+	['submitTemplate', submitTemplate],
+	['onNewAttribute', onNewAttribute],
+	['onEditAttribute', onEditAttribute],
+	['onDeleteAttribute', onDeleteAttribute],
+	['onAttributeFormCancelLinkPressed', onAttributeFormCancelLinkPressed],
+	['onAttributeFormSubmit', onAttributeFormSubmit]
 ]);

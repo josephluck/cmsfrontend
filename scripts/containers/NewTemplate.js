@@ -59,7 +59,8 @@ class Template extends React.Component {
 
 function onNewAttribute() {
 	Store.get().set({
-		attribute_form_showing: "yes"
+		attribute_form_showing: "yes",
+		attribute_currently_editing: {}
 	})
 }
 
@@ -109,7 +110,12 @@ function submitTemplate(form) {
 		url: {
 			name: 'templates'
 		},
-		payload: form
+		payload: {
+			field_template: {
+				...form,
+				attributes: Store.get().forms.template.attributes
+			}
+		}
 	}).then((res) => {
 		Store.get().templates.unshift(res);
 		Api.redirect(`/templates/view`);
