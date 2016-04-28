@@ -1,3 +1,25 @@
+
+
+
+/* ==========================
+
+Need to store options in a
+new database table with a
+schems since right now it's
+storing errors: {} in the DB
+
+Also, having options in DB
+table means that edit will work
+without butchering with forced
+uuids in the front-end
+
+*/ ==========================
+
+
+
+
+
+
 import React from 'react';
 import FormHelper from 'utils/FormHelper';
 
