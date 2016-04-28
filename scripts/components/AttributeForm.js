@@ -36,7 +36,7 @@ class AttributeForm extends React.Component {
     e.preventDefault();
     e.persist();
     let option_index = this.state.options.findIndex(function(opt, i) {
-      return opt.uuid === option.uuid
+      return opt.id === option.id
     })
 
     this.state.options[option_index].editing = true;
@@ -49,7 +49,7 @@ class AttributeForm extends React.Component {
   }
   handleEditOptionInputChange(option, attribute, e) {
     let option_index = this.state.options.findIndex(function(opt, i) {
-      return opt.uuid === option.uuid
+      return opt.id === option.id
     })
 
     this.state.options[option_index][attribute] = e.target.value;
@@ -58,7 +58,7 @@ class AttributeForm extends React.Component {
   handleEditSaveOption(option, e) {
     e.preventDefault();
     let option_index = this.state.options.findIndex(function(opt, i) {
-      return opt.uuid === option.uuid
+      return opt.id === option.id
     })
 
     if (option.value.length > 0) {
@@ -83,7 +83,7 @@ class AttributeForm extends React.Component {
   handleDeleteOption(option, e) {
     e.preventDefault();
     let option_index = this.state.options.findIndex(function(opt, i) {
-      return opt.uuid === option.uuid
+      return opt.id === option.id
     })
 
     this.state.options.splice(option_index, 1)
@@ -113,7 +113,7 @@ class AttributeForm extends React.Component {
       this.state.new_option = {
         name: "",
         value: "",
-        uuid: Date.now(),
+        id: Date.now(),
         errors: {}
       }
     }
@@ -135,10 +135,10 @@ class AttributeForm extends React.Component {
       this.forceUpdate();
       return false
     } else {
-      this.handleAddNewOption(e);
+      this.handleAddNewOption(e); // Save the current option if there is one in progress
       let form = {
         options: this.state.options,
-        uuid: Date.now(),
+        id: this.props.attributeCurrentlyEditing.id || Date.now(),
         ...form_values
       }
       this.props.onSubmit(form, this.props.attributeCurrentlyEditing);
@@ -153,10 +153,10 @@ class AttributeForm extends React.Component {
           <h3>{this.props.title}</h3>
         </div>
         <div className="container modal-content">
-          <FormInput title="Title"
-            error={this.state.errors.title}>
-            <input name="title"
-              defaultValue={this.props.attributeCurrentlyEditing.title}
+          <FormInput title="Name"
+            error={this.state.errors.name}>
+            <input name="name"
+              defaultValue={this.props.attributeCurrentlyEditing.name}
               type="text" />
           </FormInput>
 

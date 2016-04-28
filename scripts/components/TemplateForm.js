@@ -11,6 +11,12 @@ function TemplateForm({
   onEditAttribute,
   onDeleteAttribute
 }) {
+  var attributes = state.attributes;
+
+  if (data.attributes.length > 0) {
+    attributes = data.attributes;
+  }
+
   return (
   	<form name="template"
       onSubmit={(e) => {
@@ -37,11 +43,11 @@ function TemplateForm({
         </a>
       </div>
       <ul className="list form-input">
-        {state.attributes.length ?
+        {attributes.length ?
           <div>
             <li className="list-header flex">
               <span className="flex-2">
-                {"Title"}
+                {"Name"}
               </span>
               <span className="flex-1">
                 {"Type"}
@@ -51,11 +57,11 @@ function TemplateForm({
                 <span>{"Delete"}</span>
               </span>
             </li>
-            {state.attributes.map((attribute, i) => {
+            {attributes.map((attribute, i) => {
               return (
                 <li key={i}
                   className="list-item flex">
-                  <span className="flex-2 ellipsis">{attribute.title}</span>
+                  <span className="flex-2 ellipsis">{attribute.name}</span>
                   <span className="flex-1 ellipsis">
                     {attribute.kind}
                   </span>

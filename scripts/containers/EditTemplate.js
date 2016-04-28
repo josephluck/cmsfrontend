@@ -18,6 +18,14 @@ class Template extends React.Component {
 			attributes: []
 		}})
 	}
+	componentWillReceiveProps(props) {
+		if (props.template.id && !Store.get().forms.template.id) {
+			Store.get().forms.set({template: {
+				errors: {},
+				...props.template
+			}})
+		}
+	}
 	render() {
 		var attribute_currently_editing = {}
 		if (this.props.attribute_currently_editing !== undefined) {
@@ -90,10 +98,13 @@ function onAttributeFormCancelLinkPressed() {
 }
 
 function onAttributeFormSubmit(new_attribute, original_attribute) {
-	if (original_attribute.title) {
+	var aa = Store;
+	if (original_attribute.name) {
 		let attributes = Store.get().forms.template.attributes;
+		// Attributes is empty array since they arent stored in the form.template...
+
 		for (let i = 0, x = attributes.length; i < x; i++) {
-			if (attributes[i].uuid === original_attribute.uuid) {
+			if (attributes[i].id === original_attribute.id) {
 				attributes.splice(i, 1, new_attribute);
 			}
 		}
