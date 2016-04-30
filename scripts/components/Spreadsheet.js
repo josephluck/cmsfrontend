@@ -23,7 +23,7 @@ class AttributeForm extends React.Component {
 		return rows.map((row, i) => {
 	    var spreadsheet_row = {
 	      row_index: i,
-	      columns: models.map((model, x) => {
+	      column: models.map((model, x) => {
 	        var cell = _.clone(model);
 
 	        cell["column_index"] = x;
@@ -38,7 +38,7 @@ class AttributeForm extends React.Component {
 
 	generateEmptyRow(models) {
 	  return {
-	    columns: models.map((model, i) => {
+	    column: models.map((model, i) => {
 	      var cell = _.clone(model);
 	      cell["column_index"] = i;
 
@@ -66,10 +66,10 @@ class AttributeForm extends React.Component {
 		this.forceUpdate();
 	}
 
-	handleInputChange(row_index, column_index, e) {
+	handleInputChange(cell, e) {
 		let value = e.target.value;
 
-		this.state.rows[row_index].columns[column_index].value = value;
+		cell.value = value;
 		this.forceUpdate();
 	}
 
@@ -80,14 +80,14 @@ class AttributeForm extends React.Component {
 					return (
 						<div className="flex spreadsheet-row"
 							key={i}>
-							{row.columns.map((cell, x) => {
+							{row.column.map((cell, x) => {
 								return (
 									<div className="flex-1 spreadsheet-cell"
 										key={x}>
 										<div className="form-input">
 										  <input name={cell.name}
 										    value={cell.value || ""}
-										    onChange={this.handleInputChange.bind(this, i, x)}
+										    onChange={this.handleInputChange.bind(this, cell)}
 										    type="text" />
 										</div>
 									</div>
