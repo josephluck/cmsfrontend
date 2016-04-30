@@ -109,11 +109,18 @@ class Spreadsheet extends React.Component {
 										</div>
 									)
 								})}
-								<a className="spreadsheet-delete-link"
-									tabindex="-1"
-									onClick={this.removeRow.bind(this, i)}>
-									<span className="ss-delete"></span>
-								</a>
+								{this.state.rows.length > 1 ?
+									<a className="spreadsheet-delete-link"
+										tabindex="-1"
+										onClick={this.removeRow.bind(this, i)}>
+										<span className="ss-delete"></span>
+									</a>
+									:
+									<a className="spreadsheet-delete-link invisible"
+										tabindex="-1">
+										<span className="ss-delete"></span>
+									</a>
+								}
 							</div>
 						)
 					})}
