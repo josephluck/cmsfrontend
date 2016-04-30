@@ -25,48 +25,53 @@
 			top: 2px;
 		}
 	}
-	.spreadsheet-row {
-		&:first-of-type {
-			.spreadsheet-cell {
-				.form-input {
-					input {
-						border-top-width: @borderWidth;
-						&:focus {
-							margin-top: 0px;
+	.spreadsheet-rows {
+ 		.spreadsheet-row {
+			&:first-of-type {
+				.spreadsheet-cell {
+					.form-input {
+						input {
+							border-top-width: @borderWidth;
+							&:focus {
+								margin-top: 0px;
+							}
+						}
+					}
+					&:first-child {
+						.form-input {
+							input {
+								border-top-left-radius: @buttonBorderRadius;
+							}
+						}
+					}
+					&:last-of-type {
+						.form-input {
+							input {
+								border-top-right-radius: @buttonBorderRadius;
+							}
 						}
 					}
 				}
+			}
+			.spreadsheet-cell {
 				&:first-child {
 					.form-input {
 						input {
-							border-top-left-radius: @buttonBorderRadius;
-						}
-					}
-				}
-				&:last-of-type {
-					.form-input {
-						input {
-							border-top-right-radius: @buttonBorderRadius;
+							border-left-width: @borderWidth;
+							&:focus {
+								margin-left: 0px;
+							}
 						}
 					}
 				}
 			}
-		}
-		.spreadsheet-cell {
-			&:first-child {
-				.form-input {
-					input {
-						border-left-width: @borderWidth;
-						&:focus {
-							margin-left: 0px;
-						}
-					}
-				}
+			.spreadsheet-delete-link {
+				cursor: pointer;
 			}
 		}
-		.spreadsheet-delete-link {
-			cursor: pointer;
-		}
+	}
+	.spreadsheet-input-labels {
+		margin-right: 21px;
 	}
 	.add-new-row {
 		padding: @padding/2 @padding/2;

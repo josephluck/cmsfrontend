@@ -67,40 +67,49 @@ class AttributeForm extends React.Component {
 	}
 
 	handleInputChange(cell, e) {
-		let value = e.target.value;
-
-		cell.value = value;
+		cell.value = e.target.value;
 		this.forceUpdate();
 	}
 
 	render() {
 		return (
 			<div className="spreadsheet">
-				{this.state.rows.map((row, i) => {
-					return (
-						<div className="flex spreadsheet-row"
-							key={i}>
-							{row.column.map((cell, x) => {
-								return (
-									<div className="flex-1 spreadsheet-cell"
-										key={x}>
-										<div className="form-input">
-										  <input name={cell.name}
-										    value={cell.value || ""}
-										    onChange={this.handleInputChange.bind(this, cell)}
-										    type="text" />
+				<div className="spreadsheet-input-labels flex">
+					{this.state.models.map((model, i) => {
+						return (
+							<div className="flex-1 form-input-label">
+								{model.label}
+							</div>
+						)
+					})}
+				</div>
+				<div className="spreadsheet-rows">
+					{this.state.rows.map((row, i) => {
+						return (
+							<div className="flex spreadsheet-row"
+								key={i}>
+								{row.column.map((cell, x) => {
+									return (
+										<div className="flex-1 spreadsheet-cell"
+											key={x}>
+											<div className="form-input">
+											  <input name={cell.name}
+											    value={cell.value || ""}
+											    onChange={this.handleInputChange.bind(this, cell)}
+											    type="text" />
+											</div>
 										</div>
-									</div>
-								)
-							})}
-							<a className="spreadsheet-delete-link"
-								tabindex="-1"
-								onClick={this.removeRow.bind(this, i)}>
-								<span className="ss-delete"></span>
-							</a>
-						</div>
-					)
-				})}
+									)
+								})}
+								<a className="spreadsheet-delete-link"
+									tabindex="-1"
+									onClick={this.removeRow.bind(this, i)}>
+									<span className="ss-delete"></span>
+								</a>
+							</div>
+						)
+					})}
+				</div>
 				<div className="add-new-row"
 					onClick={this.addNewRow.bind(this)}>
 					{"Add a new row"}
