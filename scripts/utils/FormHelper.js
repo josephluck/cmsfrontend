@@ -1,16 +1,10 @@
 function serialize(form) {
-  let data,
-      i,
-      len,
-      node,
-      ref;
+  let data = {};
 
-  data = {};
-  ref = form.elements;
+  for (let i = 0, x = form.elements.length; i < x; i++) {
+    let node = form.elements[i];
 
-  for (i = 0, len = ref.length; i < len; i++) {
-    node = ref[i];
-    if (!node.disabled && node.name) {
+    if (!node.disabled && node.name && !node.classList.contains('spreadsheet-input')) {
       data[node.name] = node.value;
     }
   }

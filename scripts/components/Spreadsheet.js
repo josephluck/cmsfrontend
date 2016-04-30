@@ -102,6 +102,7 @@ class Spreadsheet extends React.Component {
 											key={x}>
 											<div className="form-input">
 											  <input name={cell.name}
+											  	className="spreadsheet-input"
 											    value={cell.value || ""}
 											    onChange={this.handleInputChange.bind(this, cell)}
 											    type="text" />
@@ -127,7 +128,7 @@ class Spreadsheet extends React.Component {
 				</div>
 				<div className="add-new-row"
 					onClick={this.addNewRow.bind(this)}>
-					{"Add a new row"}
+					{this.props.addNewRowText || "Add a new row"}
 				</div>
 			</div>
 		)

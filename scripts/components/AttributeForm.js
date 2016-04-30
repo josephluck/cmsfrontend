@@ -53,13 +53,18 @@ class AttributeForm extends React.Component {
 
   onOptionsChange(options) {
     this.state.options = options;
-    console.log(options);
-    this.forceUpdate();
   }
 
   onSubmit(e) {
     e.preventDefault();
     let form_values = FormHelper.serialize(e.target);
+    form_values['options'] = this.state.options;
+
+    if (this.props.attributeCurrentlyEditing) {
+      form_values.id = this.props.attributeCurrentlyEditing.id || Date.now()
+    }
+
+    this.props.onSubmit(form_values, this.props.attributeCurrentlyEditing);
   }
 
   render() {
@@ -90,6 +95,8 @@ class AttributeForm extends React.Component {
           </FormInput>
 
           <Spreadsheet
+            addNewRowText="Add another option"
+            onChange={this.onOptionsChange.bind(this)}
             data={this.state.options}
             input_models={[
               {
@@ -104,8 +111,7 @@ class AttributeForm extends React.Component {
                 label: 'Option value',
                 required: true
               }
-            ]}
-            onChange={this.onOptionsChange.bind(this)} />
+            ]} />
         </div>
         <div className="modal-footer container text-align-right">
           <a href="" onClick={(e) => {

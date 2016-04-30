@@ -1,5 +1,6 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
+import * as _ from 'underscore';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
@@ -10,7 +11,7 @@ import TemplateForm from 'components/TemplateForm';
 import AttributeForm from 'components/AttributeForm';
 import {ModalTransition} from 'components/Transitions';
 
-class Template extends React.Component {
+class EditTemplate extends React.Component {
 	constructor(props) {
 		super(props);
 		Store.get().forms.set({template: {
@@ -26,6 +27,78 @@ class Template extends React.Component {
 			}})
 		}
 	}
+
+	submitTemplate(form) {
+		Store.get().forms.template.set({
+			"loading": true,
+			"error": false
+		});
+
+		var aa = Store;
+		debugger
+
+		Api.put({
+			url: {
+				name: 'template',
+				template_id: Store.get().template.id
+			},
+			payload: {
+				field_template: {
+					...form,
+					attributes: Store.get().forms.template.attributes
+				}
+			}
+		}).then((res) => {
+			Store.get().templates.unshift(res);
+			Api.redirect(`/templates/view`);
+		}, (err) => {
+			Store.get().forms.template.set({
+				"loading": false,
+				"error": true,
+				"errors": err.errors
+			});
+		})
+	}
+
+	onNewAttributeButtonClick() {
+		Store.get().set({
+			attribute_form_showing: "yes",
+			attribute_currently_editing: {}
+		})
+	}
+
+	onEditAttributeButtonClick(attribute) {
+		Store.get().set({
+			attribute_currently_editing: attribute
+		})
+		Store.get().set({
+			attribute_form_showing: "yes"
+		})
+	}
+
+	onDeleteAttributeButtonClick(attribute) {
+	}
+
+	onAttributeFormCancelLinkPressed() {
+		Store.get().set({
+			attribute_form_showing: "no"
+		})
+	}
+
+	onAttributeFormSubmit(new_attribute, original_attribute) {
+		var aa = Store;
+		if (original_attribute) {
+			let attribute_to_update = _.findWhere(Store.get().forms.template.attributes, {id: new_attribute.id})
+
+			attribute_to_update.reset(new_attribute);
+		} else {
+			Store.get().forms.template.attributes.push(new_attribute);
+		}
+		Store.get().set({
+			attribute_form_showing: "no"
+		})
+	}
+
 	render() {
 		var attribute_currently_editing = {}
 		if (this.props.attribute_currently_editing !== undefined) {
@@ -50,10 +123,10 @@ class Template extends React.Component {
 	  		<div className="container">
 	  			<Block loading={!this.props.template.title}>
 			  		<TemplateForm
-			  			onSubmit={this.props.submitTemplate}
-			  			onNewAttribute={this.props.onNewAttribute}
-			  			onEditAttribute={this.props.onEditAttribute}
-			  			onDeleteAttribute={this.props.onDeleteAttribute}
+			  			onSubmit={this.submitTemplate.bind(this)}
+			  			onNewAttributeButtonClick={this.onNewAttributeButtonClick.bind(this)}
+			  			onEditAttributeButtonClick={this.onEditAttributeButtonClick.bind(this)}
+			  			onDeleteAttributeButtonClick={this.onDeleteAttributeButtonClick.bind(this)}
 			  			state={this.props.form}
 			  			data={this.props.template}></TemplateForm>
 			  	</Block>
@@ -61,8 +134,8 @@ class Template extends React.Component {
 	  		{this.props.attribute_form_showing === "yes" ?
 	  			<AttributeForm
 	  				attributeCurrentlyEditing={attribute_currently_editing || {}}
-	  				onCancel={this.props.onAttributeFormCancelLinkPressed}
-	  				onSubmit={this.props.onAttributeFormSubmit}
+	  				onCancel={this.onAttributeFormCancelLinkPressed.bind(this)}
+	  				onSubmit={this.onAttributeFormSubmit.bind(this)}
 	  				title={"New attribute"}>
 	  			</AttributeForm>
 	  			: null
@@ -72,82 +145,7 @@ class Template extends React.Component {
 	}
 }
 
-function onNewAttribute() {
-	Store.get().set({
-		attribute_form_showing: "yes",
-		attribute_currently_editing: {}
-	})
-}
-
-function onEditAttribute(attribute) {
-	Store.get().set({
-		attribute_currently_editing: attribute
-	})
-	Store.get().set({
-		attribute_form_showing: "yes"
-	})
-}
-
-function onDeleteAttribute(attribute) {
-}
-
-function onAttributeFormCancelLinkPressed() {
-	Store.get().set({
-		attribute_form_showing: "no"
-	})
-}
-
-function onAttributeFormSubmit(new_attribute, original_attribute) {
-	var aa = Store;
-	if (original_attribute.name) {
-		let attributes = Store.get().forms.template.attributes;
-		// Attributes is empty array since they arent stored in the form.template...
-
-		for (let i = 0, x = attributes.length; i < x; i++) {
-			if (attributes[i].id === original_attribute.id) {
-				attributes.splice(i, 1, new_attribute);
-			}
-		}
-		Store.get().attribute_currently_editing.reset({});
-	} else {
-		Store.get().forms.template.attributes.unshift(new_attribute);
-	}
-
-	Store.get().set({
-		attribute_form_showing: "no"
-	})
-}
-
-function submitTemplate(form) {
-	Store.get().forms.template.set({
-		"loading": true,
-		"error": false
-	});
-
-	Api.put({
-		url: {
-			name: 'template',
-			template_id: Store.get().template.id
-		},
-		payload: {
-			field_template: {
-				...form,
-				attributes: Store.get().forms.template.attributes
-			}
-		}
-	}).then((res) => {
-		Store.get().templates.unshift(res);
-		Api.redirect(`/templates/view`);
-	}, (err) => {
-		Store.get().forms.template.set({
-			"loading": false,
-			"error": true,
-			"errors": err.errors
-		});
-	})
-}
-
-Template.defaultProps = {
+EditTemplate.defaultProps = {
 	form: {
 		errors: {},
 		attributes: [],
@@ -155,15 +153,9 @@ Template.defaultProps = {
 	}
 }
 
-export default warmUp(Template, [
+export default warmUp(EditTemplate, [
 	['template', 'template'],
 	['form', 'forms', 'template'],
 	['attribute_form_showing', 'attribute_form_showing'],
-	['attribute_currently_editing', 'attribute_currently_editing'],
-	['submitTemplate', submitTemplate],
-	['onNewAttribute', onNewAttribute],
-	['onEditAttribute', onEditAttribute],
-	['onDeleteAttribute', onDeleteAttribute],
-	['onAttributeFormCancelLinkPressed', onAttributeFormCancelLinkPressed],
-	['onAttributeFormSubmit', onAttributeFormSubmit]
+	['attribute_currently_editing', 'attribute_currently_editing']
 ]);

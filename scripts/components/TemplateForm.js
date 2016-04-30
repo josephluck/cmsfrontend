@@ -7,9 +7,9 @@ function TemplateForm({
 	state,
   data,
   onSubmit,
-  onNewAttribute,
-  onEditAttribute,
-  onDeleteAttribute
+  onNewAttributeButtonClick,
+  onEditAttributeButtonClick,
+  onDeleteAttributeButtonClick
 }) {
   var attributes = state.attributes;
 
@@ -37,7 +37,7 @@ function TemplateForm({
           href=""
           onClick={(e) => {
             e.preventDefault();
-            onNewAttribute();
+            onNewAttributeButtonClick();
           }}>
           {"New attribute"}
         </a>
@@ -69,14 +69,14 @@ function TemplateForm({
                     <a href=""
                       onClick={(e) => {
                         e.preventDefault();
-                        onEditAttribute(attribute);
+                        onEditAttributeButtonClick(attribute);
                       }}>
                       {"Edit"}
                     </a>
                     <a href=""
                       onClick={(e) => {
                         e.preventDefault();
-                        onDeleteAttribute(attribute);
+                        onDeleteAttributeButtonClick(attribute);
                       }}>
                       {"Delete"}
                     </a>
