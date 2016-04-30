@@ -84,14 +84,8 @@ class AttributeForm extends React.Component {
           </FormInput>
 
           <Spreadsheet
-            data={this.state.options.concat(this.state.options)}
+            data={this.state.options}
             input_models={[
-              {
-                type: 'input',
-                name: 'name',
-                label: 'Name',
-                required: true
-              },
               {
                 type: 'input',
                 name: 'name',

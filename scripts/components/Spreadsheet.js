@@ -7,7 +7,8 @@ class AttributeForm extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			rows: this.generateRows(props.data, props.input_models)
+			rows: this.generateRows(props.data, props.input_models),
+			models: props.input_models
 		}
 	}
 
@@ -22,7 +23,7 @@ class AttributeForm extends React.Component {
 		return rows.map((row, i) => {
 	    var spreadsheet_row = {
 	      row_index: i,
-	      column: models.map((model, x) => {
+	      columns: models.map((model, x) => {
 	        var cell = _.clone(model);
 
 	        cell["column_index"] = x;
@@ -37,7 +38,7 @@ class AttributeForm extends React.Component {
 
 	generateEmptyRow(models) {
 	  return {
-	    column: models.map((model, i) => {
+	    columns: models.map((model, i) => {
 	      var cell = _.clone(model);
 	      cell["column_index"] = i;
 
@@ -53,30 +54,57 @@ class AttributeForm extends React.Component {
 	  });
 	};
 
+	addNewRow() {
+		this.state.rows.push(this.generateEmptyRow(this.state.models));
+		this.state.rows = this.updateSpreadsheetRowIndexes(this.state.rows);
+		this.forceUpdate();
+	}
+
+	removeRow(row_index) {
+		this.state.rows.splice(row_index, 1);
+		this.state.rows = this.updateSpreadsheetRowIndexes(this.state.rows);
+		this.forceUpdate();
+	}
+
+	handleInputChange(row_index, column_index, e) {
+		let value = e.target.value;
+
+		this.state.rows[row_index].columns[column_index].value = value;
+		this.forceUpdate();
+	}
+
 	render() {
 		return (
 			<div className="spreadsheet">
 				{this.state.rows.map((row, i) => {
 					return (
-						<div className="flex spreadsheet-row">
-							{row.column.map((cell, x) => {
+						<div className="flex spreadsheet-row"
+							key={i}>
+							{row.columns.map((cell, x) => {
 								return (
-									<div className="flex-1 spreadsheet-cell">
+									<div className="flex-1 spreadsheet-cell"
+										key={x}>
 										<div className="form-input">
 										  <input name={cell.name}
-										    defaultValue={cell.value}
+										    value={cell.value || ""}
+										    onChange={this.handleInputChange.bind(this, i, x)}
 										    type="text" />
 										</div>
 									</div>
 								)
 							})}
 							<a className="spreadsheet-delete-link"
-								tabindex="-1">
+								tabindex="-1"
+								onClick={this.removeRow.bind(this, i)}>
 								<span className="ss-delete"></span>
 							</a>
 						</div>
 					)
 				})}
+				<div className="add-new-row"
+					onClick={this.addNewRow.bind(this)}>
+					{"Add a new row"}
+				</div>
 			</div>
 		)
 	}

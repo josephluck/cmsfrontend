@@ -52,35 +52,30 @@
 				}
 			}
 		}
-		&:last-of-type {
-			.spreadsheet-cell {
-				&:first-of-type {
-					.form-input {
-						input {
-							border-bottom-left-radius: @buttonBorderRadius;
-						}
-					}
-				}
-				&:last-of-type {
-					.form-input {
-						input {
-							border-bottom-right-radius: @buttonBorderRadius;
+		.spreadsheet-cell {
+			&:first-child {
+				.form-input {
+					input {
+						border-left-width: @borderWidth;
+						&:focus {
+							margin-left: 0px;
 						}
 					}
 				}
 			}
+		}
+		.spreadsheet-delete-link {
+			cursor: pointer;
 		}
 	}
-	.spreadsheet-cell {
-		&:first-child {
-			.form-input {
-				input {
-					border-left-width: @borderWidth;
-					&:focus {
-						margin-left: 0px;
-					}
-				}
-			}
-		}
+	.add-new-row {
+		padding: @padding/2 @padding/2;
+		border: dashed @borderWidth @darkGray;
+		border-top-width: 0px;
+		margin-right: 21px; // Compensate for delete links
+		border-bottom-left-radius: @buttonBorderRadius;
+		border-bottom-right-radius: @buttonBorderRadius;
+		text-align: center;
+		cursor: pointer;
 	}
 }
