@@ -43,12 +43,18 @@ class Spreadsheet extends React.Component {
 	  };
 	};
 
-	decorateRowsForParent(rows, models) {
+	prepareRowsForParent(rows, models) {
 		return rows.map((row, i) => {
-			let decorated_row = {}
+			let decorated_row = {
+				valid: true
+			}
 
 			row.cells.map((cell, x) => {
-				decorated_row[cell.name] = cell.value
+				if (cell.required && !cell.value) {
+					decorated_row.valid = false;
+				} else {
+					decorated_row[cell.name] = cell.value
+				}
 			})
 
 			return decorated_row
@@ -69,7 +75,7 @@ class Spreadsheet extends React.Component {
 		cell.value = e.target.value;
 		this.forceUpdate();
 
-		this.props.onChange(this.decorateRowsForParent(this.state.rows, this.state.models));
+		this.props.onChange(this.prepareRowsForParent(this.state.rows, this.state.models));
 	}
 
 	render() {

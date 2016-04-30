@@ -53,6 +53,7 @@ class AttributeForm extends React.Component {
 
   onOptionsChange(options) {
     this.state.options = options;
+    console.log(options);
     this.forceUpdate();
   }
 
