@@ -51,6 +51,11 @@ class AttributeForm extends React.Component {
     }
   }
 
+  onOptionsChange(options) {
+    this.state.options = options;
+    this.forceUpdate();
+  }
+
   onSubmit(e) {
     e.preventDefault();
     let form_values = FormHelper.serialize(e.target);
@@ -89,16 +94,17 @@ class AttributeForm extends React.Component {
               {
                 type: 'input',
                 name: 'name',
-                label: 'Name',
+                label: 'Option name',
                 required: true
               },
               {
                 type: 'input',
                 name: 'value',
-                label: 'Value',
+                label: 'Option value',
                 required: true
               }
-            ]} />
+            ]}
+            onChange={this.onOptionsChange.bind(this)} />
         </div>
         <div className="modal-footer container text-align-right">
           <a href="" onClick={(e) => {
