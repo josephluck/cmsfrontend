@@ -24,8 +24,6 @@ class Template extends React.Component {
 			"error": false
 		});
 
-		// var aa = Store;
-
 		Api.post({
 			url: {
 				name: 'templates'
