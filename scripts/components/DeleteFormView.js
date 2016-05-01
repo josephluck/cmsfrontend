@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import FormInput from 'components/FormInput';
 
 function DeleteFormView({
@@ -42,9 +42,13 @@ function DeleteFormView({
         </div>
       </div>
       <div className="modal-footer container text-align-right">
-        <Link to={cancelLinkPath}>
+        <a href=""
+          onClick={(e) => {
+            e.preventDefault();
+            browserHistory.goBack();
+          }}>
           {"Cancel"}
-        </Link>
+        </a>
         <button type="submit">
           {loading ?
             "Deleting"

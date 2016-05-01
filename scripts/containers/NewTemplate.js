@@ -112,15 +112,17 @@ class Template extends React.Component {
 		  			onDeleteAttributeButtonClick={this.onDeleteAttributeButtonClick.bind(this)}
 		  			state={this.props.form}></TemplateForm>
 		  	</div>
-	  		{this.props.attribute_form_showing === "yes" ?
-	  			<AttributeForm
-	  				attributeCurrentlyEditing={attribute_currently_editing || {}}
-	  				onCancel={this.onAttributeFormCancelLinkPressed.bind(this)}
-	  				onSubmit={this.onAttributeFormSubmit.bind(this)}
-	  				title={"New attribute"}>
-	  			</AttributeForm>
-	  			: null
-	  		}
+		  	<ModalTransition transitionKey={this.props.attribute_form_showing}>
+		  		{this.props.attribute_form_showing === "yes" ?
+		  			<AttributeForm
+		  				attributeCurrentlyEditing={attribute_currently_editing || {}}
+		  				onCancel={this.onAttributeFormCancelLinkPressed.bind(this)}
+		  				onSubmit={this.onAttributeFormSubmit.bind(this)}
+		  				title={"New attribute"}>
+		  			</AttributeForm>
+		  			: <div></div>
+		  		}
+		  	</ModalTransition>
 		  </div>
 	  );
 	}

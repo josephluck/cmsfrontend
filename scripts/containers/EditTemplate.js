@@ -129,15 +129,17 @@ class EditTemplate extends React.Component {
 			  			data={this.props.template}></TemplateForm>
 			  	</Block>
 		  	</div>
-	  		{this.props.attribute_form_showing === "yes" ?
-	  			<AttributeForm
-	  				attributeCurrentlyEditing={attribute_currently_editing || {}}
-	  				onCancel={this.onAttributeFormCancelLinkPressed.bind(this)}
-	  				onSubmit={this.onAttributeFormSubmit.bind(this)}
-	  				title={"New attribute"}>
-	  			</AttributeForm>
-	  			: null
-	  		}
+	  		<ModalTransition transitionKey={this.props.attribute_form_showing}>
+	  			{this.props.attribute_form_showing === "yes" ?
+	  				<AttributeForm
+	  					attributeCurrentlyEditing={attribute_currently_editing || {}}
+	  					onCancel={this.onAttributeFormCancelLinkPressed.bind(this)}
+	  					onSubmit={this.onAttributeFormSubmit.bind(this)}
+	  					title={"New attribute"}>
+	  				</AttributeForm>
+	  				: <div></div>
+	  			}
+	  		</ModalTransition>
 		  </div>
 	  );
 	}
