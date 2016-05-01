@@ -34,8 +34,6 @@ class EditTemplate extends React.Component {
 			"error": false
 		});
 
-		// var aa = Store;
-
 		Api.put({
 			url: {
 				name: 'template',
@@ -48,8 +46,8 @@ class EditTemplate extends React.Component {
 				}
 			}
 		}).then((res) => {
-			debugger
-			Store.get().templates.unshift(res);
+			_.findWhere(Store.get().templates, {id: res.id}).reset(res);
+			Store.get().template.reset(res);
 			Api.redirect(`/templates/view`);
 		}, (err) => {
 			Store.get().forms.template.set({
