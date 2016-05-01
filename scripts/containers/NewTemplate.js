@@ -65,6 +65,8 @@ class Template extends React.Component {
 	}
 
 	onDeleteAttributeButtonClick(attribute) {
+		let attribute_index = _.findIndex(Store.get().template.attributes, {id: attribute.id});
+		Store.get().template.attributes.splice(attribute_index, 1);
 	}
 
 	onAttributeFormCancelLinkPressed() {
@@ -74,7 +76,9 @@ class Template extends React.Component {
 	}
 
 	onAttributeFormSubmit(new_attribute, original_attribute) {
-		if (Object.keys(original_attribute).length) {
+		let user_is_editing_attribute = Object.keys(original_attribute).length;
+
+		if (user_is_editing_attribute) {
 			let attribute_to_update = _.findWhere(Store.get().forms.template.attributes, {id: new_attribute.id})
 
 			attribute_to_update.reset(new_attribute);

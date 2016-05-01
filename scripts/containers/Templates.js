@@ -56,5 +56,5 @@ Templates.defaultProps = {
 
 export default warmUp(Templates, [
 	['templates', 'templates'],
-	['loading', '/templates_loading']
+	['loading', 'templates_loading']
 ]);
