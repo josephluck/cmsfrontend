@@ -111,7 +111,8 @@ class EditTemplate extends React.Component {
 	  					link: '/templates/view'
 	  				},
 						{
-							name: this.props.template.title
+							name: this.props.template.title,
+							link: `/templates/${this.props.template.id}/view`
 						},
 						{
 	  					name: 'Edit'
