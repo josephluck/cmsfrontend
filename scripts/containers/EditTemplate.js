@@ -34,8 +34,7 @@ class EditTemplate extends React.Component {
 			"error": false
 		});
 
-		var aa = Store;
-		debugger
+		// var aa = Store;
 
 		Api.put({
 			url: {
@@ -49,6 +48,7 @@ class EditTemplate extends React.Component {
 				}
 			}
 		}).then((res) => {
+			debugger
 			Store.get().templates.unshift(res);
 			Api.redirect(`/templates/view`);
 		}, (err) => {
@@ -86,8 +86,7 @@ class EditTemplate extends React.Component {
 	}
 
 	onAttributeFormSubmit(new_attribute, original_attribute) {
-		var aa = Store;
-		if (original_attribute) {
+		if (Object.keys(original_attribute).length) {
 			let attribute_to_update = _.findWhere(Store.get().forms.template.attributes, {id: new_attribute.id})
 
 			attribute_to_update.reset(new_attribute);

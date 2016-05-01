@@ -94,24 +94,27 @@ class AttributeForm extends React.Component {
             </select>
           </FormInput>
 
-          <Spreadsheet
-            addNewRowText="Add another option"
-            onChange={this.onOptionsChange.bind(this)}
-            data={this.state.options}
-            input_models={[
-              {
-                type: 'input',
-                name: 'name',
-                label: 'Option name',
-                required: true
-              },
-              {
-                type: 'input',
-                name: 'value',
-                label: 'Option value',
-                required: true
-              }
-            ]} />
+          {this.state.show_options ?
+            <Spreadsheet
+              addNewRowText="Add another option"
+              onChange={this.onOptionsChange.bind(this)}
+              data={this.state.options}
+              input_models={[
+                {
+                  type: 'input',
+                  name: 'name',
+                  label: 'Option name',
+                  required: true
+                },
+                {
+                  type: 'input',
+                  name: 'value',
+                  label: 'Option value',
+                  required: true
+                }
+              ]} />
+            : null
+          }
         </div>
         <div className="modal-footer container text-align-right">
           <a href="" onClick={(e) => {
