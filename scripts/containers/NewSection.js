@@ -11,8 +11,33 @@ class NewSection extends React.Component {
 	constructor(props) {
 		super(props);
 		Store.get().forms.set({new_section: {
-			errors: {}
+			errors: {},
+			items: []
 		}})
+	}
+	submitSection(form) {
+		Store.get().forms.new_section.set({
+			"loading": true,
+			"error": false
+		});
+
+		form['page_id'] = Store.get().page.id;
+
+		Api.post({
+			url: {
+				name: 'sections'
+			},
+			payload: form
+		}).then((res) => {
+			Store.get().page.sections.unshift(res);
+			Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`);
+		}, (err) => {
+			Store.get().forms.new_section.set({
+				"loading": false,
+				"error": true,
+				"errors": err.errors
+			});
+		})
 	}
 	render() {
 	  return (
@@ -37,7 +62,7 @@ class NewSection extends React.Component {
 					]} />
 		  	<div className="container">
 		  		<SectionForm
-		  			onSubmit={submitSection}
+		  			onSubmit={this.submitSection}
 		  			state={this.props.form}>
 		  		</SectionForm>
 		  	</div>
@@ -46,40 +71,15 @@ class NewSection extends React.Component {
 	}
 }
 
-function submitSection(form) {
-	Store.get().forms.new_section.set({
-		"loading": true,
-		"error": false
-	});
-
-	form['page_id'] = Store.get().page.id;
-
-	Api.post({
-		url: {
-			name: 'sections'
-		},
-		payload: form
-	}).then((res) => {
-		Store.get().page.sections.unshift(res);
-		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`);
-	}, (err) => {
-		Store.get().forms.new_section.set({
-			"loading": false,
-			"error": true,
-			"errors": err.errors
-		});
-	})
-}
-
 NewSection.defaultProps = {
 	form: {
-		errors: {}
+		errors: {},
+		items: []
 	}
 }
 
 export default warmUp(NewSection, [
 	['site', 'site'],
 	['page', 'page'],
-	['form', 'forms', 'new_section'],
-	['submitSection', submitSection]
+	['form', 'forms', 'new_section']
 ]);

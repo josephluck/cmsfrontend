@@ -8,6 +8,12 @@ function SectionForm({
 	state,
   data
 }) {
+  var items = state.items;
+
+  if (data.items.length > 0) {
+    items = data.items;
+  }
+
   return (
   	<form name="section"
       onSubmit={(e) => {
@@ -22,6 +28,36 @@ function SectionForm({
           type="text" />
       </FormInput>
 
+      <div className="container flex vertical-align">
+        <h3 className="flex-1">Items</h3>
+        <a className="button add-another"
+          href=""
+          onClick={(e) => {
+            e.preventDefault();
+            onNewItemButtonClick();
+          }}>
+          {"New item"}
+        </a>
+      </div>
+
+      <ul className="list form-input">
+        {items.length ?
+          <div>
+            {items.map((item) => {
+              return (
+                <li className="list-item flex">
+                  <span className="flex-1 ellipsis">
+                    {item.title}
+                  </span>
+                </li>
+              )
+            })}
+          </div>
+          :
+          <li className="list-item">{"No items saved yet"}</li>
+        }
+      </ul>
+
       <div className="text-align-right">
   		  <button type="submit">
           {state.loading ? "Saving" : "Save"}
@@ -32,7 +68,9 @@ function SectionForm({
 }
 
 SectionForm.defaultProps = {
-  data: {}
+  data: {
+    items: []
+  }
 }
 
 export default SectionForm;
