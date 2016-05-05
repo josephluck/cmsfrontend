@@ -60,11 +60,16 @@ class NewSection extends React.Component {
 							name: 'New section'
 						}
 					]} />
-		  	<div className="container">
-		  		<SectionForm
-		  			onSubmit={this.submitSection}
-		  			state={this.props.form}>
-		  		</SectionForm>
+		  	<div className="container flex">
+		  		<div className="flex-2 right-margin">
+			  		<SectionForm
+			  			onSubmit={this.submitSection}
+			  			state={this.props.form}>
+			  		</SectionForm>
+			  	</div>
+			  	<div className="flex-1 left-margin">
+
+			  	</div>
 		  	</div>
 		  </div>
 	  );
