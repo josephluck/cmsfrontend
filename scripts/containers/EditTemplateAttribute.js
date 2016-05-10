@@ -1,5 +1,6 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
+import * as _ from 'underscore';
 import Store from 'store/Store';
 import Api from 'utils/Api';
 
@@ -14,6 +15,35 @@ class EditTemplateAttribute extends React.Component {
 		Store.get().forms.set({template_attribute: {
 			errors: {}
 		}})
+	}
+	submitTemplateAttribute(form) {
+		Store.get().forms.template_attribute.set({
+			"loading": true,
+			"error": false
+		});
+
+		form['field_template_id'] = Store.get().template.id;
+
+		Api.put({
+			url: {
+				name: 'template_attribute',
+				template_attribute_id: Store.get().template_attribute.id
+			},
+			payload: form
+		}).then((res) => {
+			let template_attribute_to_update = _.findWhere(Store.get().template.attributes, {id: res.id});
+			if (template_attribute_to_update) {
+				template_attribute_to_update.reset(res);
+			}
+			Store.get().template_attribute.reset(res);
+			Api.redirect(`/templates/${Store.get().template.id}/view`);
+		}, (err) => {
+			Store.get().forms.template_attribute.set({
+				"loading": false,
+				"error": true,
+				"errors": err.errors
+			});
+		})
 	}
 	render() {
 	  return (

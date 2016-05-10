@@ -11,6 +11,10 @@ class TemplateAttributeForm extends React.Component {
       show_options: false,
       options: props.data.options || []
     }
+
+    if (props.data.kind === "dropdown" || props.data.kind === "multi_select") {
+      this.state.show_options = true
+    }
   }
 
   onKindChange(e) {
