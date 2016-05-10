@@ -39,6 +39,23 @@ hr {
 	.container {
 		margin: @padding 0px;
 	}
+	&.page-container {
+		margin-bottom: 0px;
+		margin-right: 0px;
+		&.with-right-bar {
+	    position: absolute;
+	    top: 145px; // Compensate for top bar and breadcrumb bar
+	    left: 0px;
+	    bottom: 0px;
+	    right: 0px;
+		}
+	}
+}
+
+.right-bar {
+	margin-top: -20px;
+  border-left: solid @borderWidth @darkGray;
+  background: @pureWhite;
 }
 
 form {
