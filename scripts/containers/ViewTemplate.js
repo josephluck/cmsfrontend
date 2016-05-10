@@ -14,7 +14,6 @@ class ViewTemplate extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.template)
 	  return (
 	  	<div>
 				<MidBar

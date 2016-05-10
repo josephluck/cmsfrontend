@@ -44,21 +44,41 @@ class Spreadsheet extends React.Component {
 	};
 
 	prepareRowsForParent(rows, models) {
-		return rows.map((row, i) => {
-			let decorated_row = {
-				valid: true
-			}
+		let decorated_rows = [];
+		for (let row of rows) {
+			let row_valid = true;
+			let decorated_row = {};
 
-			row.cells.map((cell, x) => {
+			for (let cell of row.cells) {
 				if (cell.required && !cell.value) {
-					decorated_row.valid = false;
+					row_valid = false;
 				} else {
 					decorated_row[cell.name] = cell.value
 				}
-			})
+			}
 
-			return decorated_row
-		})
+			if (row_valid) {
+				decorated_rows.push(decorated_row);
+			}
+		}
+
+		// for (let row of rows) {
+		// 	let row_valid = true;
+		// 	let decorated_row = {};
+
+		// 	for (let cell of row.cells) {
+		// 		if (cell.required && !cell.value) {
+		// 			row_valid = false;
+		// 		}
+		// 	}
+
+		// 	if (row_valid) {
+		// 		decorated_rows.push(row.cells[1].value);
+		// 	}
+		// }
+
+		console.log(decorated_rows);
+		return decorated_rows;
 	};
 
 	addNewRow() {

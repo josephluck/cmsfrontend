@@ -39,7 +39,7 @@ class TemplateAttributeForm extends React.Component {
         onSubmit={(e) => {
       		e.preventDefault();
           let form_values = FormHelper.serialize(e.target);
-          form_values['options'] = this.state.options;
+          form_values['options'] = JSON.stringify(this.state.options);
       		this.props.onSubmit(form_values);
       	}}>
 
