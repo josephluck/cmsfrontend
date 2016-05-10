@@ -37,9 +37,36 @@ class ViewTemplate extends React.Component {
 							path: `/templates/${this.props.template.id}/edit`
 						}
 					]} />
-	  		<div className="container">
-	  			<h1>Testing</h1>
-			  </div>
+		  		<div className="container">
+		  			<Block loading={this.props.loading}>
+		  	  		<div className="container flex vertical-align">
+		  	  			<h3 className="flex-1">Attributes</h3>
+		  	  			<Link className="button"
+		  	  				to={`/templates/${this.props.template.id}/new_attribute`}>
+		  	  				{"New attribute"}
+		  	  			</Link>
+		  	  		</div>
+		  		  	<div className="container">
+		  		  		<NoResults noResults={!this.props.template.attributes.length}
+		  		  			name="attributes">
+		  		  			<ul className="list">
+			  		  			{this.props.template.attributes.map((attribute, i) => {
+			  		  				return (
+				  		  				<li key={i}
+				  		  					className="list-item flex">
+				  		  					<span className="flex-1 ellipsis">{attribute.name}</span>
+				  		  					<span className="flex-0 list-buttons">
+				  		  						<a href="">{"Edit"}</a>
+				  		  						<a href="">{"Delete"}</a>
+				  		  					</span>
+				  		  				</li>
+				  		  			)
+			  		  			})}
+			  		  		</ul>
+		  		  		</NoResults>
+		  		  	</div>
+				  	</Block>
+				  </div>
 
 			  <ModalTransition routes={this.props.routes}
 			  	route={this.props.route}>
@@ -58,12 +85,11 @@ function showHelp() {
 
 ViewTemplate.defaultProps = {
 	template: {
-		pages: []
+		attributes: []
 	}
 }
 
 export default warmUp(ViewTemplate, [
 	['template', 'template'],
-	['loading', 'template_loading'],
-	['help_showing', 'help_showing']
+	['loading', 'template_loading']
 ]);
