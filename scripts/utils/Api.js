@@ -142,6 +142,8 @@ function getApiUrl(options) {
     case 'template':
       return API_ROOT + `field_templates/${options.template_id}`;
       break;
+    case 'template_attributes':
+      return API_ROOT + `field_template_attributes`;
     case 'users':
       return API_ROOT + 'users';
       break;

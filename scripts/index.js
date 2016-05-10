@@ -19,6 +19,8 @@ import Template from 'containers/Template';
 import ViewTemplate from 'containers/ViewTemplate';
 import EditTemplate from 'containers/EditTemplate';
 import DeleteTemplate from 'containers/DeleteTemplate';
+// Template attributes
+import NewTemplateAttribute from 'containers/NewTemplateAttribute';
 
 // Settings
 import Settings from 'containers/Settings';
@@ -88,6 +90,7 @@ render((
         <Route path="view" component={ViewTemplate}>
           <Route path="delete" component={DeleteTemplate} />
         </Route>
+        <Route path="new_attribute" component={NewTemplateAttribute} />
         <Route path="edit" component={EditTemplate} />
       </Route>
     </Route>
