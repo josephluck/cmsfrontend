@@ -56,7 +56,7 @@ class ViewTemplate extends React.Component {
 				  		  					className="list-item flex">
 				  		  					<span className="flex-1 ellipsis">{attribute.name}</span>
 				  		  					<span className="flex-0 list-buttons">
-				  		  						<a href="">{"Edit"}</a>
+				  		  						<Link to={`/templates/${this.props.template.id}/attributes/${attribute.id}/edit`}>{"Edit"}</Link>
 				  		  						<a href="">{"Delete"}</a>
 				  		  					</span>
 				  		  				</li>

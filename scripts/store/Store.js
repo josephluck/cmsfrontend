@@ -11,6 +11,7 @@ export default new Freezer({
 	template: {
 		attributes: []
 	},
+	template_attribute: {},
 	sites: [],
 	site: {
 		pages: []

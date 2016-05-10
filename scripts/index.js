@@ -21,6 +21,8 @@ import EditTemplate from 'containers/EditTemplate';
 import DeleteTemplate from 'containers/DeleteTemplate';
 // Template attributes
 import NewTemplateAttribute from 'containers/NewTemplateAttribute';
+import TemplateAttribute from 'containers/TemplateAttribute';
+import EditTemplateAttribute from 'containers/EditTemplateAttribute';
 
 // Settings
 import Settings from 'containers/Settings';
@@ -90,8 +92,13 @@ render((
         <Route path="view" component={ViewTemplate}>
           <Route path="delete" component={DeleteTemplate} />
         </Route>
-        <Route path="new_attribute" component={NewTemplateAttribute} />
         <Route path="edit" component={EditTemplate} />
+        <Route path="new_attribute" component={NewTemplateAttribute} />
+        <Route path="attributes">
+          <Route path=":template_attribute_id" component={TemplateAttribute}>
+            <Route path="edit" component={EditTemplateAttribute} />
+          </Route>
+        </Route>
       </Route>
     </Route>
 

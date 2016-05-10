@@ -131,7 +131,6 @@ function getApiUrl(options) {
         return API_ROOT + `sessions/${options.token}`;
       }
       return API_ROOT + 'sessions';
-
       break;
     case 'company':
       return API_ROOT + `companies/${options.id}`;
@@ -144,6 +143,8 @@ function getApiUrl(options) {
       break;
     case 'template_attributes':
       return API_ROOT + `field_template_attributes`;
+    case 'template_attribute':
+      return API_ROOT + `field_template_attributes/${options.template_attribute_id}`;
     case 'users':
       return API_ROOT + 'users';
       break;
