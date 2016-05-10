@@ -8,24 +8,14 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import TemplateForm from 'components/TemplateForm';
-import AttributeForm from 'components/AttributeForm';
 import {ModalTransition} from 'components/Transitions';
 
 class EditTemplate extends React.Component {
 	constructor(props) {
 		super(props);
 		Store.get().forms.set({template: {
-			errors: {},
-			attributes: []
+			errors: {}
 		}})
-	}
-	componentWillReceiveProps(props) {
-		if (props.template.id && !Store.get().forms.template.id) {
-			Store.get().forms.set({template: {
-				errors: {},
-				...props.template
-			}})
-		}
 	}
 
 	submitTemplate(form) {
@@ -40,63 +30,21 @@ class EditTemplate extends React.Component {
 				template_id: Store.get().template.id
 			},
 			payload: {
-				field_template: {
-					...form,
-					attributes: Store.get().forms.template.attributes
-				}
+				field_template: form
 			}
 		}).then((res) => {
-			_.findWhere(Store.get().templates, {id: res.id}).reset(res);
+			let template_to_update = _.findWhere(Store.get().templates, {id: res.id});
+			if (template_to_update) {
+				template_to_update.reset(res);
+			}
 			Store.get().template.reset(res);
-			Api.redirect(`/templates/view`);
+			Api.redirect(`/templates/${res.id}/view`);
 		}, (err) => {
 			Store.get().forms.template.set({
 				"loading": false,
 				"error": true,
 				"errors": err.errors
 			});
-		})
-	}
-
-	onNewAttributeButtonClick() {
-		Store.get().set({
-			attribute_form_showing: "yes",
-			attribute_currently_editing: {}
-		})
-	}
-
-	onEditAttributeButtonClick(attribute) {
-		Store.get().set({
-			attribute_currently_editing: attribute
-		})
-		Store.get().set({
-			attribute_form_showing: "yes"
-		})
-	}
-
-	onDeleteAttributeButtonClick(attribute) {
-		let attribute_index = _.findIndex(Store.get().template.attributes, {id: attribute.id});
-		Store.get().template.attributes.splice(attribute_index, 1);
-	}
-
-	onAttributeFormCancelLinkPressed() {
-		Store.get().set({
-			attribute_form_showing: "no"
-		})
-	}
-
-	onAttributeFormSubmit(new_attribute, original_attribute) {
-		let user_is_editing_attribute = Object.keys(original_attribute).length;
-
-		if (user_is_editing_attribute) {
-			let attribute_to_update = _.findWhere(Store.get().forms.template.attributes, {id: new_attribute.id})
-
-			attribute_to_update.reset(new_attribute);
-		} else {
-			Store.get().forms.template.attributes.push(new_attribute);
-		}
-		Store.get().set({
-			attribute_form_showing: "no"
 		})
 	}
 
@@ -126,24 +74,10 @@ class EditTemplate extends React.Component {
 	  			<Block loading={!this.props.template.title}>
 			  		<TemplateForm
 			  			onSubmit={this.submitTemplate.bind(this)}
-			  			onNewAttributeButtonClick={this.onNewAttributeButtonClick.bind(this)}
-			  			onEditAttributeButtonClick={this.onEditAttributeButtonClick.bind(this)}
-			  			onDeleteAttributeButtonClick={this.onDeleteAttributeButtonClick.bind(this)}
 			  			state={this.props.form}
 			  			data={this.props.template}></TemplateForm>
 			  	</Block>
 		  	</div>
-	  		<ModalTransition transitionKey={this.props.attribute_form_showing}>
-	  			{this.props.attribute_form_showing === "yes" ?
-	  				<AttributeForm
-	  					attributeCurrentlyEditing={attribute_currently_editing || {}}
-	  					onCancel={this.onAttributeFormCancelLinkPressed.bind(this)}
-	  					onSubmit={this.onAttributeFormSubmit.bind(this)}
-	  					title={"New attribute"}>
-	  				</AttributeForm>
-	  				: <div></div>
-	  			}
-	  		</ModalTransition>
 		  </div>
 	  );
 	}
@@ -151,15 +85,11 @@ class EditTemplate extends React.Component {
 
 EditTemplate.defaultProps = {
 	form: {
-		errors: {},
-		attributes: [],
-		attribute_currently_editing: {}
+		errors: {}
 	}
 }
 
 export default warmUp(EditTemplate, [
 	['template', 'template'],
-	['form', 'forms', 'template'],
-	['attribute_form_showing', 'attribute_form_showing'],
-	['attribute_currently_editing', 'attribute_currently_editing']
+	['form', 'forms', 'template']
 ]);
