@@ -1,5 +1,6 @@
 import React from 'react';
 import FormHelper from 'utils/FormHelper';
+import * as _ from 'underscore';
 
 import FormInput from 'components/FormInput';
 import { Link } from 'react-router';
@@ -10,7 +11,8 @@ class ItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {}
+      data: {},
+      fields: []
     }
   }
 
@@ -20,12 +22,14 @@ class ItemForm extends React.Component {
   }
 
   onSelectedTemplateChange(e) {
-    console.log(e.target.value);
-    debugger
+    let selected_template = _.findWhere(this.props.templates, {id: parseInt(e.target.value)});
+
+    this.setState({
+      selected_template: selected_template
+    })
   }
 
   render() {
-    console.log(this.props.templates);
     return (
       <form name="item"
         onSubmit={(e) => {
@@ -38,9 +42,11 @@ class ItemForm extends React.Component {
             onChange={(e) => {
               this.onSelectedTemplateChange(e);
             }}>
-            {this.props.templates.map((template) => {
+            <option disabled selected>Please select a template</option>
+            {this.props.templates.map((template, i) => {
               return (
-                <option value={template.id}>
+                <option key={i}
+                  value={template.id}>
                   {template.title}
                 </option>
               )
@@ -54,20 +60,45 @@ class ItemForm extends React.Component {
             defaultValue={this.state.data.title} />
         </FormInput>
 
-
-        <FormInput>
-          <Editor theme="snow"
-            value="">
-            <Editor.Toolbar key="toolbar"
-              ref="toolbar"
-              items={Editor.Toolbar.defaultItems} />
-            <div key="editor"
-              ref="editor"
-              className="quill-contents"
-              dangerouslySetInnerHTML={{__html: "blah"}} />
-          </Editor>
-          <div className="clearfix"></div>
-        </FormInput>
+        {this.state.selected_template ?
+          <div>
+            {this.state.selected_template.attributes.map((attribute, i) => {
+              if (attribute.kind === "text") {
+                return (
+                  <FormInput title={attribute.name}>
+                    <Editor theme="snow"
+                      value="">
+                      <Editor.Toolbar key="toolbar"
+                        ref="toolbar"
+                        items={Editor.Toolbar.defaultItems} />
+                      <div key="editor"
+                        ref="editor"
+                        className="quill-contents"
+                        dangerouslySetInnerHTML={{__html: "blah"}} />
+                    </Editor>
+                    <div className="clearfix"></div>
+                  </FormInput>
+                )
+              } else {
+                return (
+                  <FormInput title={attribute.name}>
+                    <select>
+                      {attribute.options.map((option, option_index) => {
+                        return (
+                          <option key={option_index}
+                            value={option.value}>
+                            {option.name}
+                          </option>
+                        )
+                      })}
+                    </select>
+                  </FormInput>
+                )
+              }
+            })}
+          </div>
+          : null
+        }
 
         <div className="text-align-right">
           <button type="submit" className="left-margin">
