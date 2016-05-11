@@ -18,7 +18,7 @@ class ItemForm extends React.Component {
 
   onSubmit(e) {
     debugger
-    this.props.onSubmit(this.state.data.toJS());
+    // this.props.onSubmit(this.state.data.toJS());
   }
 
   onSelectedTemplateChange(e) {
@@ -28,6 +28,12 @@ class ItemForm extends React.Component {
       selected_template: selected_template,
       fields: [{}]
     })
+  }
+
+  handleAddAnother(e) {
+    e.preventDefault();
+    this.state.fields.push({});
+    this.forceUpdate();
   }
 
   render() {
@@ -65,23 +71,14 @@ class ItemForm extends React.Component {
           <div>
             {this.state.fields.map((field, field_index) => {
               return (
-                <div key={field_index}>
+                <div key={field_index}
+                  className="form-input-group">
                   {this.state.selected_template.attributes.map((attribute, attribute_index) => {
                     if (attribute.kind === "text") {
                       return (
                         <FormInput key={attribute_index}
                           title={attribute.name}>
-                          <Editor theme="snow"
-                            value="">
-                            <Editor.Toolbar key="toolbar"
-                              ref="toolbar"
-                              items={Editor.Toolbar.defaultItems} />
-                            <div key="editor"
-                              ref="editor"
-                              className="quill-contents"
-                              dangerouslySetInnerHTML={{__html: "blah"}} />
-                          </Editor>
-                          <div className="clearfix"></div>
+                          <input type="text" />
                         </FormInput>
                       )
                     } else {
@@ -105,6 +102,11 @@ class ItemForm extends React.Component {
                 </div>
               )
             })}
+
+            <button className="add-another"
+              onClick={this.handleAddAnother.bind(this)}>
+              {"Add another"}
+            </button>
           </div>
           : null
         }
@@ -128,3 +130,18 @@ ItemForm.defaultProps = {
 }
 
 export default ItemForm;
+
+
+
+
+// <Editor theme="snow"
+//   value="">
+//   <Editor.Toolbar key="toolbar"
+//     ref="toolbar"
+//     items={Editor.Toolbar.defaultItems} />
+//   <div key="editor"
+//     ref="editor"
+//     className="quill-contents"
+//     dangerouslySetInnerHTML={{__html: "blah"}} />
+// </Editor>
+// <div className="clearfix"></div>
