@@ -6,6 +6,7 @@ import Api from 'utils/Api';
 import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import ItemForm from 'components/ItemForm';
+import Block from 'components/Block';
 
 class NewItem extends React.Component {
 	constructor(props) {
@@ -16,6 +17,19 @@ class NewItem extends React.Component {
 				fields: []
 			}
 		}})
+	}
+	componentWillMount() {
+	  Api.get({
+	    url: {
+	      name: 'templates'
+	    }
+	  }).then((body) => {
+	    Store.get().templates.reset(body);
+	    Store.get().set({templates_loading: false})
+	  }, (err) => {
+	    Store.get().templates.reset([]);
+	    Store.get().set({templates_loading: false})
+	  });
 	}
 	componentWillUnmount() {
 		Store.get().forms.new_item.reset({
@@ -52,11 +66,14 @@ class NewItem extends React.Component {
 					]} />
 
 		  	<div className="container">
-		  		<ItemForm
-		  			onSubmit={this.props.submitItem}
-		  			state={this.props.form}
-		  			loading={false}>
-		  		</ItemForm>
+		  		<Block loading={this.props.templates_loading}>
+			  		<ItemForm
+			  			onSubmit={this.props.submitItem}
+			  			state={this.props.form}
+			  			templates={this.props.templates.toJS()}
+			  			loading={false}>
+			  		</ItemForm>
+			  	</Block>
 		  	</div>
 		  </div>
 	  );
@@ -101,6 +118,8 @@ export default warmUp(NewItem, [
 	['site', 'site'],
 	['page', 'page'],
 	['section', 'section'],
+	['templates', 'templates'],
+	['loading', 'templates_loading'],
 	['form', 'forms', 'new_item'],
 	['submitItem', submitItem]
 ]);

@@ -19,13 +19,34 @@ class ItemForm extends React.Component {
     this.props.onSubmit(this.state.data.toJS());
   }
 
+  onSelectedTemplateChange(e) {
+    console.log(e.target.value);
+    debugger
+  }
+
   render() {
+    console.log(this.props.templates);
     return (
       <form name="item"
         onSubmit={(e) => {
           e.preventDefault();
           this.onSubmit(e);
         }}>
+
+        <FormInput title="Template">
+          <select name="selected_template"
+            onChange={(e) => {
+              this.onSelectedTemplateChange(e);
+            }}>
+            {this.props.templates.map((template) => {
+              return (
+                <option value={template.id}>
+                  {template.title}
+                </option>
+              )
+            })}
+          </select>
+        </FormInput>
 
         <FormInput title="Title">
           <input name="title"
