@@ -7,7 +7,6 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import SectionForm from 'components/SectionForm';
-import UseTemplatesList from 'components/UseTemplatesList';
 import {ModalTransition} from 'components/Transitions';
 
 class NewSection extends React.Component {
@@ -17,30 +16,6 @@ class NewSection extends React.Component {
 			errors: {},
 			items: []
 		}})
-	}
-	componentWillMount() {
-		Api.get({
-			url: {
-				name: 'templates'
-			}
-		}).then((body) => {
-			Store.get().templates.reset(body);
-			Store.get().set({templates_loading: false})
-		}, (err) => {
-			Store.get().templates.reset([]);
-			Store.get().set({templates_loading: false})
-		});
-	}
-	onUseTemplateClick(template) {
-		Store.get().set({
-			template_currently_using: template,
-			item_form_showing: "yes"
-		})
-	}
-	onItemFormCancelLinkPressed() {
-		Store.get().set({
-			item_form_showing: "no"
-		})
 	}
 	submitSection(form) {
 		Store.get().forms.new_section.set({
@@ -87,28 +62,12 @@ class NewSection extends React.Component {
 							name: 'New section'
 						}
 					]} />
-		  	<div className="container flex page-container with-right-bar">
-		  		<div className="flex-2 right-margin">
+		  	<div className="container flex">
+		  		<div className="flex-1">
 			  		<SectionForm
 			  			onSubmit={this.submitSection}
 			  			state={this.props.form}>
 			  		</SectionForm>
-
-			  		<ModalTransition transitionKey={this.props.item_form_showing}>
-			  			{this.props.item_form_showing === "yes" ?
-			  				<div>
-			  					{"Testing"}
-			  				</div>
-			  				: <div></div>
-			  			}
-			  		</ModalTransition>
-			  	</div>
-			  	<div className="flex-1 left-margin overflow-hidden right-bar">
-			  		<Block loading={this.props.loading}>
-			  			<UseTemplatesList templates={this.props.templates}
-			  				onUseClick={this.onUseTemplateClick.bind(this)}>
-			  			</UseTemplatesList>
-			  		</Block>
 			  	</div>
 		  	</div>
 		  </div>
@@ -117,20 +76,13 @@ class NewSection extends React.Component {
 }
 
 NewSection.defaultProps = {
-	templates: [],
 	form: {
-		errors: {},
-		items: []
-	},
-	template_currently_using: {},
-	item_form_showing: "no"
+		errors: {}
+	}
 }
 
 export default warmUp(NewSection, [
 	['site', 'site'],
 	['page', 'page'],
-	['templates', 'templates'],
-	['loading', 'templates_loading'],
-	['form', 'forms', 'new_section'],
-	['item_form_showing', 'item_form_showing']
+	['form', 'forms', 'new_section']
 ]);
