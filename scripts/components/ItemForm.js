@@ -25,7 +25,8 @@ class ItemForm extends React.Component {
     let selected_template = _.findWhere(this.props.templates, {id: parseInt(e.target.value)});
 
     this.setState({
-      selected_template: selected_template
+      selected_template: selected_template,
+      fields: [{}]
     })
   }
 
@@ -62,39 +63,47 @@ class ItemForm extends React.Component {
 
         {this.state.selected_template ?
           <div>
-            {this.state.selected_template.attributes.map((attribute, i) => {
-              if (attribute.kind === "text") {
-                return (
-                  <FormInput title={attribute.name}>
-                    <Editor theme="snow"
-                      value="">
-                      <Editor.Toolbar key="toolbar"
-                        ref="toolbar"
-                        items={Editor.Toolbar.defaultItems} />
-                      <div key="editor"
-                        ref="editor"
-                        className="quill-contents"
-                        dangerouslySetInnerHTML={{__html: "blah"}} />
-                    </Editor>
-                    <div className="clearfix"></div>
-                  </FormInput>
-                )
-              } else {
-                return (
-                  <FormInput title={attribute.name}>
-                    <select>
-                      {attribute.options.map((option, option_index) => {
-                        return (
-                          <option key={option_index}
-                            value={option.value}>
-                            {option.name}
-                          </option>
-                        )
-                      })}
-                    </select>
-                  </FormInput>
-                )
-              }
+            {this.state.fields.map((field, field_index) => {
+              return (
+                <div key={field_index}>
+                  {this.state.selected_template.attributes.map((attribute, attribute_index) => {
+                    if (attribute.kind === "text") {
+                      return (
+                        <FormInput key={attribute_index}
+                          title={attribute.name}>
+                          <Editor theme="snow"
+                            value="">
+                            <Editor.Toolbar key="toolbar"
+                              ref="toolbar"
+                              items={Editor.Toolbar.defaultItems} />
+                            <div key="editor"
+                              ref="editor"
+                              className="quill-contents"
+                              dangerouslySetInnerHTML={{__html: "blah"}} />
+                          </Editor>
+                          <div className="clearfix"></div>
+                        </FormInput>
+                      )
+                    } else {
+                      return (
+                        <FormInput key={attribute_index}
+                          title={attribute.name}>
+                          <select>
+                            {attribute.options.map((option, option_index) => {
+                              return (
+                                <option key={option_index}
+                                  value={option.value}>
+                                  {option.name}
+                                </option>
+                              )
+                            })}
+                          </select>
+                        </FormInput>
+                      )
+                    }
+                  })}
+                </div>
+              )
             })}
           </div>
           : null
