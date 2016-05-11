@@ -72,7 +72,10 @@ class ItemForm extends React.Component {
             {this.state.fields.map((field, field_index) => {
               return (
                 <div key={field_index}
-                  className="form-input-group">
+                  className="form-input-group relative">
+                  <div className="remove-template-icon">
+                    <span className="ss-delete"></span>
+                  </div>
                   {this.state.selected_template.attributes.map((attribute, attribute_index) => {
                     if (attribute.kind === "text") {
                       return (
