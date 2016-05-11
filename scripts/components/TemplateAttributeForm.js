@@ -62,24 +62,27 @@ class TemplateAttributeForm extends React.Component {
         </FormInput>
 
         {this.state.show_options ?
-          <Spreadsheet
-            addNewRowText="Add another option"
-            onChange={this.onOptionsChange.bind(this)}
-            data={this.state.options}
-            input_models={[
-              {
-                type: 'input',
-                name: 'name',
-                label: 'Option name',
-                required: true
-              },
-              {
-                type: 'input',
-                name: 'value',
-                label: 'Option value',
-                required: true
-              }
-            ]} />
+          <FormInput>
+            <Spreadsheet
+              addNewRowText="Add another option"
+              onChange={this.onOptionsChange.bind(this)}
+              data={this.state.options}
+              input_models={[
+                {
+                  type: 'input',
+                  name: 'name',
+                  label: 'Option name',
+                  required: true
+                },
+                {
+                  type: 'input',
+                  name: 'value',
+                  label: 'Option value',
+                  required: true
+                }
+              ]}>
+            </Spreadsheet>
+          </FormInput>
           : null
         }
 
