@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import SectionForm from 'components/SectionForm';
-import TemplatesList from 'components/TemplatesList';
+import UseTemplatesList from 'components/UseTemplatesList';
 import {ModalTransition} from 'components/Transitions';
 
 class NewSection extends React.Component {
@@ -33,9 +33,7 @@ class NewSection extends React.Component {
 	}
 	onUseTemplateClick(template) {
 		Store.get().set({
-			template_currently_using: template
-		})
-		Store.get().set({
+			template_currently_using: template,
 			item_form_showing: "yes"
 		})
 	}
@@ -95,25 +93,24 @@ class NewSection extends React.Component {
 			  			onSubmit={this.submitSection}
 			  			state={this.props.form}>
 			  		</SectionForm>
+
+			  		<ModalTransition transitionKey={this.props.item_form_showing}>
+			  			{this.props.item_form_showing === "yes" ?
+			  				<div>
+			  					{"Testing"}
+			  				</div>
+			  				: <div></div>
+			  			}
+			  		</ModalTransition>
 			  	</div>
 			  	<div className="flex-1 left-margin overflow-hidden right-bar">
 			  		<Block loading={this.props.loading}>
-			  			<TemplatesList templates={this.props.templates}
-			  				use={true}
+			  			<UseTemplatesList templates={this.props.templates}
 			  				onUseClick={this.onUseTemplateClick.bind(this)}>
-			  			</TemplatesList>
+			  			</UseTemplatesList>
 			  		</Block>
 			  	</div>
 		  	</div>
-
-		  	<ModalTransition transitionKey={this.props.item_form_showing}>
-		  		{this.props.item_form_showing === "yes" ?
-		  			<div>
-		  				{"Testing"}
-		  			</div>
-		  			: <div></div>
-		  		}
-		  	</ModalTransition>
 		  </div>
 	  );
 	}
@@ -134,5 +131,6 @@ export default warmUp(NewSection, [
 	['page', 'page'],
 	['templates', 'templates'],
 	['loading', 'templates_loading'],
-	['form', 'forms', 'new_section']
+	['form', 'forms', 'new_section'],
+	['item_form_showing', 'item_form_showing']
 ]);
