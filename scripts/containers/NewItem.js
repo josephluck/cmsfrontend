@@ -13,7 +13,7 @@ class NewItem extends React.Component {
 		Store.get().forms.set({new_item: {
 			errors: {},
 			data: {
-				fields: [{}]
+				fields: []
 			}
 		}})
 	}
@@ -21,7 +21,7 @@ class NewItem extends React.Component {
 		Store.get().forms.new_item.reset({
 			errors: {},
 			data: {
-				fields: [{}]
+				fields: []
 			}
 		})
 	}
@@ -54,11 +54,8 @@ class NewItem extends React.Component {
 		  	<div className="container">
 		  		<ItemForm
 		  			onSubmit={this.props.submitItem}
-		  			onTitleType={this.props.onTitleType}
-		  			addAnotherField={this.props.addAnotherField}
-		  			removeField={this.props.removeField}
-		  			onFieldContentType={this.props.onFieldContentType}
-		  			state={this.props.form}>
+		  			state={this.props.form}
+		  			loading={false}>
 		  		</ItemForm>
 		  	</div>
 		  </div>
@@ -91,31 +88,11 @@ function submitItem(form) {
 	})
 }
 
-function onTitleType(title) {
-	Store.get().forms.new_item.data.set({
-		title: title
-	})
-}
-
-function addAnotherField() {
-	Store.get().forms.new_item.data.fields.push({});
-}
-
-function removeField(i) {
-	Store.get().forms.new_item.data.fields.splice(i, 1);
-}
-
-function onFieldContentType(i, content) {
-	Store.get().forms.new_item.data.fields[i].set({
-		content: content
-	})
-}
-
 NewItem.defaultProps = {
 	form: {
 		errors: {},
 		data: {
-			fields: [{}]
+			fields: []
 		}
 	}
 }
@@ -125,9 +102,5 @@ export default warmUp(NewItem, [
 	['page', 'page'],
 	['section', 'section'],
 	['form', 'forms', 'new_item'],
-	['submitItem', submitItem],
-	['onTitleType', onTitleType],
-	['addAnotherField', addAnotherField],
-	['removeField', removeField],
-	['onFieldContentType', onFieldContentType]
+	['submitItem', submitItem]
 ]);
