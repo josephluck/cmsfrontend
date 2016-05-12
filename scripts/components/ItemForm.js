@@ -26,7 +26,7 @@ class ItemForm extends React.Component {
 
     this.setState({
       selected_template: selected_template,
-      fields: [{}]
+      fields: [{}] // At this state, we can place default values for the field (only if the attribute has a default value)
     })
   }
 
@@ -125,7 +125,7 @@ class ItemForm extends React.Component {
 
             <button className="add-another"
               onClick={this.handleAddAnother.bind(this)}>
-              {"Add another"}
+              {"Add another "} {this.state.selected_template.title.toLowerCase()}
             </button>
           </div>
           : null
