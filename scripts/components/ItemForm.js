@@ -84,12 +84,15 @@ class ItemForm extends React.Component {
               return (
                 <div key={field_index}
                   className="form-input-group relative">
-                  <div className="remove-template-icon"
-                    onClick={(e) => {
-                      this.handleRemoveField(field_index)
-                    }}>
-                    <span className="ss-delete"></span>
-                  </div>
+                  {this.state.fields.length > 1 ?
+                    <div className="remove-template-icon"
+                      onClick={(e) => {
+                        this.handleRemoveField(field_index)
+                      }}>
+                      <span className="ss-delete"></span>
+                    </div>
+                    : null
+                  }
                   {this.state.selected_template.attributes.map((attribute, attribute_index) => {
                     if (attribute.kind === "text") {
                       return (
