@@ -36,6 +36,17 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
+  handleRemoveField(field_index) {
+    this.state.fields.splice(field_index, 1);
+    this.forceUpdate();
+  }
+
+  handleFieldAttributeChange(attribute, field_index, e) {
+    let value = e.target.value;
+    this.state.fields[field_index][attribute.name] = value;
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <form name="item"
@@ -73,7 +84,10 @@ class ItemForm extends React.Component {
               return (
                 <div key={field_index}
                   className="form-input-group relative">
-                  <div className="remove-template-icon">
+                  <div className="remove-template-icon"
+                    onClick={(e) => {
+                      this.handleRemoveField(field_index)
+                    }}>
                     <span className="ss-delete"></span>
                   </div>
                   {this.state.selected_template.attributes.map((attribute, attribute_index) => {
@@ -81,14 +95,17 @@ class ItemForm extends React.Component {
                       return (
                         <FormInput key={attribute_index}
                           title={attribute.name}>
-                          <input type="text" />
+                          <input type="text"
+                            value={field[attribute.name]}
+                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
                         </FormInput>
                       )
                     } else {
                       return (
                         <FormInput key={attribute_index}
                           title={attribute.name}>
-                          <select>
+                          <select value={field[attribute.name]}
+                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
                             {attribute.options.map((option, option_index) => {
                               return (
                                 <option key={option_index}
