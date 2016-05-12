@@ -122,16 +122,20 @@ class ItemForm extends React.Component {
                 </div>
               )
             })}
-
-            <button className="add-another"
-              onClick={this.handleAddAnother.bind(this)}>
-              {"Add another "} {this.state.selected_template.title.toLowerCase()}
-            </button>
           </div>
           : null
         }
 
-        <div className="text-align-right">
+        <div className="flex">
+          <div className="flex-1">
+            {this.state.selected_template ?
+              <button className="add-another"
+                onClick={this.handleAddAnother.bind(this)}>
+                {"Add another "} {this.state.selected_template.title.toLowerCase()}
+              </button>
+              : null
+            }
+          </div>
           <button type="submit" className="left-margin">
             {this.props.loading ? "Saving" : "Save"}
           </button>
