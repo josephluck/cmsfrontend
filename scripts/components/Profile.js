@@ -13,51 +13,61 @@ function Profile({
 	openDropdown,
 	closeDropdown
 }) {
+	let dropdown_class = "dropdown-menu";
+	let dropdown_wrap_class = "dropdown-menu-wrap";
+
+	if (dropdownOpen) {
+		dropdown_class += " open";
+		dropdown_wrap_class += " open";
+	}
   return (
-  	<span>
-  		{user.email}
-  		{dropdownOpen ?
-  			<span>
+  	<span className={dropdown_wrap_class}>
+			<span>
 				  <a href=""
 				  	className="left-margin"
-				  	onClick={closeDropdown.bind(true)}>
-				  	{"Close"}
+				  	onClick={(e) => {
+				  		e.preventDefault();
+				  		if (dropdownOpen) {
+				  			closeDropdown();
+				  		} else {
+				  			openDropdown();
+				  		}
+				  	}}>
+				  	{dropdownOpen ?
+				  		"Close"
+				  		:
+				  		"Menu"
+				  	}
+				  	<span className="ss-navigateup"></span>
 				  </a>
-    			<div className="dropdown-menu">
-  			  	<Link to="/sites/view"
-  			  		className="menu-item"
-  			  		onClick={closeDropdown}>
-  			  		{"Sites"}
-  			  	</Link>
-  			  	<Link to="/templates/view"
-  			  		className="menu-item"
-  			  		onClick={closeDropdown}>
-  			  		{"Templates"}
-  			  	</Link>
-  			  	<Link to="/users/view"
-  			  		className="menu-item"
-  			  		onClick={closeDropdown}>
-  			  		{"Users"}
-  			  	</Link>
-  			  	<Link to="/settings/view"
-  			  		className="menu-item"
-  			  		onClick={closeDropdown}>
-  			  		{"Settings"}
-  			  	</Link>
-  			  	<a href=""
-  			  		className="menu-item"
-  			  		onClick={onLogoutClick}>
-  			  		{"Logout"}
-  			  	</a>
-  			  </div>
-				</span>
-		  	:
-		  	<a href=""
-		  		className="left-margin"
-		  		onClick={openDropdown}>
-		  		{"Menu"}
-		  	</a>
-		  }
+  			<div className={dropdown_class}>
+			  	<Link to="/sites/view"
+			  		className="menu-item"
+			  		onClick={closeDropdown}>
+			  		{"Sites"}
+			  	</Link>
+			  	<Link to="/templates/view"
+			  		className="menu-item"
+			  		onClick={closeDropdown}>
+			  		{"Templates"}
+			  	</Link>
+			  	<Link to="/users/view"
+			  		className="menu-item"
+			  		onClick={closeDropdown}>
+			  		{"Users"}
+			  	</Link>
+			  	<Link to="/settings/view"
+			  		className="menu-item"
+			  		onClick={closeDropdown}>
+			  		{"Settings"}
+			  	</Link>
+			  	<a href=""
+			  		className="menu-item"
+			  		onClick={onLogoutClick}>
+			  		{"Logout"}
+			  	</a>
+			  </div>
+			</span>
 	  </span>
   );
 }
@@ -83,17 +93,13 @@ function onLogoutClick(e) {
 	})
 }
 
-function openDropdown(e) {
-	e.preventDefault();
+function openDropdown() {
 	Store.get().set({
 		profileDropdownOpen: true
 	})
 }
 
-function closeDropdown(e, rid, should_prevent) {
-	if (should_prevent) {
-		e.preventDefault();
-	};
+function closeDropdown() {
 	Store.get().set({
 		profileDropdownOpen: false
 	})

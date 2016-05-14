@@ -8,12 +8,12 @@ class Breadcrumbs extends React.Component {
 
 	render() {
 	  return (
-	  	<h3>
+	  	<h3 className="breadcrumbs">
 		  	{this.props.breadcrumbs.map((crumb, i) => {
 	  			return (
 	  				<span key={i}>
 		  				{i > 0 ?
-		  					<span>{" / "}</span>
+		  					<span className="breadcrumb-breaker ss-navigateright">{""}</span>
 		  					: null
 		  				}
 	  					{crumb.name ?
