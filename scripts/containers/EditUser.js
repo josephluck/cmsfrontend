@@ -22,7 +22,7 @@ class EditUser extends React.Component {
   				breadcrumbs={[
 						{
 							name: 'Users',
-							link: 'users/view'
+							link: '/users/view'
 						},
 						{
 							name: 'Change password'
