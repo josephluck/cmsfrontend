@@ -17,8 +17,10 @@ class ItemForm extends React.Component {
   }
 
   onSubmit(e) {
-    debugger
-    // this.props.onSubmit(this.state.data.toJS());
+    var item = FormHelper.serialize(e.target)
+
+    item['fields'] = this.state.fields;
+    this.props.onSubmit(item);
   }
 
   onSelectedTemplateChange(e) {
@@ -56,7 +58,7 @@ class ItemForm extends React.Component {
         }}>
 
         <FormInput title="Template">
-          <select name="selected_template"
+          <select name="field_template_id"
             onChange={(e) => {
               this.onSelectedTemplateChange(e);
             }}>

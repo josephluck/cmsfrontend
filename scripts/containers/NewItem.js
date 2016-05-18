@@ -94,6 +94,7 @@ function submitItem(form) {
 		},
 		payload: form
 	}).then((res) => {
+		console.log(res);
 		Store.get().section.items.push(res);
 		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`);
 	}, (err) => {
