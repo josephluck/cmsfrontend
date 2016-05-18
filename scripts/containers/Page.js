@@ -29,7 +29,9 @@ class Page extends React.Component {
 	}
 
 	componentWillUnmount() {
-		Store.get().page.reset({})
+		Store.get().page.reset({
+			sections: []
+		});
 	}
 
 	render() {

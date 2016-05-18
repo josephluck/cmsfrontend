@@ -154,7 +154,7 @@ class ItemForm extends React.Component {
             }
           </div>
           <button type="submit" className="left-margin">
-            {this.props.loading ? "Saving" : "Save"}
+            {this.props.state.loading ? "Saving" : "Save"}
           </button>
         </div>
       </form>

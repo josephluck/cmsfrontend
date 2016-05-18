@@ -34,7 +34,7 @@ class Users extends React.Component {
 	}
 
 	componentWillUnmount() {
-		Store.get().users.reset({})
+		Store.get().users.reset([])
 	}
 
 	render() {

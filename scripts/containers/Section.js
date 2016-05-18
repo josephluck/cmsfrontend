@@ -21,13 +21,17 @@ class Section extends React.Component {
 			Store.get().section.reset(body);
 			Store.get().set({section_loading: false})
 		}, (err) => {
-			Store.get().section.reset({});
+			Store.get().section.reset({
+				items: []
+			});
 			Store.get().set({section_loading: false})
 		})
 	}
 
 	componentWillUnmount() {
-		Store.get().section.reset({})
+		Store.get().section.reset({
+			items: []
+		})
 	}
 
 	render() {

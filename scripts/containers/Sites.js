@@ -28,7 +28,7 @@ class Sites extends React.Component {
 	}
 
 	componentWillUnmount() {
-		Store.get().sites.reset({})
+		Store.get().sites.reset([])
 	}
 
 	render() {

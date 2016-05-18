@@ -21,9 +21,7 @@ class Template extends React.Component {
 			Store.get().template_attribute.reset(body);
 			Store.get().set({template_attribute_loading: false})
 		}, (err) => {
-			Store.get().template_attribute.reset({
-				sections: []
-			});
+			Store.get().template_attribute.reset({});
 			Store.get().set({template_attribute_loading: false})
 		})
 	}

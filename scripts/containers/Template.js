@@ -22,14 +22,16 @@ class Template extends React.Component {
 			Store.get().set({template_loading: false})
 		}, (err) => {
 			Store.get().template.reset({
-				sections: []
+				attributes: []
 			});
 			Store.get().set({template_loading: false})
 		})
 	}
 
 	componentWillUnmount() {
-		Store.get().template.reset({})
+		Store.get().template.reset({
+			attributes: []
+		});
 	}
 
 	render() {
@@ -44,7 +46,7 @@ class Template extends React.Component {
 
 Template.defaultProps = {
 	template: {
-		sections: []
+		attributes: []
 	},
 	loading: true
 }

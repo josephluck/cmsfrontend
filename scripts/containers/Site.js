@@ -16,9 +16,16 @@ class Site extends React.Component {
 			Store.get().site.reset(body);
 			Store.get().set({site_loading: false});
 		}, (err) => {
-			Store.get().site.reset({});
+			Store.get().site.reset({
+				pages: []
+			});
 			Store.get().set({site_loading: false})
 		})
+	}
+	componentWillUnmount() {
+		Store.get().site.reset({
+			pages: []
+		});
 	}
 	render() {
 	  return (
@@ -31,7 +38,9 @@ class Site extends React.Component {
 }
 
 Site.defaultProps = {
-	site: {},
+	site: {
+		pages: []
+	},
 	loading: true
 }
 

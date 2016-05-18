@@ -20,12 +20,16 @@ class Item extends React.Component {
 			Store.get().item.reset(body);
 			Store.get().set({item_loading: false})
 		}, (err) => {
-			Store.get().item.reset({});
+			Store.get().item.reset({
+				fields: []
+			});
 			Store.get().set({item_loading: false})
 		})
 	}
 	componentWillUnmount() {
-		Store.get().item.reset({})
+		Store.get().item.reset({
+			fields: []
+		})
 	}
 
 	render() {
