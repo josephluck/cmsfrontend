@@ -11,9 +11,12 @@ class ItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
-      fields: []
+      data: props.data || {},
+      fields: props.data.fields || []
     }
+
+    let selected_template = _.findWhere(props.templates, {id: parseInt(props.data.field_template_id)});
+    this.state.selected_template = selected_template
   }
 
   onSubmit(e) {

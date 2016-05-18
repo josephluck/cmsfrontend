@@ -12,6 +12,7 @@ class Sites extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
 	componentWillMount() {
 		Api.get({
 			url: {
@@ -25,6 +26,11 @@ class Sites extends React.Component {
 			Store.get().set({sites_loading: false})
 		});
 	}
+
+	componentWillUnmount() {
+		Store.get().sites.reset({})
+	}
+
 	render() {
 	  return (
 	  	<div>

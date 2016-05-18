@@ -18,6 +18,7 @@ class Users extends React.Component {
 			users_loading: true
 		});
 	}
+
 	componentWillMount() {
 		Api.get({
 			url: {
@@ -31,6 +32,11 @@ class Users extends React.Component {
 			Store.get().set({users_loading: false})
 		})
 	}
+
+	componentWillUnmount() {
+		Store.get().users.reset({})
+	}
+
 	render() {
 	  return (
 	  	<div>

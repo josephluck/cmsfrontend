@@ -11,6 +11,7 @@ class Pages extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
 	componentWillMount() {
 		Api.get({
 			url: {
@@ -24,6 +25,11 @@ class Pages extends React.Component {
 			Store.get().set({pages_loading: false})
 		})
 	}
+
+	componentWillUnmount() {
+		Store.get().pages.reset({})
+	}
+
 	render() {
 	  return (
 	  	<div>

@@ -14,26 +14,23 @@ class EditItem extends React.Component {
 		super(props);
 		Store.get().forms.set({edit_item: {
 			errors: {},
-			data: {}
+			data: {
+				fields: []
+			}
 		}})
 	}
 	componentWillMount() {
-		this.set_form_from_server = false;
-	}
-	componentWillReceiveProps(props) {
-		if (props.item.title && this.set_form_from_server === false) {
-			let item_form_data = props.item.toJS();
-
-			if (item_form_data.fields.length === 0) {
-				item_form_data.fields = [{}];
-			}
-			Store.get().forms.set({edit_item: {
-				errors: {},
-				data: item_form_data
-			}});
-
-			this.set_form_from_server = true;
-		}
+		Api.get({
+		  url: {
+		    name: 'templates'
+		  }
+		}).then((body) => {
+		  Store.get().templates.reset(body);
+		  Store.get().set({templates_loading: false})
+		}, (err) => {
+		  Store.get().templates.reset([]);
+		  Store.get().set({templates_loading: false})
+		});
 	}
 	render() {
 	  return (
@@ -65,18 +62,14 @@ class EditItem extends React.Component {
 					]} />
 
 		  	<div className="container">
-		  		<Block loading={!this.props.item.id}>
-		  			{this.props.form.data.fields ?
-		  				<ItemForm
-		  					state={this.props.form}
-		  					onSubmit={this.props.submitItem}
-		  					onTitleType={this.props.onTitleType}
-		  					addAnotherField={this.props.addAnotherField}
-		  					removeField={this.props.removeField}
-		  					onFieldContentType={this.props.onFieldContentType}>
-		  				</ItemForm>
-		  				: null
-		  			}
+		  		<Block loading={!this.props.item.id && !this.props.templates_loading}>
+	  				<ItemForm
+	  					state={this.props.form}
+	  					onSubmit={this.props.submitItem}
+	  					templates={this.props.templates.toJS()}
+	  					data={this.props.item}
+	  					loading={false}>
+	  				</ItemForm>
 			  	</Block>
 		  	</div>
 		  </div>
@@ -99,6 +92,7 @@ function submitItem(form) {
 		},
 		payload: form
 	}).then((res) => {
+		debugger
 		let item_index = _.findIndex(Store.get().section.items.toJS(), function(item) { return item.id == res.id });
 		Store.get().section.items[item_index].reset(res);
 		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`);
@@ -111,30 +105,12 @@ function submitItem(form) {
 	})
 }
 
-function onTitleType(title) {
-	Store.get().forms.edit_item.data.set({
-		title: title
-	})
-}
-
-function addAnotherField() {
-	Store.get().forms.edit_item.data.fields.push({});
-}
-
-function removeField(i) {
-	Store.get().forms.edit_item.data.fields.splice(i, 1);
-}
-
-function onFieldContentType(i, content) {
-	Store.get().forms.edit_item.data.fields[i].set({
-		content: content
-	})
-}
-
 EditItem.defaultProps = {
 	form: {
 		errors: {},
-		data: {}
+		data: {
+			fields: []
+		}
 	}
 }
 
@@ -143,10 +119,8 @@ export default warmUp(EditItem, [
 	['page', 'page'],
 	['section', 'section'],
 	['item', 'item'],
+	['templates', 'templates'],
+	['loading', 'templates_loading'],
 	['form', 'forms', 'edit_item'],
-	['submitItem', submitItem],
-	['onTitleType', onTitleType],
-	['addAnotherField', addAnotherField],
-	['removeField', removeField],
-	['onFieldContentType', onFieldContentType]
+	['submitItem', submitItem]
 ]);

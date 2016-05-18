@@ -28,6 +28,10 @@ class Template extends React.Component {
 		})
 	}
 
+	componentWillUnmount() {
+		Store.get().template_attribute.reset({})
+	}
+
 	render() {
 	  return (
   		<PageTransition routes={this.props.routes}

@@ -26,6 +26,10 @@ class Section extends React.Component {
 		})
 	}
 
+	componentWillUnmount() {
+		Store.get().section.reset({})
+	}
+
 	render() {
 	  return (
 	  	<PageTransition routes={this.props.routes}

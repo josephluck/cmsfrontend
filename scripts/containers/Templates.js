@@ -12,6 +12,7 @@ class Templates extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
 	componentWillMount() {
 		Api.get({
 			url: {
@@ -25,6 +26,11 @@ class Templates extends React.Component {
 			Store.get().set({templates_loading: false})
 		});
 	}
+
+	componentWillUnmount() {
+		Store.get().templates.reset({})
+	}
+
 	render() {
 	  return (
 	  	<div>

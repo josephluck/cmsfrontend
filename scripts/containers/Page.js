@@ -28,6 +28,10 @@ class Page extends React.Component {
 		})
 	}
 
+	componentWillUnmount() {
+		Store.get().page.reset({})
+	}
+
 	render() {
 	  return (
   		<PageTransition routes={this.props.routes}

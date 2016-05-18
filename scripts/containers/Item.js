@@ -24,6 +24,9 @@ class Item extends React.Component {
 			Store.get().set({item_loading: false})
 		})
 	}
+	componentWillUnmount() {
+		Store.get().item.reset({})
+	}
 
 	render() {
 	  return (

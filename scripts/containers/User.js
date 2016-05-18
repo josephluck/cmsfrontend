@@ -11,7 +11,6 @@ class User extends React.Component {
 	}
 
 	componentWillMount() {
-		console.log('getting');
 		Api.get({
 			url: {
 				name: 'user',
@@ -24,6 +23,10 @@ class User extends React.Component {
 			Store.get().team_member.reset({});
 			Store.get().set({team_member_loading: false})
 		})
+	}
+
+	componentWillUnmount() {
+		Store.get().user.reset({})
 	}
 
 	render() {
