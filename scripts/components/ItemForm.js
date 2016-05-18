@@ -10,13 +10,21 @@ import Editor from 'react-quill';
 class ItemForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: props.data || {},
-      fields: props.data.fields || []
-    }
 
-    let selected_template = _.findWhere(props.templates, {id: parseInt(props.data.field_template_id)});
-    this.state.selected_template = selected_template
+    if (props.data) {
+      let selected_template =  _.findWhere(props.templates, {id: parseInt(props.data.field_template_id)});
+
+      this.state = {
+        data: props.data,
+        fields: props.data.fields,
+        selected_template: selected_template
+      }
+    } else {
+      this.state = {
+        data: {},
+        fields: []
+      }
+    }
   }
 
   onSubmit(e) {
@@ -62,6 +70,7 @@ class ItemForm extends React.Component {
 
         <FormInput title="Template">
           <select name="field_template_id"
+            defaultValue={this.state.data.field_template_id}
             onChange={(e) => {
               this.onSelectedTemplateChange(e);
             }}>

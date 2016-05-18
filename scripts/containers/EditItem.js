@@ -62,12 +62,12 @@ class EditItem extends React.Component {
 					]} />
 
 		  	<div className="container">
-		  		<Block loading={!this.props.item.id && !this.props.templates_loading}>
+		  		<Block loading={!this.props.item.id || this.props.templates_loading}>
 	  				<ItemForm
 	  					state={this.props.form}
 	  					onSubmit={this.props.submitItem}
 	  					templates={this.props.templates.toJS()}
-	  					data={this.props.item}
+	  					data={this.props.item.toJS()}
 	  					loading={false}>
 	  				</ItemForm>
 			  	</Block>
@@ -92,7 +92,6 @@ function submitItem(form) {
 		},
 		payload: form
 	}).then((res) => {
-		debugger
 		let item_index = _.findIndex(Store.get().section.items.toJS(), function(item) { return item.id == res.id });
 		Store.get().section.items[item_index].reset(res);
 		Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${Store.get().section.id}/view`);
@@ -106,6 +105,7 @@ function submitItem(form) {
 }
 
 EditItem.defaultProps = {
+	templates_loading: true,
 	form: {
 		errors: {},
 		data: {
@@ -120,7 +120,7 @@ export default warmUp(EditItem, [
 	['section', 'section'],
 	['item', 'item'],
 	['templates', 'templates'],
-	['loading', 'templates_loading'],
+	['templates_loading', 'templates_loading'],
 	['form', 'forms', 'edit_item'],
 	['submitItem', submitItem]
 ]);

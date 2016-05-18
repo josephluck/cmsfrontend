@@ -19,6 +19,7 @@ class NewItem extends React.Component {
 		}})
 	}
 	componentWillMount() {
+		Store.get().set({templates_loading: true})
 	  Api.get({
 	    url: {
 	      name: 'templates'
