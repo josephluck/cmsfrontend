@@ -8,7 +8,7 @@ class Breadcrumbs extends React.Component {
 
 	render() {
 	  return (
-	  	<h3 className="breadcrumbs">
+	  	<span className="breadcrumbs">
 		  	{this.props.breadcrumbs.map((crumb, i) => {
 	  			return (
 	  				<span key={i}>
@@ -32,7 +32,7 @@ class Breadcrumbs extends React.Component {
 	  				</span>
 	  			)
 		  	})}
-			</h3>
+			</span>
 	  );
 	}
 }

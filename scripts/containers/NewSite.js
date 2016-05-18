@@ -45,7 +45,7 @@ function submitSite (form) {
 
 	Api.post({
 		url: {
-			name: '/sites'
+			name: 'sites'
 		},
 		payload: form
 	}).then((res) => {
