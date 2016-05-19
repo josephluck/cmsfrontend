@@ -20,6 +20,7 @@ class Sites extends React.Component {
 			}
 		}).then((body) => {
 			Store.get().sites.reset(body);
+			console.log(Store.get().sites.toJS());
 			Store.get().set({sites_loading: false})
 		}, (err) => {
 			Store.get().sites.reset([]);

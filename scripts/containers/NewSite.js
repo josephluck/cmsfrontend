@@ -49,7 +49,6 @@ function submitSite (form) {
 		},
 		payload: form
 	}).then((res) => {
-		Store.get().sites.unshift(res);
 		Api.redirect("/sites/view");
 	}, (err) => {
 		Store.get().forms.site.set({
