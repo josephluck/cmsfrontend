@@ -2,7 +2,6 @@ import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
-import * as _ from 'underscore';
 
 import { Link } from 'react-router';
 import Block from 'components/Block';
@@ -33,12 +32,24 @@ class Sites extends React.Component {
 	}
 
 	handleReorder(sites) {
-		let order = {}
-		_.each(sites, function(site, i) {
-			order[site.id] = i
+		let order = sites.map((site, i) => {
+			return {
+				id: site.id,
+				order: i
+			}
 		})
+		console.log(order)
 
-
+		Api.post({
+			url: {
+				name: 'reorder_sites'
+			},
+			payload: {
+				order: order
+			}
+		}).then((res) => {
+		}, (err) => {
+		})
 	}
 
 	render() {

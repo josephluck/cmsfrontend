@@ -154,6 +154,9 @@ function getApiUrl(options) {
     case 'sites':
       return API_ROOT + 'sites';
       break;
+    case 'reorder_sites':
+      return API_ROOT + 'sites/reorder';
+      break;
     case 'site':
       return API_ROOT + `sites/${options.site_id}`;
       break;
