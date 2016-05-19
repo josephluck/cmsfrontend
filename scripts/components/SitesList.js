@@ -7,16 +7,17 @@ import SortableListItem from 'components/SortableListItem';
 
 function SitesList({
 	sites,
-	handleSort
+	onReorder
 }) {
   return (
 		<NoResults noResults={!sites.length}
 			name="sites">
 			<Sortable className="list"
-				onSort={handleSort}>
+				onSort={onReorder}>
 				{sites.map((site, i) => {
 					return (
 						<SortableListItem key={i}
+							sortData={site}
 							className="list-item flex">
 							<span className="flex-1 ellipsis">{site.title}</span>
 							<span className="flex-0 list-buttons">

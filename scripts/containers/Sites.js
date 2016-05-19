@@ -2,6 +2,7 @@ import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
+import * as _ from 'underscore';
 
 import { Link } from 'react-router';
 import Block from 'components/Block';
@@ -31,6 +32,15 @@ class Sites extends React.Component {
 		Store.get().sites.reset([])
 	}
 
+	handleReorder(sites) {
+		let order = {}
+		_.each(sites, function(site, i) {
+			order[site.id] = i
+		})
+
+
+	}
+
 	render() {
 	  return (
 	  	<div>
@@ -48,7 +58,8 @@ class Sites extends React.Component {
 					]} />
 		  	<div className="container">
 			  	<Block loading={this.props.loading}>
-			  		<SitesList sites={this.props.sites} />
+			  		<SitesList sites={this.props.sites}
+			  			onReorder={this.handleReorder} />
 			  	</Block>
 			  </div>
 			</div>
