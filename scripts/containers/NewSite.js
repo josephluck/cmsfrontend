@@ -49,6 +49,7 @@ function submitSite (form) {
 		},
 		payload: form
 	}).then((res) => {
+		Store.get().sites.push(res);
 		Api.redirect("/sites/view");
 	}, (err) => {
 		Store.get().forms.site.set({

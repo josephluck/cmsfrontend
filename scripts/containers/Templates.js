@@ -28,7 +28,7 @@ class Templates extends React.Component {
 	}
 
 	componentWillUnmount() {
-		Store.get().templates.reset([])
+		// Store.get().templates.reset([])
 	}
 
 	render() {

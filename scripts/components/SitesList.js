@@ -13,7 +13,8 @@ function SitesList({
 		<NoResults noResults={!sites.length}
 			name="sites">
 			<Sortable className="list"
-				onSort={onReorder}>
+				onSort={onReorder}
+				dynamic>
 				{sites.map((site, i) => {
 					return (
 						<SortableListItem key={i}

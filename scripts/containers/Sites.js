@@ -20,7 +20,6 @@ class Sites extends React.Component {
 			}
 		}).then((body) => {
 			Store.get().sites.reset(body);
-			console.log(Store.get().sites.toJS());
 			Store.get().set({sites_loading: false})
 		}, (err) => {
 			Store.get().sites.reset([]);
@@ -29,7 +28,7 @@ class Sites extends React.Component {
 	}
 
 	componentWillUnmount() {
-		Store.get().sites.reset([])
+		// Store.get().sites.reset([])
 	}
 
 	handleReorder(sites) {
@@ -54,6 +53,8 @@ class Sites extends React.Component {
 	}
 
 	render() {
+		console.log('rerendering');
+		console.log(this.props.sites);
 	  return (
 	  	<div>
   			<MidBar
