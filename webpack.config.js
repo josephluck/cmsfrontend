@@ -71,6 +71,8 @@ module.exports = {
         test: /\.jsx?$/,
         loader: ['babel'],
         query: {
+          cacheDirectory: true,
+          plugins: ['transform-decorators-legacy'],
           presets: ['es2015', 'stage-0', 'react']
         },
         include: path.join(__dirname, 'scripts')

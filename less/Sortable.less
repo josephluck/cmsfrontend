@@ -1,0 +1,17 @@
+.ui-sortable {
+	.ui-sortable-placeholder {
+		&.visible {
+			display: flex;
+			opacity: 0.4;
+		}
+	}
+	.ui-sortable-item {
+		float: none;
+		width: 100%;
+		box-sizing: border-box;
+		&.ui-sortable-dragging {
+			border: solid @borderWidth @darkGray;
+			border-radius: @listBorderRadius;
+		}
+	}
+}

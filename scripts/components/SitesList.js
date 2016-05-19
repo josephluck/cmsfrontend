@@ -1,18 +1,22 @@
 import React from 'react';
 
 import { Link } from 'react-router';
+import Sortable from 'react-anything-sortable';
 import NoResults from 'components/NoResults';
+import SortableListItem from 'components/SortableListItem';
 
 function SitesList({
-	sites
+	sites,
+	handleSort
 }) {
   return (
 		<NoResults noResults={!sites.length}
 			name="sites">
-			<ul className="list">
+			<Sortable className="list"
+				onSort={handleSort}>
 				{sites.map((site, i) => {
 					return (
-						<li key={i}
+						<SortableListItem key={i}
 							className="list-item flex">
 							<span className="flex-1 ellipsis">{site.title}</span>
 							<span className="flex-0 list-buttons">
@@ -20,10 +24,10 @@ function SitesList({
 								<Link to={`/sites/${site.id}/edit`}>{"Edit"}</Link>
 								<Link to={`/sites/${site.id}/view/delete`}>{"Delete"}</Link>
 							</span>
-						</li>
+						</SortableListItem>
 					)
 				})}
-			</ul>
+			</Sortable>
 		</NoResults>
   );
 }
