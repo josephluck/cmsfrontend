@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Link } from 'react-router';
-import Sortable from 'react-anything-sortable';
 import NoResults from 'components/NoResults';
+import Sortable from 'react-anything-sortable';
 import SortableListItem from 'components/SortableListItem';
 
 function SitesList({

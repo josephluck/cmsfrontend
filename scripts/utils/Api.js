@@ -157,6 +157,9 @@ function getApiUrl(options) {
     case 'reorder_sites':
       return API_ROOT + 'sites/reorder';
       break;
+    case 'reorder_pages':
+      return API_ROOT + 'pages/reorder';
+      break;
     case 'site':
       return API_ROOT + `sites/${options.site_id}`;
       break;

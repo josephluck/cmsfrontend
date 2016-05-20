@@ -1,16 +1,42 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
+import Api from 'utils/Api';
 
 import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import {ModalTransition} from 'components/Transitions';
+import Sortable from 'react-anything-sortable';
+import SortableListItem from 'components/SortableListItem';
 
 class ViewSite extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+
+
+	handleReorder(pages) {
+		let order = pages.map((page, i) => {
+			return {
+				id: page.id,
+				order: i
+			}
+		})
+		console.log(order)
+
+		Api.post({
+			url: {
+				name: 'reorder_pages'
+			},
+			payload: {
+				order: order
+			}
+		}).then((res) => {
+		}, (err) => {
+		})
 	}
 
 	render() {
@@ -48,10 +74,13 @@ class ViewSite extends React.Component {
 	  		  	<div className="container">
 	  		  		<NoResults noResults={!this.props.site.pages.length}
 	  		  			name="pages">
-	  		  			<ul className="list">
+	  		  			<Sortable className="list"
+	  		  				onSort={this.handleReorder}
+	  		  				dynamic>
 		  		  			{this.props.site.pages.map((page, i) => {
 		  		  				return (
-			  		  				<li key={i}
+			  		  				<SortableListItem key={i}
+			  		  					sortData={page}
 			  		  					className="list-item flex">
 			  		  					<span className="flex-1 ellipsis">{page.title}</span>
 			  		  					<span className="flex-0 list-buttons">
@@ -59,10 +88,10 @@ class ViewSite extends React.Component {
 			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
 			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
 			  		  					</span>
-			  		  				</li>
+			  		  				</SortableListItem>
 			  		  			)
 		  		  			})}
-		  		  		</ul>
+		  		  		</Sortable>
 	  		  		</NoResults>
 	  		  	</div>
 			  	</Block>
