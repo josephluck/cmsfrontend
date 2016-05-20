@@ -1,17 +1,43 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
-
 import Store from 'store/Store';
+import Api from 'utils/Api';
 
 import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import {ModalTransition} from 'components/Transitions';
+import Sortable from 'react-anything-sortable';
+import SortableListItem from 'components/SortableListItem';
 
 class ViewPage extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+	handleReorder(sections) {
+		Store.get().page.sections.reset(sections);
+		Store.get().set({sections_loading: true});
+		let order = sections.map((section, i) => {
+			return {
+				id: section.id,
+				order: i
+			}
+		})
+
+		Api.post({
+			url: {
+				name: 'reorder_sections'
+			},
+			payload: {
+				order: order
+			}
+		}).then((res) => {
+			Store.get().set({sections_loading: false});
+		}, (err) => {
+			Store.get().set({sections_loading: false});
+		})
 	}
 
 	render() {
@@ -54,10 +80,13 @@ class ViewPage extends React.Component {
 	  		  	<div className="container">
 	  		  		<NoResults noResults={!this.props.page.sections.length}
 	  		  			name="sections">
-	  		  			<ul className="list">
+	  		  			<Sortable className="list"
+	  		  				onSort={this.handleReorder}
+	  		  				dynamic>
 		  		  			{this.props.page.sections.map((section, i) => {
 		  		  				return (
-			  		  				<li key={i}
+			  		  				<SortableListItem key={i}
+			  		  					sortData={section}
 			  		  					className="list-item flex">
 			  		  					<span className="flex-1 ellipsis">{section.title}</span>
 			  		  					<span className="flex-0 list-buttons">
@@ -65,10 +94,10 @@ class ViewPage extends React.Component {
 			  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${section.id}/edit`}>{"Edit"}</Link>
 			  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${section.id}/view/delete`}>{"Delete"}</Link>
 			  		  					</span>
-			  		  				</li>
+			  		  				</SortableListItem>
 			  		  			)
 		  		  			})}
-		  		  		</ul>
+		  		  		</Sortable>
 	  		  		</NoResults>
 	  		  	</div>
 			  	</Block>
@@ -98,5 +127,6 @@ export default warmUp(ViewPage, [
 	['site', 'site'],
 	['page', 'page'],
 	['loading', 'page_loading'],
+	['sections_loading', 'sections_loading'],
 	['help_showing', 'help_showing']
 ]);

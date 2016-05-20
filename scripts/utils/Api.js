@@ -157,20 +157,23 @@ function getApiUrl(options) {
     case 'reorder_sites':
       return API_ROOT + 'sites/reorder';
       break;
-    case 'reorder_pages':
-      return API_ROOT + 'pages/reorder';
-      break;
     case 'site':
       return API_ROOT + `sites/${options.site_id}`;
       break;
     case 'pages':
       return API_ROOT + 'pages';
       break;
+    case 'reorder_pages':
+      return API_ROOT + 'pages/reorder';
+      break;
     case 'page':
       return API_ROOT + `pages/${options.page_id}`;
       break;
     case 'sections':
       return API_ROOT + 'sections';
+      break;
+    case 'reorder_sections':
+      return API_ROOT + 'sections/reorder';
       break;
     case 'section':
       return API_ROOT + `sections/${options.section_id}`;

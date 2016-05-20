@@ -32,13 +32,14 @@ class Sites extends React.Component {
 	}
 
 	handleReorder(sites) {
+		Store.get().sites.reset(sites);
+		Store.get().set({sites_loading: true})
 		let order = sites.map((site, i) => {
 			return {
 				id: site.id,
 				order: i
 			}
 		})
-		console.log(order)
 
 		Api.post({
 			url: {
@@ -48,7 +49,9 @@ class Sites extends React.Component {
 				order: order
 			}
 		}).then((res) => {
+			Store.get().set({sites_loading: false})
 		}, (err) => {
+			Store.get().set({sites_loading: false})
 		})
 	}
 

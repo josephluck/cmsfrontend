@@ -19,13 +19,14 @@ class ViewSite extends React.Component {
 
 
 	handleReorder(pages) {
+		Store.get().site.pages.reset(pages);
+		Store.get().set({pages_loading: true});
 		let order = pages.map((page, i) => {
 			return {
 				id: page.id,
 				order: i
 			}
 		})
-		console.log(order)
 
 		Api.post({
 			url: {
@@ -35,7 +36,9 @@ class ViewSite extends React.Component {
 				order: order
 			}
 		}).then((res) => {
+			Store.get().set({pages_loading: false});
 		}, (err) => {
+			Store.get().set({pages_loading: false});
 		})
 	}
 
@@ -72,6 +75,7 @@ class ViewSite extends React.Component {
 	  	  			</Link>
 	  	  		</div>
 	  		  	<div className="container">
+	  		  		<h1>{this.props.pages_loading}</h1>
 	  		  		<NoResults noResults={!this.props.site.pages.length}
 	  		  			name="pages">
 	  		  			<Sortable className="list"
@@ -121,5 +125,6 @@ ViewSite.defaultProps = {
 export default warmUp(ViewSite, [
 	['site', 'site'],
 	['loading', 'site_loading'],
+	['pages_loading', 'pages_loading'],
 	['help_showing', 'help_showing']
 ]);
