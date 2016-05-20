@@ -181,6 +181,9 @@ function getApiUrl(options) {
     case 'items':
       return API_ROOT + 'items';
       break;
+    case 'reorder_items':
+      return API_ROOT + 'items/reorder';
+      break;
     case 'item':
       return API_ROOT + `items/${options.item_id}`;
       break;
