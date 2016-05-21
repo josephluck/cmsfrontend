@@ -18,7 +18,6 @@ class ViewPage extends React.Component {
 
 	handleReorder(sections) {
 		Store.get().page.sections.reset(sections);
-		Store.get().set({sections_loading: true});
 		let order = sections.map((section, i) => {
 			return {
 				id: section.id,
@@ -33,10 +32,6 @@ class ViewPage extends React.Component {
 			payload: {
 				order: order
 			}
-		}).then((res) => {
-			Store.get().set({sections_loading: false});
-		}, (err) => {
-			Store.get().set({sections_loading: false});
 		})
 	}
 
@@ -127,6 +122,5 @@ export default warmUp(ViewPage, [
 	['site', 'site'],
 	['page', 'page'],
 	['loading', 'page_loading'],
-	['sections_loading', 'sections_loading'],
 	['help_showing', 'help_showing']
 ]);

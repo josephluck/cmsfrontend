@@ -33,7 +33,6 @@ class Sites extends React.Component {
 
 	handleReorder(sites) {
 		Store.get().sites.reset(sites);
-		Store.get().set({sites_loading: true})
 		let order = sites.map((site, i) => {
 			return {
 				id: site.id,
@@ -48,16 +47,10 @@ class Sites extends React.Component {
 			payload: {
 				order: order
 			}
-		}).then((res) => {
-			Store.get().set({sites_loading: false})
-		}, (err) => {
-			Store.get().set({sites_loading: false})
 		})
 	}
 
 	render() {
-		console.log('rerendering');
-		console.log(this.props.sites);
 	  return (
 	  	<div>
   			<MidBar
@@ -88,6 +81,5 @@ Sites.defaultProps = {
 }
 
 export default warmUp(Sites, [
-	['sites', 'sites'],
-	['loading', '/sites_loading']
+	['sites', 'sites']
 ]);

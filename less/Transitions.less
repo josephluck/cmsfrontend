@@ -15,6 +15,7 @@
 .animate-page-enter.animate-page-enter-active {
   opacity: 1;
   transform: translateX(0);
+  transition: @defaultTransition;
   position: absolute;
   width: 100%;
 }
@@ -28,6 +29,7 @@
 .animate-page-leave.animate-page-leave-active {
   opacity: 0.01;
   transform: translateX(-1em);
+  transition: @defaultTransition;
   position: absolute;
   width: 100%;
 }
@@ -41,6 +43,7 @@
 .modal-transition-enter.modal-transition-enter-active {
   opacity: 1;
   transform: translateY(0) scale(1);
+  transition: @defaultTransition;
 }
 .modal-transition-leave {
   opacity: 1;
@@ -50,6 +53,7 @@
 .modal-transition-leave.modal-transition-leave-active {
   opacity: 0.01;
   transform: translateY(-20px) scale(0.98);
+  transition: @defaultTransition;
 }
 
 
@@ -62,6 +66,7 @@
 .slide-transition-enter.slide-transition-enter-active {
   opacity: 1;
   transform: translateX(0);
+  transition: @defaultTransition;
   position: absolute;
 }
 .slide-transition-leave {
@@ -73,5 +78,6 @@
 .slide-transition-leave.slide-transition-leave-active {
   opacity: 0.01;
   transform: translateX(20px);
+  transition: @defaultTransition;
   position: absolute;
 }

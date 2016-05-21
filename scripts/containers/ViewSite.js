@@ -20,7 +20,6 @@ class ViewSite extends React.Component {
 
 	handleReorder(pages) {
 		Store.get().site.pages.reset(pages);
-		Store.get().set({pages_loading: true});
 		let order = pages.map((page, i) => {
 			return {
 				id: page.id,
@@ -35,10 +34,6 @@ class ViewSite extends React.Component {
 			payload: {
 				order: order
 			}
-		}).then((res) => {
-			Store.get().set({pages_loading: false});
-		}, (err) => {
-			Store.get().set({pages_loading: false});
 		})
 	}
 
@@ -125,6 +120,5 @@ ViewSite.defaultProps = {
 export default warmUp(ViewSite, [
 	['site', 'site'],
 	['loading', 'site_loading'],
-	['pages_loading', 'pages_loading'],
 	['help_showing', 'help_showing']
 ]);

@@ -12,7 +12,6 @@ function UserForm({
   	<form name="page"
       onSubmit={(e) => {
     		e.preventDefault();
-        console.log(FormHelper.serialize(e.target));
     		onSubmit(FormHelper.serialize(e.target));
     	}}>
 

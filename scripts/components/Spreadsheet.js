@@ -61,23 +61,6 @@ class Spreadsheet extends React.Component {
 				decorated_rows.push(decorated_row);
 			}
 		}
-
-		// for (let row of rows) {
-		// 	let row_valid = true;
-		// 	let decorated_row = {};
-
-		// 	for (let cell of row.cells) {
-		// 		if (cell.required && !cell.value) {
-		// 			row_valid = false;
-		// 		}
-		// 	}
-
-		// 	if (row_valid) {
-		// 		decorated_rows.push(row.cells[1].value);
-		// 	}
-		// }
-
-		console.log(decorated_rows);
 		return decorated_rows;
 	};
 

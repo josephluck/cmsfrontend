@@ -18,7 +18,6 @@ class ViewSection extends React.Component {
 
 	handleReorder(items) {
 		Store.get().section.items.reset(items);
-		Store.get().set({items_loading: true});
 		let order = items.map((item, i) => {
 			return {
 				id: item.id,
@@ -33,10 +32,6 @@ class ViewSection extends React.Component {
 			payload: {
 				order: order
 			}
-		}).then((res) => {
-			Store.get().set({items_loading: false});
-		}, (err) => {
-			Store.get().set({items_loading: false});
 		})
 	}
 
@@ -124,7 +119,6 @@ ViewSection.defaultProps = {
 export default warmUp(ViewSection, [
 	['site', 'site'],
 	['page', 'page'],
-	['items_loading', 'items_loading'],
 	['section', 'section'],
 	['loading', 'section_loading']
 ]);

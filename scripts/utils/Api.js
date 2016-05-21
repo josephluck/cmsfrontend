@@ -12,7 +12,6 @@ if (window.location.hostname !== 'localhost') {
 
 function handleErrors(status) {
   if (status === 403 || status === 401) {
-    console.log('Should redirect to login screen')
     debugger
   }
 }
