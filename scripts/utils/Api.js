@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 if (window.location.hostname !== 'localhost') {
   var API_ROOT = 'https://young-earth-94007.herokuapp.com/';
 } else {
-  var API_ROOT = 'http://cms-api.dev/';
+  var API_ROOT = 'http://localhost:3000/';
 }
 
 // Handle errors (unauthorized, forbidden etc)
