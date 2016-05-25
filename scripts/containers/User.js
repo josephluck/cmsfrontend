@@ -26,7 +26,7 @@ class User extends React.Component {
 	}
 
 	componentWillUnmount() {
-		Store.get().user.reset({})
+		Store.get().team_member.reset({})
 	}
 
 	render() {

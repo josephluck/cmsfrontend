@@ -2,29 +2,28 @@ import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
 import Api from 'utils/Api';
-import PersistentStorage from 'utils/PersistentStorage';
 import FormHelper from 'utils/FormHelper';
 
 import FormInput from 'components/FormInput';
 import ErrorBar from 'components/ErrorBar';
 import {Link} from 'react-router';
 
-class Login extends React.Component {
+class ForgottenPassword extends React.Component {
 	constructor(props) {
 		super(props);
 		Store.get().forms.set({
-			login: {}
+			forgotten_password: {}
 		})
 	}
 	render() {
 	  return (
-  		<form name="login"
+  		<form name="forgotten_password"
   	    onSubmit={(e) => {
   	  		e.preventDefault();
-  	  		this.props.submitLogin(FormHelper.serialize(e.target));
+  	  		this.props.submitForgottenPassword(FormHelper.serialize(e.target));
   	  	}}>
 	  		<div className="modal-header">
-	  			<h3>{"Login"}</h3>
+	  			<h3>{"Forgotten password"}</h3>
 	  		</div>
 		  	<div className="container modal-content">
 		  		<div>
@@ -36,35 +35,20 @@ class Login extends React.Component {
 	  		      <input name="email"
 	  		        type="text" />
 	  		    </FormInput>
-
-	  		    <FormInput title="Password">
-	  		      <input name="password"
-	  		        type="password" />
-	  		    </FormInput>
 		  		</div>
 		  	</div>
 		    <div className="modal-footer container flex vertical-align">
 		      <div className="flex-1">
-		      	<p>
-			        <span>
-			          {"Don't have an account yet? "}
-			        </span>
-			        <Link to="/register">
-			          {"Register"}
-			        </Link>
-			      </p>
-		      	<p>
-			        <span>
-			          {"Can't remember? "}
-			        </span>
-			        <Link to="/forgotten_password">
-			          {"Forgotten password"}
-			        </Link>
-			      </p>
+		        <span>
+		          {"Remembered? "}
+		        </span>
+		        <Link to="/login">
+		          {"Login"}
+		        </Link>
 		      </div>
 		      <div class="flex-0">
 		  		  <button type="submit">
-		          {this.props.form.loading ? "Logging in" : "Login"}
+		          {this.props.form.loading ? "Sending instructions" : "Send instructions"}
 		        </button>
 		      </div>
 		    </div>
@@ -73,39 +57,33 @@ class Login extends React.Component {
 	}
 }
 
-function submitLogin (form) {
-	Store.get().forms.login.set({
+function submitForgottenPassword (form) {
+	Store.get().forms.forgotten_password.set({
 		"loading": true,
 		"error": false
 	});
 
 	Api.post({
 		url: {
-			name: 'login'
+			name: 'reset_password_email'
 		},
 		payload: form
 	}).then((res) => {
-		Store.get().user.reset(res);
-		Api.setToken(res.auth_token);
-
-		Api.redirect("/sites/view");
+		// Api.redirect("/sites/view");
 	}, (err) => {
-		Store.get().forms.login.set({
+		Store.get().forms.forgotten_password.set({
 			"loading": false,
 			"error": true,
 			"errors": err.errors || err.error //err.error is in the case of devise error message
 		});
-
-		Api.removeToken();
-		Store.get().user.reset({});
 	})
 }
 
-Login.defaultProps = {
+ForgottenPassword.defaultProps = {
 	form: {}
 }
 
-export default warmUp(Login, [
-	['form', 'forms', 'login'],
-	['submitLogin', submitLogin]
+export default warmUp(ForgottenPassword, [
+	['form', 'forms', 'forgotten_password'],
+	['submitForgottenPassword', submitForgottenPassword]
 ]);

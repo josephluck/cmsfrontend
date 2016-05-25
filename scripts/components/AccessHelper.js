@@ -5,7 +5,6 @@ import Api from 'utils/Api';
 import { browserHistory } from 'react-router';
 
 import Markdown from 'remarkable';
-import hljs from 'highlight.js';
 import {Link} from 'react-router';
 import {SlideTransition} from 'components/Transitions';
 

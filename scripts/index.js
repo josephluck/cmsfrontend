@@ -10,6 +10,10 @@ import App from './App';
 import LoginContainer from 'containers/LoginContainer';
 import Register from 'containers/Register';
 import Login from 'containers/Login';
+import ForgottenPassword from 'containers/ForgottenPassword';
+import ConfirmAccount from 'containers/ConfirmAccount'
+import ResetPassword from 'containers/ResetPassword'
+
 import RequireLogin from 'containers/RequireLogin';
 
 // Template
@@ -73,9 +77,14 @@ render((
 <Router history={browserHistory}>
 <Route path="/" component={App}>
   <IndexRoute component={Website} />
+
+  <Route path="users/confirmation" component={ConfirmAccount}></Route>
+  <Route path="users/password/edit" component={ResetPassword}></Route>
+
   <Route component={LoginContainer}>
     <Route path="register" component={Register} />
-  	<Route path="login" component={Login} />
+    <Route path="login" component={Login} />
+  	<Route path="forgotten_password" component={ForgottenPassword} />
   </Route>
 	<Route component={RequireLogin}>
 

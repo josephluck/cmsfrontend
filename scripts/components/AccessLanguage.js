@@ -3,7 +3,6 @@ import { warmUp } from 'react-freezer-js';
 import Api from 'utils/Api';
 
 import Markdown from 'remarkable';
-import hljs from 'highlight.js';
 
 class AccessHelper extends React.Component {
   constructor(props) {

@@ -6,6 +6,7 @@ export default new Freezer({
 	breadcrumbs: [],
 	user: {},
 	company: {},
+	users: [],
 	team_member: {},
 	templates: [],
 	template: {

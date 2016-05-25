@@ -10,9 +10,10 @@ if (window.location.hostname !== 'localhost') {
 
 // Handle errors (unauthorized, forbidden etc)
 
-function handleErrors(status) {
+function handleErrors(res) {
+  let status = res.status;
   if (status === 403 || status === 401) {
-    debugger
+    console.log("Forbidden / unauthorized")
   }
 }
 
@@ -30,7 +31,7 @@ function post(params) {
       .end((error, res, a, b, c) => {
         error ?
           (function(res) {
-            handleErrors(res.status);
+            handleErrors(res);
             reject(res.body, res.status, res)
           })(res)
           :
@@ -54,7 +55,7 @@ function put(params) {
       .end((error, res, a, b, c) => {
         error ?
           (function(res) {
-            handleErrors(res.status);
+            handleErrors(res);
             reject(res.body, res.status, res)
           })(res)
           :
@@ -76,7 +77,7 @@ function get(params) {
       .end((error, res, a, b, c) => {
         error ?
           (function(res) {
-            handleErrors(res.status);
+            handleErrors(res);
             reject(res.body, res.status, res)
           })(res)
           :
@@ -99,7 +100,7 @@ function destroy(params) {
       .end((error, res, a, b, c) => {
         error ?
           (function(res) {
-            handleErrors(res.status);
+            handleErrors(res);
             reject(res.body, res.status, res)
           })(res)
           :
@@ -130,6 +131,12 @@ function getApiUrl(options) {
         return API_ROOT + `sessions/${options.token}`;
       }
       return API_ROOT + 'sessions';
+      break;
+    case 'confirm_account':
+      return API_ROOT + `users/confirmation?confirmation_token=${options.confirmation_token}`;
+      break;
+    case 'reset_password_email':
+      return API_ROOT + `users/reset_password_email`;
       break;
     case 'company':
       return API_ROOT + `companies/${options.id}`;
@@ -186,6 +193,7 @@ function getApiUrl(options) {
     case 'item':
       return API_ROOT + `items/${options.item_id}`;
       break;
+
     default:
       return false;
       break

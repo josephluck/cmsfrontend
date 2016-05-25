@@ -13,10 +13,6 @@ import {ModalTransition} from 'components/Transitions';
 class Users extends React.Component {
 	constructor(props) {
 		super(props);
-		Store.get().set({
-			users: [],
-			users_loading: true
-		});
 	}
 
 	componentWillMount() {
