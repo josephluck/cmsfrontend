@@ -138,6 +138,9 @@ function getApiUrl(options) {
     case 'reset_password_email':
       return API_ROOT + `users/reset_password_email`;
       break;
+    case 'reset_password':
+      return API_ROOT + `users/reset_password`;
+      break;
     case 'company':
       return API_ROOT + `companies/${options.id}`;
       break;

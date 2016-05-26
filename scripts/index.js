@@ -79,12 +79,12 @@ render((
   <IndexRoute component={Website} />
 
   <Route path="users/confirmation" component={ConfirmAccount}></Route>
-  <Route path="users/password/edit" component={ResetPassword}></Route>
 
   <Route component={LoginContainer}>
     <Route path="register" component={Register} />
     <Route path="login" component={Login} />
   	<Route path="forgotten_password" component={ForgottenPassword} />
+    <Route path="users/password/edit" component={ResetPassword}></Route>
   </Route>
 	<Route component={RequireLogin}>
 
