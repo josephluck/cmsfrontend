@@ -5,7 +5,7 @@ import Api from 'utils/Api';
 import FormHelper from 'utils/FormHelper';
 
 import FormInput from 'components/FormInput';
-import ErrorBar from 'components/ErrorBar';
+import MessageBar from 'components/MessageBar';
 import {Link} from 'react-router';
 
 class ForgottenPassword extends React.Component {
@@ -27,8 +27,8 @@ class ForgottenPassword extends React.Component {
 	  		</div>
 		  	<div className="container modal-content">
 		  		<div>
-		  		  {this.props.form.errors ?
-		  		    <ErrorBar text={this.props.form.errors}></ErrorBar>
+		  		  {this.props.form.message ?
+		  		    <MessageBar text={this.props.form.message}></MessageBar>
 		  		    : null
 		  		  }
 	  		    <FormInput title="Email">
@@ -69,7 +69,9 @@ function submitForgottenPassword (form) {
 		},
 		payload: form
 	}).then((res) => {
-		// Api.redirect("/sites/view");
+		Store.get().forms.forgotten_password.set({
+			message: "Instructions have been sent to your inbox."
+		})
 	}, (err) => {
 		Store.get().forms.forgotten_password.set({
 			"loading": false,
