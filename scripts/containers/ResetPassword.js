@@ -27,7 +27,12 @@ class ResetPassword extends React.Component {
 			},
 			payload: form
 		}).then((res) => {
-			debugger
+			// Should log the user in here
+			Store.get().user.reset(res);
+			Api.setToken(res.auth_token);
+
+			Api.redirect("/sites/view");
+			window.location.reload();
 		}, (err) => {
 			Store.get().forms.reset_password.set({
 				"loading": false,
