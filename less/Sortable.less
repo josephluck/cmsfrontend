@@ -2,7 +2,9 @@
 	.ui-sortable-placeholder {
 		&.visible {
 			display: flex;
-			opacity: 0.4;
+			& > * { // Only affect immediate children (top level children)
+				opacity: 0.2;
+			}
 		}
 	}
 	.ui-sortable-item {
