@@ -62,102 +62,100 @@ class ItemForm extends React.Component {
 
   render() {
     return (
-      <form name="item"
-        onSubmit={(e) => {
-          e.preventDefault();
-          this.onSubmit(e);
-        }}>
+      <div className="flex flex-1">
+        <form className="flex-2 flex overflow-auto"
+          name="item"
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.onSubmit(e);
+          }}>
+          <div className="flex-1 container">
+            <FormInput title="Title">
+              <input name="title"
+                type="text"
+                defaultValue={this.state.data.title} />
+            </FormInput>
 
-        <FormInput title="Template">
-          <select name="field_template_id"
-            defaultValue={this.state.data.field_template_id}
-            onChange={(e) => {
-              this.onSelectedTemplateChange(e);
-            }}>
-            <option disabled selected>Please select a template</option>
+            {this.state.selected_template ?
+              <div>
+                {this.state.fields.map((field, field_index) => {
+                  return (
+                    <div key={field_index}
+                      className="form-input-group relative">
+                      {this.state.fields.length > 1 ?
+                        <div className="remove-template-icon"
+                          onClick={(e) => {
+                            this.handleRemoveField(field_index)
+                          }}>
+                          <span className="ss-delete"></span>
+                        </div>
+                        : null
+                      }
+                      {this.state.selected_template.attributes.map((attribute, attribute_index) => {
+                        if (attribute.kind === "text") {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <input type="text"
+                                value={field[attribute.name]}
+                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
+                            </FormInput>
+                          )
+                        } else {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <select value={field[attribute.name]}
+                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
+                                {attribute.options.map((option, option_index) => {
+                                  return (
+                                    <option key={option_index}
+                                      value={option.value}>
+                                      {option.name}
+                                    </option>
+                                  )
+                                })}
+                              </select>
+                            </FormInput>
+                          )
+                        }
+                      })}
+                    </div>
+                  )
+                })}
+              </div>
+              : null
+            }
+
+            <div className="flex">
+              <div className="flex-1">
+                {this.state.selected_template ?
+                  <button className="add-another"
+                    onClick={this.handleAddAnother.bind(this)}>
+                    {"Add another "} {this.state.selected_template.title.toLowerCase()}
+                  </button>
+                  : null
+                }
+              </div>
+              <button type="submit" className="left-margin">
+                {this.props.state.loading ? "Saving" : "Save"}
+              </button>
+            </div>
+          </div>
+        </form>
+        <div className="flex-1 aside">
+          <div className="container">
             {this.props.templates.map((template, i) => {
               return (
-                <option key={i}
+                <div key={i}
                   value={template.id}>
                   {template.title}
-                </option>
-              )
-            })}
-          </select>
-        </FormInput>
-
-        <FormInput title="Title">
-          <input name="title"
-            type="text"
-            defaultValue={this.state.data.title} />
-        </FormInput>
-
-        {this.state.selected_template ?
-          <div>
-            {this.state.fields.map((field, field_index) => {
-              return (
-                <div key={field_index}
-                  className="form-input-group relative">
-                  {this.state.fields.length > 1 ?
-                    <div className="remove-template-icon"
-                      onClick={(e) => {
-                        this.handleRemoveField(field_index)
-                      }}>
-                      <span className="ss-delete"></span>
-                    </div>
-                    : null
-                  }
-                  {this.state.selected_template.attributes.map((attribute, attribute_index) => {
-                    if (attribute.kind === "text") {
-                      return (
-                        <FormInput key={attribute_index}
-                          title={attribute.name}>
-                          <input type="text"
-                            value={field[attribute.name]}
-                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
-                        </FormInput>
-                      )
-                    } else {
-                      return (
-                        <FormInput key={attribute_index}
-                          title={attribute.name}>
-                          <select value={field[attribute.name]}
-                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
-                            {attribute.options.map((option, option_index) => {
-                              return (
-                                <option key={option_index}
-                                  value={option.value}>
-                                  {option.name}
-                                </option>
-                              )
-                            })}
-                          </select>
-                        </FormInput>
-                      )
-                    }
-                  })}
                 </div>
               )
             })}
           </div>
-          : null
-        }
-
-        <div className="flex">
-          <div className="flex-1">
-            {this.state.selected_template ?
-              <button className="add-another"
-                onClick={this.handleAddAnother.bind(this)}>
-                {"Add another "} {this.state.selected_template.title.toLowerCase()}
-              </button>
-              : null
-            }
-          </div>
-          <button type="submit" className="left-margin">
-            {this.props.state.loading ? "Saving" : "Save"}
-          </button>
         </div>
-      </form>
+      </div>
     );
   }
 }

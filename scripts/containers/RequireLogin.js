@@ -54,20 +54,19 @@ class RequireLogin extends Component {
 		}
 	}
 	render() {
-		return (
-	  	<div>
-	  		{this.props.user.email ?
-	  			<div>
-		  			<TopBar />
-		  			<PageTransition routes={this.props.routes}
-		  				route={this.props.route}>
-		  				{this.props.children}
-		  			</PageTransition>
-		  		</div>
-		  		: null
-	  		}
-		  </div>
-	  );
+		if (this.props.user.email) {
+			return (
+  			<div className="app-container">
+	  			<TopBar />
+	  			<PageTransition routes={this.props.routes}
+	  				route={this.props.route}>
+	  				{this.props.children}
+	  			</PageTransition>
+	  		</div>
+			)
+		} else {
+			return null
+		}
 	}
 }
 

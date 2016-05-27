@@ -12,27 +12,21 @@ function MidBar({
 	current_path
 }) {
   return (
-  	<div>
-			<div className="mid-bar">
-				<div className="subnav container flex vertical-align">
-					<div className="flex-1">
-						<Breadcrumbs breadcrumbs={breadcrumbs} />
-					</div>
-					<button className="transparent">{"-"}</button>
-					{current_path ?
-						<span>
-	 	 					<Link className="button"
-	 	 						to={`${current_path}/access/jquery`}>
-	 	 						{"Access"}
-	 	 					</Link>
-	 	 				</span>
-						: null
-					}
-					<PageActions
-						actions={actions} />
-				</div>
+		<div className="subnav container flex vertical-align flex-0">
+			<div className="flex-1">
+				<Breadcrumbs breadcrumbs={breadcrumbs} />
 			</div>
-			<hr />
+			<button className="transparent">{"-"}</button>
+			{current_path ?
+				<span>
+	 					<Link className="button"
+	 						to={`${current_path}/access/jquery`}>
+	 						{"Access"}
+	 					</Link>
+	 				</span>
+				: null
+			}
+			<PageActions actions={actions} />
 		</div>
   );
 }

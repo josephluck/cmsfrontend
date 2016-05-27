@@ -6,11 +6,7 @@ import Store from 'store/Store';
 function App({
 	children
 }) {
-  return (
-  	<div>
-  		{children}
-  	</div>
-  );
+  return children
 }
 
 export default cool(App, Store);

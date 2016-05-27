@@ -42,7 +42,7 @@ class NewItem extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div>
+	  	<div className="page-container">
   			<MidBar
   				breadcrumbs={[
 						{
@@ -66,7 +66,7 @@ class NewItem extends React.Component {
 						}
 					]} />
 
-		  	<div className="container">
+		  	<div className="flex flex-1">
 		  		<Block loading={this.props.templates_loading}>
 			  		<ItemForm
 			  			onSubmit={this.props.submitItem}

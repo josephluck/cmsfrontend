@@ -7,6 +7,25 @@ body, html {
 	color: @black;
 	-webkit-font-smoothing: antialiased;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+	height: 100%;
+	display: flex;
+	width: 100%;
+}
+
+#root {
+	display: flex;
+	flex: 1;
+}
+
+.app-container,
+.page-container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.page-content {
+	flex: 1;
 }
 
 h1, h2, h3, h4, h5, p, strong {
@@ -64,4 +83,9 @@ form {
 	padding: @padding @padding;
 	border: solid @borderWidth @darkGray;
 	border-radius: @listBorderRadius;
+}
+
+.aside {
+	border-left: solid @borderWidth @darkGray;
+	background: @white;
 }

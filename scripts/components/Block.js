@@ -4,15 +4,13 @@ function Block({
 	loading,
 	children
 }) {
-  return (
-  	<div>
-	  	{loading ?
-	  		<div>{"Loading"}</div>
-	  		:
-	  		<div>{children}</div>
-	  	}
-	  </div>
-  );
+	if (loading) {
+		return (
+			<div>{"Loading"}</div>
+		)
+	} else {
+		return children;
+	}
 }
 
 export default Block;

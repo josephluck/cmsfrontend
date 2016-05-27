@@ -27,21 +27,19 @@ class Login extends React.Component {
 	  			<h3>{"Login"}</h3>
 	  		</div>
 		  	<div className="container modal-content">
-		  		<div>
-		  		  {this.props.form.errors ?
-		  		    <ErrorBar text={this.props.form.errors}></ErrorBar>
-		  		    : null
-		  		  }
-	  		    <FormInput title="Email">
-	  		      <input name="email"
-	  		        type="text" />
-	  		    </FormInput>
+	  		  {this.props.form.errors ?
+	  		    <ErrorBar text={this.props.form.errors}></ErrorBar>
+	  		    : null
+	  		  }
+  		    <FormInput title="Email">
+  		      <input name="email"
+  		        type="text" />
+  		    </FormInput>
 
-	  		    <FormInput title="Password">
-	  		      <input name="password"
-	  		        type="password" />
-	  		    </FormInput>
-		  		</div>
+  		    <FormInput title="Password">
+  		      <input name="password"
+  		        type="password" />
+  		    </FormInput>
 		  	</div>
 		    <div className="modal-footer container flex vertical-align">
 		      <div className="flex-1">
