@@ -50,7 +50,7 @@ function submitSite (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().sites.push(res);
-		Api.redirect("/sites/view");
+		Api.redirect(`/sites/${res.id}/view`);
 	}, (err) => {
 		Store.get().forms.site.set({
 			"loading": false,

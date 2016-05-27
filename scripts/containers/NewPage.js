@@ -56,7 +56,7 @@ function submitPage (form) {
 		payload: form
 	}).then((res) => {
 		Store.get().site.pages.unshift(res);
-		Api.redirect(`/sites/${Store.get().site.id}/view`);
+		Api.redirect(`/sites/${Store.get().site.id}/pages/${res.id}/view`);
 	}, (err) => {
 		Store.get().forms.page.set({
 			"loading": false,

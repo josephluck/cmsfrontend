@@ -32,7 +32,7 @@ class NewSection extends React.Component {
 			payload: form
 		}).then((res) => {
 			Store.get().page.sections.unshift(res);
-			Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/view`);
+			Api.redirect(`/sites/${Store.get().site.id}/pages/${Store.get().page.id}/sections/${res.id}/view`);
 		}, (err) => {
 			Store.get().forms.new_section.set({
 				"loading": false,

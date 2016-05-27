@@ -50,7 +50,7 @@ function submitUser (form) {
 		},
 		payload: form
 	}).then((res) => {
-		Api.redirect("/users/view");
+		Api.redirect(`/users/${res.id}/view`);
 	}, (err) => {
 		Store.get().forms.user.set({
 			"loading": false,
