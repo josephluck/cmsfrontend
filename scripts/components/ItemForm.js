@@ -83,46 +83,51 @@ class ItemForm extends React.Component {
 
             {this.state.fields.map((field, field_index) => {
               return (
-                <div key={field_index}
-                  className="form-input-group relative">
-                  {this.state.fields.length > 1 ?
-                    <div className="remove-template-icon"
+                <div>
+                  <span className="form-input-label flex">
+                    <span className="flex-1">
+                      {field.title}
+                    </span>
+                    <a href=""
                       onClick={(e) => {
+                        e.preventDefault();
                         this.handleRemoveField(field_index)
                       }}>
-                      <span className="ss-delete"></span>
-                    </div>
-                    : null
-                  }
-                  {field.attributes.map((attribute, attribute_index) => {
-                    if (attribute.kind === "text") {
-                      return (
-                        <FormInput key={attribute_index}
-                          title={attribute.name}>
-                          <input type="text"
-                            value={field[attribute.name]}
-                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
-                        </FormInput>
-                      )
-                    } else {
-                      return (
-                        <FormInput key={attribute_index}
-                          title={attribute.name}>
-                          <select value={field[attribute.name]}
-                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
-                            {attribute.options.map((option, option_index) => {
-                              return (
-                                <option key={option_index}
-                                  value={option.value}>
-                                  {option.name}
-                                </option>
-                              )
-                            })}
-                          </select>
-                        </FormInput>
-                      )
-                    }
-                  })}
+                      {"Remove"}
+                    </a>
+                  </span>
+                  <div key={field_index}
+                    className="form-input-group relative">
+                    {field.attributes.map((attribute, attribute_index) => {
+                      if (attribute.kind === "text") {
+                        return (
+                          <FormInput key={attribute_index}
+                            title={attribute.name}>
+                            <input type="text"
+                              value={field[attribute.name]}
+                              onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
+                          </FormInput>
+                        )
+                      } else {
+                        return (
+                          <FormInput key={attribute_index}
+                            title={attribute.name}>
+                            <select value={field[attribute.name]}
+                              onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
+                              {attribute.options.map((option, option_index) => {
+                                return (
+                                  <option key={option_index}
+                                    value={option.value}>
+                                    {option.name}
+                                  </option>
+                                )
+                              })}
+                            </select>
+                          </FormInput>
+                        )
+                      }
+                    })}
+                  </div>
                 </div>
               )
             })}
