@@ -151,26 +151,24 @@ class ItemForm extends React.Component {
           <div className="aside-header">
             {"Templates"}
           </div>
-          <div className="aside-content">
-            <div className="list">
-              {this.props.templates.map((template, i) => {
-                return (
-                  <div key={i}
-                    value={template.id}
-                    className="list-item flex">
-                    <span className="flex-1">
-                      {template.title}
-                    </span>
-                    <a href="" onClick={(e) => {
-                      e.preventDefault();
-                      this.useTemplate(template);
-                    }}>
-                      {"Use"}
-                    </a>
-                  </div>
-                )
-              })}
-            </div>
+          <div className="list without-border">
+            {this.props.templates.map((template, i) => {
+              return (
+                <div key={i}
+                  value={template.id}
+                  className="list-item flex with-bottom-border">
+                  <span className="flex-1">
+                    {template.title}
+                  </span>
+                  <a href="" onClick={(e) => {
+                    e.preventDefault();
+                    this.useTemplate(template);
+                  }}>
+                    {"Use"}
+                  </a>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

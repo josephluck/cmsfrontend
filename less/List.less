@@ -5,16 +5,10 @@
 	margin: 0px;
 	border: solid @borderWidth @darkGray;
 	border-radius: @listBorderRadius;
-}
-
-.list-header {
-	padding: @padding/2 @padding;
-	border-bottom: solid @borderWidth @darkGray;
-	.list-buttons {
-		opacity: 0;
-		span {
-			margin-left: @padding/2;
-		}
+	&.without-border {
+		border: 0px;
+		background: transparent;
+		border-radius: 0px;
 	}
 }
 
@@ -22,7 +16,13 @@
 	padding: @padding;
 	border-bottom: solid @borderWidth @darkGray;
 	&:last-of-type {
-		border-bottom: 0px;
+		border-bottom-width: 0px;
+	}
+	&.with-bottom-border {
+		border-bottom-width: @borderWidth;
+		&:last-of-type {
+			border-bottom-width: @borderWidth;
+		}
 	}
 	.list-buttons {
 		a {
