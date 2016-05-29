@@ -61,7 +61,10 @@ class ItemForm extends React.Component {
   }
 
   useTemplate(template) {
-    this.state.fields.push(template);
+    this.state.fields.push({
+      id: Date.now(),
+      ...template
+    });
     this.forceUpdate();
   }
 
