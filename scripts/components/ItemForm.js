@@ -2,10 +2,11 @@ import React from 'react';
 import FormHelper from 'utils/FormHelper';
 import * as _ from 'underscore';
 
-import FormInput from 'components/FormInput';
 import { Link } from 'react-router';
-
 import Editor from 'react-quill';
+import FormInput from 'components/FormInput';
+import Sortable from 'react-anything-sortable';
+import SortableListItem from 'components/SortableListItem';
 
 class ItemForm extends React.Component {
   constructor(props) {
@@ -43,12 +44,6 @@ class ItemForm extends React.Component {
     })
   }
 
-  handleAddAnother(e) {
-    e.preventDefault();
-    this.state.fields.push({});
-    this.forceUpdate();
-  }
-
   handleRemoveField(field_index) {
     this.state.fields.splice(field_index, 1);
     this.forceUpdate();
@@ -68,6 +63,10 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
+  handleReorder(re_ordered_fields) {
+    console.log(re_ordered_fields);
+  }
+
   render() {
     return (
       <div className="flex flex-1">
@@ -84,56 +83,61 @@ class ItemForm extends React.Component {
                 defaultValue={this.state.data.title} />
             </FormInput>
 
-            {this.state.fields.map((field, field_index) => {
-              return (
-                <div className="form-input-group">
-                  <span className="form-input-group-title flex">
-                    <span className="flex-1">
-                      {field.title}
+            <Sortable onSort={this.handleReorder}
+              dynamic>
+              {this.state.fields.map((field, field_index) => {
+                return (
+                  <SortableListItem key={field_index}
+                    sortData={field}
+                    className="form-input-group">
+                    <span className="form-input-group-title flex">
+                      <span className="flex-1">
+                        {field.title}
+                      </span>
+                      <a href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.handleRemoveField(field_index)
+                        }}>
+                        {"Remove"}
+                      </a>
                     </span>
-                    <a href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.handleRemoveField(field_index)
-                      }}>
-                      {"Remove"}
-                    </a>
-                  </span>
-                  <div key={field_index}
-                    className="form-input-group-content relative">
-                    {field.attributes.map((attribute, attribute_index) => {
-                      if (attribute.kind === "text") {
-                        return (
-                          <FormInput key={attribute_index}
-                            title={attribute.name}>
-                            <input type="text"
-                              value={field[attribute.name]}
-                              onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
-                          </FormInput>
-                        )
-                      } else {
-                        return (
-                          <FormInput key={attribute_index}
-                            title={attribute.name}>
-                            <select value={field[attribute.name]}
-                              onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
-                              {attribute.options.map((option, option_index) => {
-                                return (
-                                  <option key={option_index}
-                                    value={option.value}>
-                                    {option.name}
-                                  </option>
-                                )
-                              })}
-                            </select>
-                          </FormInput>
-                        )
-                      }
-                    })}
-                  </div>
-                </div>
-              )
-            })}
+                    <div key={field_index}
+                      className="form-input-group-content relative">
+                      {field.attributes.map((attribute, attribute_index) => {
+                        if (attribute.kind === "text") {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <input type="text"
+                                value={field[attribute.name]}
+                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
+                            </FormInput>
+                          )
+                        } else {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <select value={field[attribute.name]}
+                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
+                                {attribute.options.map((option, option_index) => {
+                                  return (
+                                    <option key={option_index}
+                                      value={option.value}>
+                                      {option.name}
+                                    </option>
+                                  )
+                                })}
+                              </select>
+                            </FormInput>
+                          )
+                        }
+                      })}
+                    </div>
+                  </SortableListItem>
+                )
+              })}
+            </Sortable>
             <div className="flex">
               <div className="flex-1">
                 {this.state.selected_template ?
