@@ -62,37 +62,39 @@ class ViewSite extends React.Component {
 					]} />
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
-	  	  		<div className="container flex vertical-align">
-	  	  			<h3 className="flex-1">Pages</h3>
-	  	  			<Link className="button"
-	  	  				to={`/sites/${this.props.site.id}/new_page`}>
-	  	  				{"New page"}
-	  	  			</Link>
-	  	  		</div>
-	  		  	<div className="container">
-	  		  		<h1>{this.props.pages_loading}</h1>
-	  		  		<NoResults noResults={!this.props.site.pages.length}
-	  		  			name="pages">
-	  		  			<Sortable className="list"
-	  		  				onSort={this.handleReorder}
-	  		  				dynamic>
-		  		  			{this.props.site.pages.map((page, i) => {
-		  		  				return (
-			  		  				<SortableListItem key={i}
-			  		  					sortData={page}
-			  		  					className="list-item flex">
-			  		  					<span className="flex-1 ellipsis">{page.title}</span>
-			  		  					<span className="flex-0 list-buttons">
-			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
-			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
-			  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
-			  		  					</span>
-			  		  				</SortableListItem>
-			  		  			)
-		  		  			})}
-		  		  		</Sortable>
-	  		  		</NoResults>
-	  		  	</div>
+	  				<div>
+		  	  		<div className="container flex vertical-align">
+		  	  			<h3 className="flex-1">Pages</h3>
+		  	  			<Link className="button"
+		  	  				to={`/sites/${this.props.site.id}/new_page`}>
+		  	  				{"New page"}
+		  	  			</Link>
+		  	  		</div>
+		  		  	<div className="container">
+		  		  		<h1>{this.props.pages_loading}</h1>
+		  		  		<NoResults noResults={!this.props.site.pages.length}
+		  		  			name="pages">
+		  		  			<Sortable className="list"
+		  		  				onSort={this.handleReorder}
+		  		  				dynamic>
+			  		  			{this.props.site.pages.map((page, i) => {
+			  		  				return (
+				  		  				<SortableListItem key={i}
+				  		  					sortData={page}
+				  		  					className="list-item flex">
+				  		  					<span className="flex-1 ellipsis">{page.title}</span>
+				  		  					<span className="flex-0 list-buttons">
+				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
+				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
+				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
+				  		  					</span>
+				  		  				</SortableListItem>
+				  		  			)
+			  		  			})}
+			  		  		</Sortable>
+		  		  		</NoResults>
+		  		  	</div>
+		  		  </div>
 			  	</Block>
 			  </div>
 

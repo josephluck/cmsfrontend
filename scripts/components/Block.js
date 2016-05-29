@@ -8,8 +8,10 @@ function Block({
 		return (
 			<div>{"Loading"}</div>
 		)
-	} else {
+	} else if (children) {
 		return children;
+	} else {
+		return null;
 	}
 }
 

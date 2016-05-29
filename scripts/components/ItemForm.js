@@ -60,6 +60,11 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
+  useTemplate(template) {
+    this.state.fields.push(template);
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <div className="flex flex-1">
@@ -76,57 +81,51 @@ class ItemForm extends React.Component {
                 defaultValue={this.state.data.title} />
             </FormInput>
 
-            {this.state.selected_template ?
-              <div>
-                {this.state.fields.map((field, field_index) => {
-                  return (
-                    <div key={field_index}
-                      className="form-input-group relative">
-                      {this.state.fields.length > 1 ?
-                        <div className="remove-template-icon"
-                          onClick={(e) => {
-                            this.handleRemoveField(field_index)
-                          }}>
-                          <span className="ss-delete"></span>
-                        </div>
-                        : null
-                      }
-                      {this.state.selected_template.attributes.map((attribute, attribute_index) => {
-                        if (attribute.kind === "text") {
-                          return (
-                            <FormInput key={attribute_index}
-                              title={attribute.name}>
-                              <input type="text"
-                                value={field[attribute.name]}
-                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
-                            </FormInput>
-                          )
-                        } else {
-                          return (
-                            <FormInput key={attribute_index}
-                              title={attribute.name}>
-                              <select value={field[attribute.name]}
-                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
-                                {attribute.options.map((option, option_index) => {
-                                  return (
-                                    <option key={option_index}
-                                      value={option.value}>
-                                      {option.name}
-                                    </option>
-                                  )
-                                })}
-                              </select>
-                            </FormInput>
-                          )
-                        }
-                      })}
+            {this.state.fields.map((field, field_index) => {
+              return (
+                <div key={field_index}
+                  className="form-input-group relative">
+                  {this.state.fields.length > 1 ?
+                    <div className="remove-template-icon"
+                      onClick={(e) => {
+                        this.handleRemoveField(field_index)
+                      }}>
+                      <span className="ss-delete"></span>
                     </div>
-                  )
-                })}
-              </div>
-              : null
-            }
-
+                    : null
+                  }
+                  {field.attributes.map((attribute, attribute_index) => {
+                    if (attribute.kind === "text") {
+                      return (
+                        <FormInput key={attribute_index}
+                          title={attribute.name}>
+                          <input type="text"
+                            value={field[attribute.name]}
+                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
+                        </FormInput>
+                      )
+                    } else {
+                      return (
+                        <FormInput key={attribute_index}
+                          title={attribute.name}>
+                          <select value={field[attribute.name]}
+                            onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
+                            {attribute.options.map((option, option_index) => {
+                              return (
+                                <option key={option_index}
+                                  value={option.value}>
+                                  {option.name}
+                                </option>
+                              )
+                            })}
+                          </select>
+                        </FormInput>
+                      )
+                    }
+                  })}
+                </div>
+              )
+            })}
             <div className="flex">
               <div className="flex-1">
                 {this.state.selected_template ?
@@ -144,15 +143,29 @@ class ItemForm extends React.Component {
           </div>
         </form>
         <div className="flex-1 aside">
-          <div className="container">
-            {this.props.templates.map((template, i) => {
-              return (
-                <div key={i}
-                  value={template.id}>
-                  {template.title}
-                </div>
-              )
-            })}
+          <div className="aside-header">
+            {"Templates"}
+          </div>
+          <div className="aside-content">
+            <div className="list">
+              {this.props.templates.map((template, i) => {
+                return (
+                  <div key={i}
+                    value={template.id}
+                    className="list-item flex">
+                    <span className="flex-1">
+                      {template.title}
+                    </span>
+                    <a href="" onClick={(e) => {
+                      e.preventDefault();
+                      this.useTemplate(template);
+                    }}>
+                      {"Use"}
+                    </a>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>

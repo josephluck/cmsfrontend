@@ -69,35 +69,37 @@ class ViewSection extends React.Component {
 
 	  		<div className="container">
 	  			<Block loading={this.props.loading}>
-	  	  		<div className="container flex vertical-align">
-	  	  			<h3 className="flex-1">Items</h3>
-	  	  			<Link className="button"
-	  	  				to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/new_item`}>
-	  	  				{"New item"}
-	  	  			</Link>
-	  	  		</div>
-	  		  	<div className="container">
-	  		  		<NoResults noResults={!this.props.section.items.length}
-	  		  			name="items">
-	  		  			<Sortable className="list"
-	  		  				onSort={this.handleReorder}
-	  		  				dynamic>
-		  		  			{this.props.section.items.map((item, i) => {
-		  		  				return (
-			  		  				<SortableListItem key={i}
-			  		  					sortData={item}
-			  		  					className="list-item flex">
-			  		  					<span className="flex-1 ellipsis">{item.title}</span>
-			  		  					<span className="flex-0 list-buttons">
-			  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>
-			  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/items/${item.id}/delete`}>{"Delete"}</Link>
-			  		  					</span>
-			  		  				</SortableListItem>
-			  		  			)
-		  		  			})}
-		  		  		</Sortable>
-	  		  		</NoResults>
-	  		  	</div>
+	  				<div>
+		  	  		<div className="container flex vertical-align">
+		  	  			<h3 className="flex-1">Items</h3>
+		  	  			<Link className="button"
+		  	  				to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/new_item`}>
+		  	  				{"New item"}
+		  	  			</Link>
+		  	  		</div>
+		  		  	<div className="container">
+		  		  		<NoResults noResults={!this.props.section.items.length}
+		  		  			name="items">
+		  		  			<Sortable className="list"
+		  		  				onSort={this.handleReorder}
+		  		  				dynamic>
+			  		  			{this.props.section.items.map((item, i) => {
+			  		  				return (
+				  		  				<SortableListItem key={i}
+				  		  					sortData={item}
+				  		  					className="list-item flex">
+				  		  					<span className="flex-1 ellipsis">{item.title}</span>
+				  		  					<span className="flex-0 list-buttons">
+				  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>
+				  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/items/${item.id}/delete`}>{"Delete"}</Link>
+				  		  					</span>
+				  		  				</SortableListItem>
+				  		  			)
+			  		  			})}
+			  		  		</Sortable>
+		  		  		</NoResults>
+		  		  	</div>
+		  		  </div>
 			  	</Block>
 			  </div>
 
