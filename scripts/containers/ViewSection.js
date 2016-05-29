@@ -81,13 +81,14 @@ class ViewSection extends React.Component {
 		  		  		<NoResults noResults={!this.props.section.items.length}
 		  		  			name="items">
 		  		  			<Sortable className="list"
+		  		  				sortHandle="sortable-handle"
 		  		  				onSort={this.handleReorder}
 		  		  				dynamic>
 			  		  			{this.props.section.items.map((item, i) => {
 			  		  				return (
 				  		  				<SortableListItem key={i}
 				  		  					sortData={item}
-				  		  					className="list-item flex">
+				  		  					className="list-item sortable-handle flex">
 				  		  					<span className="flex-1 ellipsis">{item.title}</span>
 				  		  					<span className="flex-0 list-buttons">
 				  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>

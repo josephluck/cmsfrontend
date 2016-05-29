@@ -63,8 +63,9 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
-  handleReorder(re_ordered_fields) {
-    console.log(re_ordered_fields);
+  handleReorder(fields) {
+    this.state.fields = fields;
+    this.forceUpdate();
   }
 
   render() {
@@ -83,14 +84,15 @@ class ItemForm extends React.Component {
                 defaultValue={this.state.data.title} />
             </FormInput>
 
-            <Sortable onSort={this.handleReorder}
+            <Sortable onSort={::this.handleReorder}
+              sortHandle="sortable-handle"
               dynamic>
               {this.state.fields.map((field, field_index) => {
                 return (
                   <SortableListItem key={field_index}
                     sortData={field}
                     className="form-input-group">
-                    <span className="form-input-group-title flex">
+                    <span className="form-input-group-title sortable-handle flex">
                       <span className="flex-1">
                         {field.title}
                       </span>

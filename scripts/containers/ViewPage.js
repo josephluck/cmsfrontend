@@ -77,13 +77,14 @@ class ViewPage extends React.Component {
 		  		  		<NoResults noResults={!this.props.page.sections.length}
 		  		  			name="sections">
 		  		  			<Sortable className="list"
+		  		  				sortHandle="sortable-handle"
 		  		  				onSort={this.handleReorder}
 		  		  				dynamic>
 			  		  			{this.props.page.sections.map((section, i) => {
 			  		  				return (
 				  		  				<SortableListItem key={i}
 				  		  					sortData={section}
-				  		  					className="list-item flex">
+				  		  					className="list-item sortable-handle flex">
 				  		  					<span className="flex-1 ellipsis">{section.title}</span>
 				  		  					<span className="flex-0 list-buttons">
 				  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${section.id}/view`}>{"View"}</Link>

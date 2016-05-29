@@ -13,13 +13,14 @@ function SitesList({
 		<NoResults noResults={!sites.length}
 			name="sites">
 			<Sortable className="list"
+				sortHandle="sortable-handle"
 				onSort={onReorder}
 				dynamic>
 				{sites.map((site, i) => {
 					return (
 						<SortableListItem key={i}
 							sortData={site}
-							className="list-item flex">
+							className="list-item sortable-handle flex">
 							<span className="flex-1 ellipsis">{site.title}</span>
 							<span className="flex-0 list-buttons">
 								<Link to={`/sites/${site.id}/view`}>{"View"}</Link>

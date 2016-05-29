@@ -10,6 +10,11 @@
 		float: none;
 		width: 100%;
 		box-sizing: border-box;
+		cursor: inherit;
+		&.sortable-handle,
+		.sortable-handle {
+			cursor: move;
+		}
 		&.ui-sortable-dragging {
 			border: solid @borderWidth @darkGray;
 			border-radius: @listBorderRadius;
@@ -22,7 +27,7 @@
 	.ui-sortable {
 		.ui-sortable-placeholder {
 			&.visible {
-				display: flex;
+				display: flex; // Set flex display on list items that are placeholders
 			}
 		}
 	}

@@ -75,13 +75,14 @@ class ViewSite extends React.Component {
 		  		  		<NoResults noResults={!this.props.site.pages.length}
 		  		  			name="pages">
 		  		  			<Sortable className="list"
+		  		  				sortHandle="sortable-handle"
 		  		  				onSort={this.handleReorder}
 		  		  				dynamic>
 			  		  			{this.props.site.pages.map((page, i) => {
 			  		  				return (
 				  		  				<SortableListItem key={i}
 				  		  					sortData={page}
-				  		  					className="list-item flex">
+				  		  					className="list-item sortable-handle flex">
 				  		  					<span className="flex-1 ellipsis">{page.title}</span>
 				  		  					<span className="flex-0 list-buttons">
 				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
