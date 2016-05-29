@@ -1,7 +1,6 @@
 .ui-sortable {
 	.ui-sortable-placeholder {
 		&.visible {
-			display: flex;
 			& > * { // Only affect immediate children (top level children)
 				opacity: 0.2;
 			}
@@ -15,6 +14,16 @@
 			border: solid @borderWidth @darkGray;
 			border-radius: @listBorderRadius;
 			background: @pureWhite;
+		}
+	}
+}
+
+.list {
+	.ui-sortable {
+		.ui-sortable-placeholder {
+			&.visible {
+				display: flex;
+			}
 		}
 	}
 }
