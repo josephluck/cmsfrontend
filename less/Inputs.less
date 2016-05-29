@@ -1,9 +1,21 @@
 .form-input-group {
+	background: fade(@pureWhite, 80%);
+	border-radius: @buttonBorderRadius;
+	border: solid @borderWidth @darkGray;
+	margin-bottom: @padding;
+}
+
+.form-input-group-title {
+	background: @pureWhite;
+	padding: @padding;
+	border-radius: @buttonBorderRadius;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom: solid @borderWidth @darkGray;
+}
+
+.form-input-group-content {
 	padding: @padding @padding 0px;
-  border: solid @borderWidth @darkGray;
-  border-radius: @buttonBorderRadius;
-  margin-bottom: @padding;
-  background: fade(@pureWhite, 80%);
 }
 
 .form-input {

@@ -60,10 +60,10 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
-  useTemplate(template) {
+  addField(selected_template) {
     this.state.fields.push({
       id: Date.now(),
-      ...template
+      ...selected_template
     });
     this.forceUpdate();
   }
@@ -86,8 +86,8 @@ class ItemForm extends React.Component {
 
             {this.state.fields.map((field, field_index) => {
               return (
-                <div>
-                  <span className="form-input-label flex">
+                <div className="form-input-group">
+                  <span className="form-input-group-title flex">
                     <span className="flex-1">
                       {field.title}
                     </span>
@@ -100,7 +100,7 @@ class ItemForm extends React.Component {
                     </a>
                   </span>
                   <div key={field_index}
-                    className="form-input-group relative">
+                    className="form-input-group-content relative">
                     {field.attributes.map((attribute, attribute_index) => {
                       if (attribute.kind === "text") {
                         return (
@@ -150,11 +150,11 @@ class ItemForm extends React.Component {
             </div>
           </div>
         </form>
-        <div className="flex-1 aside">
+        <div className="flex-1 aside flex flex-vertical">
           <div className="aside-header">
             {"Templates"}
           </div>
-          <div className="list without-border">
+          <div className="list without-border flex-1 overflow-auto">
             {this.props.templates.map((template, i) => {
               return (
                 <div key={i}
@@ -165,7 +165,7 @@ class ItemForm extends React.Component {
                   </span>
                   <a href="" onClick={(e) => {
                     e.preventDefault();
-                    this.useTemplate(template);
+                    this.addField(template);
                   }}>
                     {"Use"}
                   </a>
