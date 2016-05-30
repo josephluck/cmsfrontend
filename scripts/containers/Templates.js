@@ -31,6 +31,25 @@ class Templates extends React.Component {
 		// Store.get().templates.reset([])
 	}
 
+	handleReorder(templates) {
+		Store.get().templates.reset(templates);
+		let order = templates.map((template, i) => {
+			return {
+				id: template.id,
+				order: i
+			}
+		})
+
+		Api.post({
+			url: {
+				name: 'reorder_templates'
+			},
+			payload: {
+				order: order
+			}
+		})
+	}
+
 	render() {
 	  return (
 	  	<div>
@@ -48,7 +67,9 @@ class Templates extends React.Component {
 					]} />
 		  	<div className="container">
 			  	<Block loading={this.props.loading}>
-			  		<TemplatesList templates={this.props.templates} />
+			  		<TemplatesList
+			  			templates={this.props.templates}
+			  			onReorder={::this.handleReorder} />
 			  	</Block>
 			  </div>
 			</div>

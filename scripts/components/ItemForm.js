@@ -88,13 +88,26 @@ class ItemForm extends React.Component {
               sortHandle="sortable-handle"
               dynamic>
               {this.state.fields.map((field, field_index) => {
+                var minimise_icon_class = "minimise-icon ss-navigateright rotated";
+                if (field.open) {
+                  minimise_icon_class = "minimise-icon ss-navigateright";
+                }
                 return (
                   <SortableListItem key={field_index}
                     sortData={field}
                     className="form-input-group">
-                    <span className="form-input-group-title sortable-handle flex">
+                    <span className="form-input-group-title sortable-handle flex vertical-align">
                       <span className="flex-1">
-                        {field.title}
+                        <a href=""
+                          className={minimise_icon_class}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            this.state.fields[field_index].open = !this.state.fields[field_index].open;
+                            this.forceUpdate();
+                          }}></a>
+                        <span className="left-margin">
+                          {field.title}
+                        </span>
                       </span>
                       <a href=""
                         onClick={(e) => {
@@ -104,38 +117,41 @@ class ItemForm extends React.Component {
                         {"Remove"}
                       </a>
                     </span>
-                    <div key={field_index}
-                      className="form-input-group-content relative">
-                      {field.attributes.map((attribute, attribute_index) => {
-                        if (attribute.kind === "text") {
-                          return (
-                            <FormInput key={attribute_index}
-                              title={attribute.name}>
-                              <input type="text"
-                                value={field[attribute.name]}
-                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
-                            </FormInput>
-                          )
-                        } else {
-                          return (
-                            <FormInput key={attribute_index}
-                              title={attribute.name}>
-                              <select value={field[attribute.name]}
-                                onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
-                                {attribute.options.map((option, option_index) => {
-                                  return (
-                                    <option key={option_index}
-                                      value={option.value}>
-                                      {option.name}
-                                    </option>
-                                  )
-                                })}
-                              </select>
-                            </FormInput>
-                          )
-                        }
-                      })}
-                    </div>
+                    {!field.open ?
+                      <div key={field_index}
+                        className="form-input-group-content relative">
+                        {field.attributes.map((attribute, attribute_index) => {
+                          if (attribute.kind === "text") {
+                            return (
+                              <FormInput key={attribute_index}
+                                title={attribute.name}>
+                                <input type="text"
+                                  value={field[attribute.name]}
+                                  onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
+                              </FormInput>
+                            )
+                          } else {
+                            return (
+                              <FormInput key={attribute_index}
+                                title={attribute.name}>
+                                <select value={field[attribute.name]}
+                                  onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
+                                  {attribute.options.map((option, option_index) => {
+                                    return (
+                                      <option key={option_index}
+                                        value={option.value}>
+                                        {option.name}
+                                      </option>
+                                    )
+                                  })}
+                                </select>
+                              </FormInput>
+                            )
+                          }
+                        })}
+                      </div>
+                      : null
+                    }
                   </SortableListItem>
                 )
               })}
