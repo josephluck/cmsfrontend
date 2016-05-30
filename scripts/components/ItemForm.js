@@ -31,17 +31,14 @@ class ItemForm extends React.Component {
   onSubmit(e) {
     var item = FormHelper.serialize(e.target)
 
-    item['fields'] = this.state.fields;
+    item['fields'] = this.state.fields.map((field, i) => {
+      return {
+        ...field,
+        id: null
+      }
+    });
+
     this.props.onSubmit(item);
-  }
-
-  onSelectedTemplateChange(e) {
-    let selected_template = _.findWhere(this.props.templates, {id: parseInt(e.target.value)});
-
-    this.setState({
-      selected_template: selected_template,
-      fields: [{}] // At this state, we can place default values for the field (only if the attribute has a default value)
-    })
   }
 
   handleRemoveField(field_index) {
@@ -49,16 +46,17 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
-  handleFieldAttributeChange(attribute, field_index, e) {
+  handleFieldAttributeChange(attribute, e) {
     let value = e.target.value;
-    this.state.fields[field_index][attribute.name] = value;
+    attribute.value = value;
     this.forceUpdate();
   }
 
   addField(selected_template) {
     this.state.fields.push({
+      ...selected_template,
       id: Date.now(),
-      ...selected_template
+      field_template_id: selected_template.id
     });
     this.forceUpdate();
   }
@@ -120,22 +118,23 @@ class ItemForm extends React.Component {
                     {!field.open ?
                       <div key={field_index}
                         className="form-input-group-content relative">
+                        <input type="hidden" value={field.field_template_id} />
                         {field.attributes.map((attribute, attribute_index) => {
                           if (attribute.kind === "text") {
                             return (
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
                                 <input type="text"
-                                  value={field[attribute.name]}
-                                  onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)} />
+                                  value={attribute.value}
+                                  onChange={this.handleFieldAttributeChange.bind(this, attribute)} />
                               </FormInput>
                             )
                           } else {
                             return (
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
-                                <select value={field[attribute.name]}
-                                  onChange={this.handleFieldAttributeChange.bind(this, attribute, field_index)}>
+                                <select value={attribute.value}
+                                  onChange={this.handleFieldAttributeChange.bind(this, attribute)}>
                                   {attribute.options.map((option, option_index) => {
                                     return (
                                       <option key={option_index}
