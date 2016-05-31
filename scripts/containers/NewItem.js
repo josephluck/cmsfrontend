@@ -69,8 +69,8 @@ class NewItem extends React.Component {
 		  	<div className="flex flex-1">
 		  		<Block loading={this.props.templates_loading}>
 			  		<ItemForm
-			  			onSubmit={this.props.submitItem}
 			  			state={this.props.form}
+			  			onSubmit={this.props.submitItem}
 			  			templates={this.props.templates.toJS()}
 			  			loading={false}>
 			  		</ItemForm>
@@ -107,6 +107,7 @@ function submitItem(form) {
 }
 
 NewItem.defaultProps = {
+	templates_loading: true,
 	form: {
 		errors: {},
 		data: {

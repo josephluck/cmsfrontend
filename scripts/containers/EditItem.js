@@ -34,7 +34,7 @@ class EditItem extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div>
+	  	<div className="page-container">
   			<MidBar
   				breadcrumbs={[
 						{
@@ -61,7 +61,7 @@ class EditItem extends React.Component {
 						}
 					]} />
 
-		  	<div className="container">
+		  	<div className="flex flex-1">
 		  		<Block loading={!this.props.item.id || this.props.templates_loading}>
 	  				<ItemForm
 	  					state={this.props.form}

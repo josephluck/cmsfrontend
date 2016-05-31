@@ -57,6 +57,7 @@ export function ModalTransition({
   return (
     <ReactCSSTransitionGroup
       component="div"
+      className="flex flex-1"
       transitionName="modal-transition"
       transitionEnterTimeout={page_transition_duration}
       transitionLeaveTimeout={page_transition_duration}>
