@@ -107,7 +107,6 @@ function submitItem(form) {
 }
 
 NewItem.defaultProps = {
-	templates_loading: true,
 	form: {
 		errors: {},
 		data: {

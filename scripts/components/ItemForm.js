@@ -53,6 +53,12 @@ class ItemForm extends React.Component {
   }
 
   addField(selected_template) {
+    selected_template.attributes = selected_template.attributes.map((attribute, i) => {
+      return {
+        ...attribute,
+        field_template_attribute_id: attribute.id
+      }
+    })
     this.state.fields.push({
       ...selected_template,
       id: Date.now(),
