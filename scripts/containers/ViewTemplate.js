@@ -1,6 +1,7 @@
 import React from 'react';
 import { warmUp } from 'react-freezer-js';
 import Store from 'store/Store';
+import Api from 'utils/Api';
 
 import { Link } from 'react-router';
 import MidBar from 'components/MidBar';
@@ -11,6 +12,29 @@ import {ModalTransition} from 'components/Transitions';
 class ViewTemplate extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+	deleteAttribute(attribute_to_delete) {
+		attribute_to_delete.set({
+			loading: true
+		});
+
+		Api.destroy({
+			url: {
+				name: 'template_attribute',
+				template_attribute_id: attribute_to_delete.id
+			}
+		}).then((res) => {
+			let attribute_index = Store.get().template.attributes.map((attribute) => {
+				return attribute.id
+			}).indexOf(attribute_to_delete.id);
+
+			Store.get().template.attributes.splice(attribute_index, 1);
+		}, (err) => {
+			attribute_to_delete.set({
+				loading: false
+			});
+		})
 	}
 
 	render() {
@@ -40,7 +64,7 @@ class ViewTemplate extends React.Component {
 		  			<Block loading={this.props.loading}>
 		  				<div>
 			  	  		<div className="container flex vertical-align">
-			  	  			<h3 className="flex-1">Attributes</h3>
+			  	  			<h3 className="flex-1">{"Attributes"}</h3>
 			  	  			<Link className="button"
 			  	  				to={`/templates/${this.props.template.id}/new_attribute`}>
 			  	  				{"New attribute"}
@@ -57,7 +81,7 @@ class ViewTemplate extends React.Component {
 					  		  					<span className="flex-1 ellipsis">{attribute.name}</span>
 					  		  					<span className="flex-0 list-buttons">
 					  		  						<Link to={`/templates/${this.props.template.id}/attributes/${attribute.id}/edit`}>{"Edit"}</Link>
-					  		  						<a href="">{"Delete"}</a>
+					  		  						<a onClick={this.deleteAttribute.bind(this, attribute)}>{"Delete"}</a>
 					  		  					</span>
 					  		  				</li>
 					  		  			)
