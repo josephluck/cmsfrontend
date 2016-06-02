@@ -3,7 +3,7 @@ import FormHelper from 'utils/FormHelper';
 import * as _ from 'underscore';
 
 import { Link } from 'react-router';
-import Editor from 'react-quill';
+import {Editor, EditorState} from 'draft-js';
 import FormInput from 'components/FormInput';
 import Sortable from 'react-anything-sortable';
 import SortableListItem from 'components/SortableListItem';
@@ -18,12 +18,14 @@ class ItemForm extends React.Component {
       this.state = {
         data: props.data,
         fields: props.data.fields,
-        selected_template: selected_template
+        selected_template: selected_template,
+        editorState: EditorState.createEmpty()
       }
     } else {
       this.state = {
         data: {},
-        fields: []
+        fields: [],
+        editorState: EditorState.createEmpty()
       }
     }
   }
@@ -70,6 +72,14 @@ class ItemForm extends React.Component {
   handleReorder(fields) {
     this.state.fields = fields;
     this.forceUpdate();
+  }
+
+  handleFieldAttributeChangeFromEditor(state) {
+    console.log(state.toJS());
+    this.setState({
+      editorState: state
+    })
+
   }
 
   render() {
@@ -139,16 +149,8 @@ class ItemForm extends React.Component {
                             return (
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
-                                <Editor theme="snow"
-                                  value={attribute.value}>
-                                  <Editor.Toolbar key="toolbar"
-                                    ref="toolbar"
-                                    items={Editor.Toolbar.defaultItems} />
-                                  <div key="editor"
-                                    ref="editor"
-                                    className="quill-contents"
-                                    dangerouslySetInnerHTML={{__html: attribute.value}} />
-                                </Editor>
+                                <Editor editorState={this.state.editorState}
+                                  onChange={::this.handleFieldAttributeChangeFromEditor} />
                               </FormInput>
                             )
                           } else if (attribute.kind === "dropdown") {
