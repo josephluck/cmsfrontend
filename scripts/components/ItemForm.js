@@ -126,7 +126,7 @@ class ItemForm extends React.Component {
                         className="form-input-group-content relative">
                         <input type="hidden" value={field.field_template_id} />
                         {field.attributes.map((attribute, attribute_index) => {
-                          if (attribute.kind === "text") {
+                          if (attribute.kind === "single_line_text") {
                             return (
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
@@ -135,7 +135,20 @@ class ItemForm extends React.Component {
                                   onChange={this.handleFieldAttributeChange.bind(this, attribute)} />
                               </FormInput>
                             )
-                          } else {
+                          } else if (attribute.kind === "rich_text") {
+                            <Editor theme="snow"
+                              value={attribute.value}>
+                              <Editor.Toolbar key="toolbar"
+                                ref="toolbar"
+                                items={Editor.Toolbar.defaultItems} />
+                              <div key="editor"
+                                ref="editor"
+                                className="quill-contents"
+                                dangerouslySetInnerHTML={{__html: "blah"}} />
+                            </Editor>
+                          } else if (attribute.kind === "dropdown") {
+
+                          } else if (attribute.kind === "multi_select") {
                             return (
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
@@ -154,6 +167,7 @@ class ItemForm extends React.Component {
                             )
                           }
                         })}
+                        <div className="clearfix"></div>
                       </div>
                       : null
                     }
@@ -178,8 +192,13 @@ class ItemForm extends React.Component {
           </div>
         </form>
         <div className="flex-1 aside flex flex-vertical">
-          <div className="aside-header">
-            {"Templates"}
+          <div className="aside-header flex flex-0">
+            <span className="flex-1">
+              {"Templates"}
+            </span>
+            <Link to="/templates/new">
+              {"New template"}
+            </Link>
           </div>
           <div className="list without-border flex-1 overflow-auto">
             {this.props.templates.map((template, i) => {
@@ -215,18 +234,3 @@ ItemForm.defaultProps = {
 }
 
 export default ItemForm;
-
-
-
-
-// <Editor theme="snow"
-//   value="">
-//   <Editor.Toolbar key="toolbar"
-//     ref="toolbar"
-//     items={Editor.Toolbar.defaultItems} />
-//   <div key="editor"
-//     ref="editor"
-//     className="quill-contents"
-//     dangerouslySetInnerHTML={{__html: "blah"}} />
-// </Editor>
-// <div className="clearfix"></div>

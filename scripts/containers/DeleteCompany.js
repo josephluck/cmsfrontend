@@ -16,11 +16,6 @@ class DeleteCompany extends React.Component {
 	  		loading={this.props.company.loading}
 	  		onSubmit={this.props.submitDelete}
 	  		cancelLinkPath="/settings/view">
-	  		<div>
-	  			<p>{"We're sad to see you go :-("}</p>
-	  			<br />
-	  			<br />
-	  		</div>
 	  	</DeleteForm>
 	  );
 	}

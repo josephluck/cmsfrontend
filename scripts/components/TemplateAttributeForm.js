@@ -55,7 +55,8 @@ class TemplateAttributeForm extends React.Component {
           <select name="kind"
             defaultValue={this.props.data.kind}
             onChange={this.onKindChange.bind(this)}>
-            <option value="text">{"Text input"}</option>
+            <option value="single_line_text">{"Single line text"}</option>
+            <option value="rich_text">{"Multi line text"}</option>
             <option value="dropdown">{"Dropdown"}</option>
             <option value="multi_select">{"Multi select"}</option>
           </select>

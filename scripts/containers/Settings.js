@@ -21,12 +21,10 @@ class Settings extends React.Component {
 							name: 'Settings'
 						}
 					]} />
-		  	<div className="container">
-			  	<PageTransition routes={this.props.routes}
-			  		route={this.props.route}>
-			  		{this.props.children}
-			  	</PageTransition>
-			  </div>
+		  	<PageTransition routes={this.props.routes}
+		  		route={this.props.route}>
+		  		{this.props.children}
+		  	</PageTransition>
 			</div>
 	  );
 	}
