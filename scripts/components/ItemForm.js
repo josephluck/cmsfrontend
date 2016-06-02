@@ -136,16 +136,21 @@ class ItemForm extends React.Component {
                               </FormInput>
                             )
                           } else if (attribute.kind === "rich_text") {
-                            <Editor theme="snow"
-                              value={attribute.value}>
-                              <Editor.Toolbar key="toolbar"
-                                ref="toolbar"
-                                items={Editor.Toolbar.defaultItems} />
-                              <div key="editor"
-                                ref="editor"
-                                className="quill-contents"
-                                dangerouslySetInnerHTML={{__html: "blah"}} />
-                            </Editor>
+                            return (
+                              <FormInput key={attribute_index}
+                                title={attribute.name}>
+                                <Editor theme="snow"
+                                  value={attribute.value}>
+                                  <Editor.Toolbar key="toolbar"
+                                    ref="toolbar"
+                                    items={Editor.Toolbar.defaultItems} />
+                                  <div key="editor"
+                                    ref="editor"
+                                    className="quill-contents"
+                                    dangerouslySetInnerHTML={{__html: attribute.value}} />
+                                </Editor>
+                              </FormInput>
+                            )
                           } else if (attribute.kind === "dropdown") {
 
                           } else if (attribute.kind === "multi_select") {
