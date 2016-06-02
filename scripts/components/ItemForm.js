@@ -90,7 +90,7 @@ class ItemForm extends React.Component {
           <div className="flex-1 container">
 
             <Editor
-              tag="pre"
+              tag="div"
               text={this.state.editor_value}
               onChange={::this.handleEditorChange}
               options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
@@ -155,7 +155,7 @@ class ItemForm extends React.Component {
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
                                 <Editor
-                                  tag="pre"
+                                  tag="div"
                                   text={attribute.value}
                                   onChange={this.handleFieldAttributeChange.bind(this, attribute)}
                                   options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
