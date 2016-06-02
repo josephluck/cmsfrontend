@@ -20,33 +20,33 @@ function getKey({
   return key;
 }
 
-// export function PageTransition({
-// 	routes,
-//   route,
-// 	children,
-//   transitionKey
-// }) {
-//   return (
-//   	<ReactCSSTransitionGroup
-//   	  component="div"
-//   	  transitionName="animate-page"
-//   	  transitionEnterTimeout={page_transition_duration}
-//   	  transitionLeaveTimeout={page_transition_duration}>
-//   	  {React.cloneElement(children, {
-//   	    key: transitionKey || getKey({routes, route})
-//   	  })}
-//   	</ReactCSSTransitionGroup>
-//   );
-// }
-
 export function PageTransition({
-  routes,
+	routes,
   route,
-  children,
+	children,
   transitionKey
 }) {
-  return children
+  return (
+  	<ReactCSSTransitionGroup
+  	  component="div"
+  	  transitionName="animate-page"
+  	  transitionEnterTimeout={page_transition_duration}
+  	  transitionLeaveTimeout={page_transition_duration}>
+  	  {React.cloneElement(children, {
+  	    key: transitionKey || getKey({routes, route})
+  	  })}
+  	</ReactCSSTransitionGroup>
+  );
 }
+
+// export function PageTransition({
+//   routes,
+//   route,
+//   children,
+//   transitionKey
+// }) {
+//   return children
+// }
 
 export function ModalTransition({
   routes,

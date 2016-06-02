@@ -14,6 +14,7 @@
 
 .list-item {
 	padding: @padding;
+	box-sizing: border-box;
 	border-bottom: solid @borderWidth @darkGray;
 	&:last-of-type {
 		border-bottom-width: 0px;
@@ -22,6 +23,16 @@
 		border-bottom-width: @borderWidth;
 		&:last-of-type {
 			border-bottom-width: @borderWidth;
+		}
+	}
+	&.dragged {
+		background: @pureWhite;
+		border: solid @borderWidth @darkGray;
+		border-radius: @listBorderRadius;
+	}
+	&.placeholder {
+		& > * { // Only affect immediate children (top level children)
+			opacity: 0.2;
 		}
 	}
 	.list-buttons {

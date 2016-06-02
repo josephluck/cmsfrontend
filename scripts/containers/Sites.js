@@ -31,7 +31,7 @@ class Sites extends React.Component {
 		// Store.get().sites.reset([])
 	}
 
-	handleReorder(sites) {
+	handleReorder(e, moved_item, item_prev_index, item_new_index, sites) {
 		Store.get().sites.reset(sites);
 		let order = sites.map((site, i) => {
 			return {

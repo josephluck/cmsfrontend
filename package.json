@@ -36,6 +36,7 @@
     "react-dom": "^15.0.1",
     "react-freezer-js": "^2.0.0",
     "react-medium-editor": "^1.7.1",
+    "react-reorder": "^2.0.0",
     "react-router": "^2.2.1",
     "remarkable": "^1.6.2",
     "superagent": "^1.8.3",
