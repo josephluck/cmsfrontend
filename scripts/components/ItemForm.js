@@ -3,7 +3,7 @@ import FormHelper from 'utils/FormHelper';
 import * as _ from 'underscore';
 
 import { Link } from 'react-router';
-import {Editor, EditorState} from 'draft-js';
+import Editor from 'react-medium-editor';
 import FormInput from 'components/FormInput';
 import Sortable from 'react-anything-sortable';
 import SortableListItem from 'components/SortableListItem';
@@ -18,14 +18,12 @@ class ItemForm extends React.Component {
       this.state = {
         data: props.data,
         fields: props.data.fields,
-        selected_template: selected_template,
-        editorState: EditorState.createEmpty()
+        selected_template: selected_template
       }
     } else {
       this.state = {
         data: {},
-        fields: [],
-        editorState: EditorState.createEmpty()
+        fields: []
       }
     }
   }
@@ -74,12 +72,10 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
-  handleFieldAttributeChangeFromEditor(state) {
-    console.log(state.toJS());
+  handleEditorChange(value) {
     this.setState({
-      editorState: state
+      editor_value: value
     })
-
   }
 
   render() {
@@ -92,6 +88,15 @@ class ItemForm extends React.Component {
             this.onSubmit(e);
           }}>
           <div className="flex-1 container">
+
+            <Editor
+              tag="pre"
+              text={this.state.editor_value}
+              onChange={::this.handleEditorChange}
+              options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
+            />
+
+
             <FormInput title="Title">
               <input name="title"
                 type="text"
@@ -149,8 +154,12 @@ class ItemForm extends React.Component {
                             return (
                               <FormInput key={attribute_index}
                                 title={attribute.name}>
-                                <Editor editorState={this.state.editorState}
-                                  onChange={::this.handleFieldAttributeChangeFromEditor} />
+                                <Editor
+                                  tag="pre"
+                                  text={attribute.value}
+                                  onChange={this.handleFieldAttributeChange.bind(this, attribute)}
+                                  options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
+                                />
                               </FormInput>
                             )
                           } else if (attribute.kind === "dropdown") {
