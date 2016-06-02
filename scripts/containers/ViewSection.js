@@ -8,15 +8,14 @@ import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import {ModalTransition} from 'components/Transitions';
-import Sortable from 'react-anything-sortable';
-import SortableListItem from 'components/SortableListItem';
+import Reorder from 'react-reorder';
 
 class ViewSection extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 
-	handleReorder(items) {
+	handleReorder(e, moved_item, item_prev_index, item_new_index, items) {
 		Store.get().section.items.reset(items);
 		let order = items.map((item, i) => {
 			return {
@@ -80,24 +79,28 @@ class ViewSection extends React.Component {
 		  		  	<div className="container">
 		  		  		<NoResults noResults={!this.props.section.items.length}
 		  		  			name="items">
-		  		  			<Sortable className="list"
-		  		  				sortHandle="sortable-handle"
-		  		  				onSort={this.handleReorder}
-		  		  				dynamic>
-			  		  			{this.props.section.items.map((item, i) => {
-			  		  				return (
-				  		  				<SortableListItem key={i}
-				  		  					sortData={item}
-				  		  					className="list-item sortable-handle flex">
-				  		  					<span className="flex-1 ellipsis">{item.title}</span>
-				  		  					<span className="flex-0 list-buttons">
-				  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>
-				  		  						<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/items/${item.id}/delete`}>{"Delete"}</Link>
-				  		  					</span>
-				  		  				</SortableListItem>
-				  		  			)
-			  		  			})}
-			  		  		</Sortable>
+		  		  			<Reorder
+		  		  			  itemKey='id'
+		  		  			  lock='horizontal'
+		  		  			  holdTime='100'
+		  		  			  list={this.props.section.items.toJS()}
+		  		  			  template={({item}) => {
+		  		  			  	return (
+		  		  			  		<div className="flex">
+		  		  			  			<span className="flex-1 ellipsis">{item.title}</span>
+		  		  			  			<span className="flex-0 list-buttons">
+		  		  			  				<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/items/${item.id}/edit`}>{"Edit"}</Link>
+		  		  			  				<Link to={`/sites/${this.props.site.id}/pages/${this.props.page.id}/sections/${this.props.section.id}/view/items/${item.id}/delete`}>{"Delete"}</Link>
+		  		  			  			</span>
+		  		  			  		</div>
+		  		  			  	)
+		  		  			  }}
+		  		  			  callback={this.handleReorder}
+		  		  			  listClass='list'
+		  		  			  itemClass='flex list-item'
+		  		  			  selectedKey='id'
+		  		  			  disableReorder={false}>
+		  		  			</Reorder>
 		  		  		</NoResults>
 		  		  	</div>
 		  		  </div>

@@ -8,17 +8,14 @@ import MidBar from 'components/MidBar';
 import Block from 'components/Block';
 import NoResults from 'components/NoResults';
 import {ModalTransition} from 'components/Transitions';
-import Sortable from 'react-anything-sortable';
-import SortableListItem from 'components/SortableListItem';
+import Reorder from 'react-reorder';
 
 class ViewSite extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 
-
-
-	handleReorder(pages) {
+	handleReorder(e, moved_item, item_prev_index, item_new_index, pages) {
 		Store.get().site.pages.reset(pages);
 		let order = pages.map((page, i) => {
 			return {
@@ -74,25 +71,29 @@ class ViewSite extends React.Component {
 		  		  		<h1>{this.props.pages_loading}</h1>
 		  		  		<NoResults noResults={!this.props.site.pages.length}
 		  		  			name="pages">
-		  		  			<Sortable className="list"
-		  		  				sortHandle="sortable-handle"
-		  		  				onSort={this.handleReorder}
-		  		  				dynamic>
-			  		  			{this.props.site.pages.map((page, i) => {
-			  		  				return (
-				  		  				<SortableListItem key={i}
-				  		  					sortData={page}
-				  		  					className="list-item sortable-handle flex">
-				  		  					<span className="flex-1 ellipsis">{page.title}</span>
-				  		  					<span className="flex-0 list-buttons">
-				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view`}>{"View"}</Link>
-				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/edit`}>{"Edit"}</Link>
-				  		  						<Link to={`/sites/${this.props.site.id}/pages/${page.id}/view/delete`}>{"Delete"}</Link>
-				  		  					</span>
-				  		  				</SortableListItem>
-				  		  			)
-			  		  			})}
-			  		  		</Sortable>
+		  		  			<Reorder
+		  		  			  itemKey='id'
+		  		  			  lock='horizontal'
+		  		  			  holdTime='100'
+		  		  			  list={this.props.site.pages.toJS()}
+		  		  			  template={({item}) => {
+		  		  			  	return (
+		  		  			  		<div className="flex">
+		  		  			  			<span className="flex-1 ellipsis">{item.title}</span>
+		  		  			  			<span className="flex-0 list-buttons">
+		  		  			  				<Link to={`/sites/${this.props.site.id}/pages/${item.id}/view`}>{"View"}</Link>
+		  		  			  				<Link to={`/sites/${this.props.site.id}/pages/${item.id}/edit`}>{"Edit"}</Link>
+		  		  			  				<Link to={`/sites/${this.props.site.id}/pages/${item.id}/view/delete`}>{"Delete"}</Link>
+		  		  			  			</span>
+		  		  			  		</div>
+		  		  			  	)
+		  		  			  }}
+		  		  			  callback={this.handleReorder}
+		  		  			  listClass='list'
+		  		  			  itemClass='flex list-item'
+		  		  			  selectedKey='id'
+		  		  			  disableReorder={false}>
+		  		  			</Reorder>
 		  		  		</NoResults>
 		  		  	</div>
 		  		  </div>

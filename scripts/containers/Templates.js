@@ -31,7 +31,7 @@ class Templates extends React.Component {
 		// Store.get().templates.reset([])
 	}
 
-	handleReorder(templates) {
+	handleReorder(e, moved_item, item_prev_index, item_new_index, templates) {
 		Store.get().templates.reset(templates);
 		let order = templates.map((template, i) => {
 			return {

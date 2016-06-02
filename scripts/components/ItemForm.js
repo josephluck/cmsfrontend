@@ -5,8 +5,7 @@ import * as _ from 'underscore';
 import { Link } from 'react-router';
 import Editor from 'react-medium-editor';
 import FormInput from 'components/FormInput';
-import Sortable from 'react-anything-sortable';
-import SortableListItem from 'components/SortableListItem';
+import Reorder from 'react-reorder';
 
 class ItemForm extends React.Component {
   constructor(props) {
@@ -67,7 +66,7 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
-  handleReorder(fields) {
+  handleReorder(e, moved_item, item_prev_index, item_new_index, fields) {
     this.state.fields = fields;
     this.forceUpdate();
   }
@@ -96,25 +95,25 @@ class ItemForm extends React.Component {
               options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
             />
 
-
             <FormInput title="Title">
               <input name="title"
                 type="text"
                 defaultValue={this.state.data.title} />
             </FormInput>
 
-            <Sortable onSort={::this.handleReorder}
-              sortHandle="sortable-handle"
-              dynamic>
-              {this.state.fields.map((field, field_index) => {
+            <Reorder
+              itemKey='id'
+              lock='horizontal'
+              holdTime='100'
+              list={this.state.fields}
+              template={({item}) => {
+                var field = item;
                 var minimise_icon_class = "minimise-icon ss-navigateright rotated";
                 if (field.open) {
                   minimise_icon_class = "minimise-icon ss-navigateright";
                 }
                 return (
-                  <SortableListItem key={field_index}
-                    sortData={field}
-                    className="form-input-group">
+                  <div className="form-item-group">
                     <span className="form-input-group-title sortable-handle flex vertical-align">
                       <span className="flex-1">
                         <a href=""
@@ -187,10 +186,15 @@ class ItemForm extends React.Component {
                       </div>
                       : null
                     }
-                  </SortableListItem>
+                  </div>
                 )
-              })}
-            </Sortable>
+              }}
+              callback={::this.handleReorder}
+              listClass='list'
+              itemClass='flex list-item'
+              selectedKey='id'
+              disableReorder={false}>
+            </Reorder>
             <div className="flex">
               <div className="flex-1">
                 {this.state.selected_template ?
