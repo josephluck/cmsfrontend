@@ -52,6 +52,7 @@ class ItemForm extends React.Component {
   }
 
   handleFieldAttributeChangeFromEditor(attribute, value) {
+    console.log(value);
     attribute.value = value;
   }
 
@@ -75,12 +76,6 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
-  handleEditorChange(value) {
-    this.setState({
-      editor_value: value
-    })
-  }
-
   render() {
     return (
       <div className="flex flex-1">
@@ -91,13 +86,6 @@ class ItemForm extends React.Component {
             this.onSubmit(e);
           }}>
           <div className="flex-1 container">
-
-            <Editor
-              tag="div"
-              text={this.state.editor_value}
-              onChange={::this.handleEditorChange}
-              options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
-            />
 
             <FormInput title="Title">
               <input name="title"
@@ -164,7 +152,7 @@ class ItemForm extends React.Component {
                                   tag="div"
                                   text={attribute.value}
                                   onChange={this.handleFieldAttributeChangeFromEditor.bind(this, attribute)}
-                                  options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
+                                  options={{toolbar: {buttons: ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}}
                                 />
                               </FormInput>
                             )

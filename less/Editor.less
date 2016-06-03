@@ -18,7 +18,7 @@
 		border-color: @lightBlue;
 	}
 	* {
-		font-family: 'Roboto Condensed', sans-serif;
+		font-family: 'Roboto Condensed', sans-serif !important;
 	}
 }
 
@@ -47,10 +47,10 @@
 		}
 		button {
 			height: auto;
-			width: auto;
+			width: 40px;
 			min-width: 0px;
 			border: 0px;
-			padding: @padding/2 @padding;
+			padding: @padding/2;
 			border-radius: 0px;
 			&:hover {
 				background: inherit;
@@ -80,4 +80,12 @@
 	border-color: @darkGray transparent transparent;
 	top: 39px;
 	border-width: 8px 8px 0;
+}
+
+// Used for image links
+.medium-editor-toolbar-form .medium-editor-toolbar-input {
+	height: auto;
+	width: auto;
+	background: none;
+	color: @black;
 }

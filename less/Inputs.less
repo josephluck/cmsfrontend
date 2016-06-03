@@ -3,6 +3,11 @@
 	border-radius: @buttonBorderRadius;
 	border: solid @borderWidth @darkGray;
 	margin-bottom: @padding;
+	&.placeholder {
+		& > * { // Only affect immediate children (top level children)
+			opacity: 0.2;
+		}
+	}
 }
 
 .form-input-group-title {
