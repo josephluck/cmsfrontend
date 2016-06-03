@@ -29,6 +29,7 @@ export function PageTransition({
   return (
   	<ReactCSSTransitionGroup
   	  component="div"
+      className="flex flex-1"
   	  transitionName="animate-page"
   	  transitionEnterTimeout={page_transition_duration}
   	  transitionLeaveTimeout={page_transition_duration}>
@@ -38,15 +39,6 @@ export function PageTransition({
   	</ReactCSSTransitionGroup>
   );
 }
-
-// export function PageTransition({
-//   routes,
-//   route,
-//   children,
-//   transitionKey
-// }) {
-//   return children
-// }
 
 export function ModalTransition({
   routes,

@@ -51,6 +51,10 @@ class ItemForm extends React.Component {
     this.forceUpdate();
   }
 
+  handleFieldAttributeChangeFromEditor(attribute, value) {
+    attribute.value = value;
+  }
+
   addField(selected_template) {
     selected_template.attributes = selected_template.attributes.map((attribute, i) => {
       return {
@@ -108,12 +112,15 @@ class ItemForm extends React.Component {
               list={this.state.fields}
               template={({item}) => {
                 var field = item;
+                var field_index = this.state.fields.findIndex((_field, i) => {
+                  return item.id === _field.id
+                })
                 var minimise_icon_class = "minimise-icon ss-navigateright rotated";
                 if (field.open) {
                   minimise_icon_class = "minimise-icon ss-navigateright";
                 }
                 return (
-                  <div className="form-item-group">
+                  <div>
                     <span className="form-input-group-title sortable-handle flex vertical-align">
                       <span className="flex-1">
                         <a href=""
@@ -156,7 +163,7 @@ class ItemForm extends React.Component {
                                 <Editor
                                   tag="div"
                                   text={attribute.value}
-                                  onChange={this.handleFieldAttributeChange.bind(this, attribute)}
+                                  onChange={this.handleFieldAttributeChangeFromEditor.bind(this, attribute)}
                                   options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
                                 />
                               </FormInput>
@@ -190,11 +197,12 @@ class ItemForm extends React.Component {
                 )
               }}
               callback={::this.handleReorder}
-              listClass='list'
-              itemClass='flex list-item'
+              listClass=''
+              itemClass='form-input-group'
               selectedKey='id'
               disableReorder={false}>
             </Reorder>
+
             <div className="flex">
               <div className="flex-1">
                 {this.state.selected_template ?
