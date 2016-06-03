@@ -35,6 +35,7 @@
     "react-anything-sortable": "^1.5.0",
     "react-dom": "^15.0.1",
     "react-freezer-js": "^2.0.0",
+    "react-lite": "^0.15.14",
     "react-medium-editor": "^1.7.1",
     "react-reorder": "^2.0.0",
     "react-router": "^2.2.1",

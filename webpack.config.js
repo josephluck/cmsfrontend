@@ -58,6 +58,10 @@ module.exports = {
   },
   resolve: {
     root: path.resolve('./scripts'),
+    alias: {
+        'react': 'react-lite',
+        'react-dom': 'react-lite'
+    },
     extensions: ['', '.js']
   },
   devtool: 'eval-source-map',
