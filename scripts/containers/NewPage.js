@@ -16,7 +16,7 @@ class Page extends React.Component {
 	}
 	render() {
 	  return (
-	  	<div>
+	  	<div className="flex-1">
 	  		<MidBar
 	  			breadcrumbs={[
 	  				{
