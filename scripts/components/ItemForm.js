@@ -52,7 +52,6 @@ class ItemForm extends React.Component {
   }
 
   handleFieldAttributeChangeFromEditor(attribute, value) {
-    console.log(value);
     attribute.value = value;
   }
 
@@ -190,6 +189,110 @@ class ItemForm extends React.Component {
               selectedKey='id'
               disableReorder={false}>
             </Reorder>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            {this.state.fields.map((item, i) => {
+              var field = item;
+              var field_index = this.state.fields.findIndex((_field, i) => {
+                return item.id === _field.id
+              })
+              var minimise_icon_class = "minimise-icon ss-navigateright rotated";
+              if (field.open) {
+                minimise_icon_class = "minimise-icon ss-navigateright";
+              }
+              return (
+                <div className="form-input-group">
+                  <span className="form-input-group-title sortable-handle flex vertical-align">
+                    <span className="flex-1">
+                      <a href=""
+                        className={minimise_icon_class}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.state.fields[field_index].open = !this.state.fields[field_index].open;
+                          this.forceUpdate();
+                        }}></a>
+                      <span className="left-margin">
+                        {field.title}
+                      </span>
+                    </span>
+                    <a href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        this.handleRemoveField(field_index)
+                      }}>
+                      {"Remove"}
+                    </a>
+                  </span>
+                  {!field.open ?
+                    <div key={field_index}
+                      className="form-input-group-content relative">
+                      <input type="hidden" value={field.field_template_id} />
+                      {field.attributes.map((attribute, attribute_index) => {
+                        if (attribute.kind === "single_line_text") {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <input type="text"
+                                value={attribute.value}
+                                onChange={this.handleFieldAttributeChange.bind(this, attribute)} />
+                            </FormInput>
+                          )
+                        } else if (attribute.kind === "rich_text") {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <Editor
+                                tag="div"
+                                text={attribute.value}
+                                onChange={this.handleFieldAttributeChangeFromEditor.bind(this, attribute)}
+                                options={{toolbar: {buttons: ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}}
+                              />
+                            </FormInput>
+                          )
+                        } else if (attribute.kind === "dropdown") {
+
+                        } else if (attribute.kind === "multi_select") {
+                          return (
+                            <FormInput key={attribute_index}
+                              title={attribute.name}>
+                              <select value={attribute.value}
+                                onChange={this.handleFieldAttributeChange.bind(this, attribute)}>
+                                {attribute.options.map((option, option_index) => {
+                                  return (
+                                    <option key={option_index}
+                                      value={option.value}>
+                                      {option.name}
+                                    </option>
+                                  )
+                                })}
+                              </select>
+                            </FormInput>
+                          )
+                        }
+                      })}
+                      <div className="clearfix"></div>
+                    </div>
+                    : null
+                  }
+                </div>
+              )
+            })}
 
             <div className="flex">
               <div className="flex-1">
