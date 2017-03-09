@@ -1,5 +1,7 @@
 ## Prerequisites
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/josephluck/cmsfrontend.svg)](https://greenkeeper.io/)
+
 Ensure that the latest versions of node and npm are installed on your machine.
 
 ## Dependencies
